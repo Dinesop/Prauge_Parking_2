@@ -52,3 +52,6 @@ Okej, jag kan nu parkera en bil, det får vara bra nog för idag. Jag hoppas ren
 - Började försöka komma på hur man flyttar ett objekt utan att fastna i index träsket och lyckades byta plats på en parkerad bil men hade då 2 p-platser med samma id. 
 
 ## 24/10
+Jag började försöka få till så att LicencePlate och Size bara gick att deklarera vid instantieringen av ett fordons objekt men löste inte det. Fick städat upp lite bland fält och egenskaper dock. Nu ska vi se om allt fortfarande funkar och i så fall ska vi fortsätta försöka flytta ett objekt. 
+Nu kan vi flytta fordon också. 
+Tidsstämpla in och utcheckning - då behöver vi ett till fält kopplat till fordon. Den här gången ska jag komma ihåg att börja med en git gren.

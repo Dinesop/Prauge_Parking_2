@@ -11,6 +11,7 @@ namespace Prauge_Parking_2._0.Classes
         {
             Size = 4;
             LicencePlate = licencePlate;
+            CheckIn = DateTime.UtcNow;
         }
     }
 }

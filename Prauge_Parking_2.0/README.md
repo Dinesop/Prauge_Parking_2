@@ -3,8 +3,8 @@
 ### Krav på systemet
  - [x] Ta emot fordon.
  - [ ] Tala om vilken parkeringsplats fordonet ska parkeras på.
- - [ ] Manuellt flytta fordon.
- - [ ] Hämta ut fordon och ta bort det ur systemet.
+ - [x] Manuellt flytta fordon.
+ - [x] Hämta ut fordon och ta bort det ur systemet.
  - [x] Söka efter fordon.
  - [ ] Systemet ska vara en textbaserad meny.
  - [ ] Tidsstämplad lagring

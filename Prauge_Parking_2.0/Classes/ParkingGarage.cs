@@ -47,18 +47,37 @@ namespace Prauge_Parking_2._0.Classes
             return null; // TODO: Set up an enum with errorcodes?
 
         }
+        public ParkingSpot FindParkingSpotId(int parkingSpotId)
+        { // TODO: Suggested LINQ query from Gemini to simplify the search 
+          // LINQ Query: "Give me the first spot where IsOccupied is false"
+          // ParkingSpot currentSpot = GetAllParkingSpots().FirstOrDefault(spot => !spot.IsOccupied);
+
+            foreach (var spot in _parkingSpots)
+            { // added spot.IsOccupied to avoid null exceptions. Consider changing to a try-catch?
+                if(spot.ParkingSpotId == parkingSpotId)
+                {
+                    return spot;
+                } 
+            }
+            return null; // TODO: Set up an enum with errorcodes?
+        }
 
         public void RetriveVehicle(string requestedLicencePlate)
-        { // TODO Change from finding the index to finding the objekt
-
-            ParkingSpot currentSpot = FindLicencePlateInParkingSpot(requestedLicencePlate);
-            currentSpot.VacateParkingSpot();
-        }
-        public void MoveVehicle(string requestedLicencePlate, int inputNewSpot)
         {
             ParkingSpot currentSpot = FindLicencePlateInParkingSpot(requestedLicencePlate);
-            // this changes the id of the spot so we have 2 spots with nr 4!!! currentSpot.ParkingSpotId = inputNewSpot;
+            TimeSpan parkedDuration = currentSpot.ParkedVehicle.CheckIn - DateTime.UtcNow;
+            currentSpot.VacateParkingSpot();
+        }
 
+        public void MoveVehicle(string requestedLicencePlate, int requestedNewSpot)
+        {
+            ParkingSpot currentSpot = FindLicencePlateInParkingSpot(requestedLicencePlate);
+            ParkingSpot newSpot = FindParkingSpotId(requestedNewSpot);
+
+            newSpot.ParkedVehicle = currentSpot.ParkedVehicle;
+            newSpot.IsOccupied = true;
+
+            currentSpot.VacateParkingSpot();
         }
     }
 }

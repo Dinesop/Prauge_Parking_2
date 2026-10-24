@@ -16,8 +16,8 @@ namespace Prauge_Parking_2._0
             praugeParking.FindFirstEmptyParkingSpot(new Car("abc456"));
             praugeParking.FindFirstEmptyParkingSpot(new Car("vbn678"));
             praugeParking.FindFirstEmptyParkingSpot(new Car("rty246"));
-            // praugeParking.RetriveVehicle("abc456");
-            // praugeParking.MoveVehicle("vbn678", 4);
+            praugeParking.RetriveVehicle("abc456");
+            praugeParking.MoveVehicle("vbn678", 5);
             Console.WriteLine("Klar!");
         }
     }
