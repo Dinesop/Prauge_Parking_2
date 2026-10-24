@@ -6,7 +6,7 @@ namespace Prauge_Parking_2._0.Classes
 {
     public class Motorcycle : Vehicle
     {
-        /* ---------- Constructors ---------- */
+        /* ---------- constructors ---------- */
         public Motorcycle(string licencePlate) : base(licencePlate)
         {
             Size = 2;
