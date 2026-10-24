@@ -1,0 +1,54 @@
+﻿# Loggbok
+## 20/10
+Snackade lite med Linnea och försökte få grepp om uppgiften men det känns svårt att binda ihop allting. Började med ett digitalt flödesschema för programmet men det är så bökigt att få till pilar och former att jag ändå lutar åt att köra penna och papper, ska ju inte behöva lägga flera timmar på att få till ett snyggt flödesschema över programmet. 
+Ska se om jag lyckas bifoga bilden på vad jag åstakommit hittills och så får vi se vad det blir av det. 
+La till ett class diagram och ett class library i projektet nu iaf, så får vi se hur det går med att använda allt. Känns som att jag bara får testa mig fram och hoppas jag förstår på vägen.
+
+Fråga: Är det bara dataåtkomst filer som ska ligga i klassbiblioteket? Eller ska alla klasser ligga där?
+
+Nu bad jag Gemini om hjälp med hur man ska strukturera upp en powerSwitch med klasser och gränssnitt för steget mellan while loop och powerSwitch bool till det var bara för stort just nu. 
+Sen bad jag mina klasskamrater om hjälp med hur man ska kunna bryta isär allt och fick tipset att inte göra det än så det kör vi på. 
+Fortsätter bygga min meny med nästlade menystrukturer och switch-case strukturer, då jag tänker att det borde gå att bryta isär till objekt
+Om jag har en menu klass med property MenuChoice, så blir varje ny menu jag skapar med nyckelordet new ett objekt, med propertyn MenuChoice. Jag trodde för ett ögonblick att egenskapen är objektet, men insåg när jag började skriva ner det här, att så är det ju inte. Återigen, räddad av loggboken!
+
+## 21/10
+Okej,  jag får min huvudmeny att funka men sen när jag vill ha en undermeny får jag inte den att hoppa tillbaka till huvudmenyn när jag väljer back. Okej, vi testar tipset att använda TODOs för att hålla koll på allt som behöver fixas och bordlägger den biten för tillfället. 
+Jag har fortfarande svårt att greppa hur programmet flödar med klasser så det får vänta. 
+
+## 22/10 
+Jag har fortfarande inte en aning om hur jag ska få ihop detta, men menyn funkar även om den bara är ett nästlat kaos. Så strukturerade upp kravspecen i README.md och ska försöka mig på att bygga en Vehicle class. 
+Det som alla fordon behöver är ett regnr och en storlek, så vi börjar där och ser om vi kan skapa ett fordon. Jag vet ju att vi behöver ha subklasser som ärver Vehicle men jag kan inte greppa den strukturen än. Behöver också lagra allt i en fil, men det brukar vara väldigt simpelt och det har jag gjort förut så hoppas det ska gå smidigt när jag kommer dit.  
+Okej, vi har en fungerande fordonsklass. Nu ska vi skapa en fungerande pHus klass att parkera fordonet i. 
+
+Testade om TODO knepet funkade även här, men tyvärr gjorde det inte det. Får köra manuellt helt enkelt.
+TODO: Redo Vehicle class to abstract and create subclass Car and Motorcycle.
+
+
+Okej, om fordonsklassen hade egenskaper regnr och storlek, vad ska parkingsgarage klassen ha för egenskaper? parkeringsplats ska vara en subklass, så då borde ju egenskaperna vara parkeringsutrymme? varför ska parkeringsplats vara en subklass? är det för att vi vill kunna ha olika parkeringsplatser för olika fordonstyper? då borde ju storlek vara en egenskap som ska finnas med i alla parkeringsplatser. och kanske beläggning?
+
+phus - kapacitet ( antal platser ) och utrymme (antal lediga platser just nu)
+pplats - storlek (hur stort fordon får plats) och beläggning (hur stor del av platsen är full)
+
+Det känns konsigt att ha beläggning som en egenskap av pHuset ur programmeringsperspektiv men inte ur ett verklighetsperspektiv. Så vi testar väl det. 
+
+Okej så det jag vill göra är att instantiera x stycken pSpots objekt i mitt pGarage. 
+ett nytt pSpot objekt är ParkingSpot namn1 = new ParkingSpot();
+Och så vill jag ha det gånger x i mitt PHus. 
+
+Förra uppgiften löste jag det mesta utan hjälp av AI utan höll mig till generiska StackOverflow poster och lite bollande med klasskamrater. Det kommer inte funka denna gång. Får liksom inte grepp om hur jag ska göra, så försöker få AI att förklara hur jag tänka runt att lösa problemet, inte ge mig lösningen.
+Nackdelen med AI är att det är svårt att begränsa användandet av det, när man väl börjat. Och jag vet från förra uppgiften och från i allmänhet att ens förståelse inte hänger med när man använder det. Men som allt måste man nog bara hitta en bra balans.
+Okej, jag kan nu parkera en bil, det får vara bra nog för idag. Jag hoppas rensa hjärnan lite kanske hjälper. 
+
+## 23/10
+- Jag börjar närma mig det jag inte förstår inom OOP, hur objekt och klasser interagerar med varandra. Jag förstår alla bitarna, men kan inte sätta ihop dom. Så bollar lite med Gemini för att hitta vägar framåt.
+- Jag älskar inte långa namn men behöver verkligen förstå vad saker gör baserat på deras namn nu så det får bli lite långt.
+- Jag ska försöka mig på att splitta ut mina klasser i egna filer nu, för att se om det uppdaterar klassdiagramet, som jag tror att det gör, vilket skulle hjälpa överskådligheten hoppas jag. Börjar också bli mycket text i en fil.
+- Klassdiagrammet verkar bara plocka upp arv än så länge, hade hoppats att den skulle plocka upp att jag kallar på ett objekt Vehicle i min parkingspot class, men det var för mycket begärt. Allting funkar ju fortafarande dock så det är ju trevligt i alla fall.
+- Okej, vi kan ta emot fordon. Nu ska vi hämta ut dom igen. Då behöver vi ange regnr och hitta det bland våra parkeringsplatser.
+- Jag börjar inse att mitt problem består i att jag fortfarande försöker lösa detta ur ett icke-OOP perspektiv eftersom den biten inte klickat ännu. Jag tänker fortfarande på fordonen som strängar i en p-hus lista, inte som egna objekt med egna egenskaper. Men för att hitta ett fordon att plocka ut, måste vi ju hitta objektet med egenskapen LicencePlate som matchar det vi söker efter. När jag kör mitt program parkeras ett Vehicle objekt på en parkingSpot och Egenskapen ParkedVehicle får Egenskaperna LicencePlate och Size eftersom att vi lägger objektet Vehicle i parkingsSpot. Så jag ska inte leta efter fordonet, jag ska leta efter parkeringsplatsen som har egenskapen av att ett fordon med regnr xxx står där. 
+- Jag skulle vilja ha en metod som kollar alla parkeringsplatser, nu har jag en foreach loop och ett vilkor i den, och skulle precis göra en ny metod med samma upplägg fast annat vilkor. Då borde det ju gå att bygga en kolla-alla-p-platser metod, men eftersom vilkoret kommer inuti foreach loopen funkar ju inte det. Visst kan man vända på loopen, så att vilkoret kommer utanför och metoden som kollar alla p-platser retunerar något lämpligt... vad skulle det vara då? parkingspot har egenskaperna IsOccupied, ParkedVehicle och ParkingSpotNr. I don't think this is possible to achive. Tried it and asked Gemini about it, and will ask in the Discord about it but every thing I checked lead back to the need to loop through each object.
+- Kan söka efter regnr nu, snackade lite med Stig också om strukturer och hur allt hänger ihop. Fick lite tips och tankar om hur man bättre lägger upp sitt förhållande mellan fält och egenskaper. Nu ska jag se om jag kan plocka ut fordon.
+- Okej, blev stolt över mig själv för skrev ett plocka ut fordon set av metoder, baserat på att hitta och använda parkeringsplatsens index, så som vi gjorde i PP1. Fick ett index fel och insåg att jag inte alls ska använda index, ska ju använda objekt, och justerade där efter. Nu får vi hoppas att det funkar med!
+- Började försöka komma på hur man flyttar ett objekt utan att fastna i index träsket och lyckades byta plats på en parkerad bil men hade då 2 p-platser med samma id. 
+
+## 24/10
