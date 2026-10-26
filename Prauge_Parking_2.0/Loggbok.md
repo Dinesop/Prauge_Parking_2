@@ -66,3 +66,8 @@ Har gjort en egen klass för att ange regNr men den metoden är inte anropsbar i
 Det könns som att switch-case borde ligga någon annanstans än i menyerna. Oklart var bara... 
 Men har fått till att menyer runt att välja fordon och ange regnr. Nu ska vi bara få ihop det med switch-case och praugeParking variabeln. 
 TODO: Bryt ut switch-cases från menyklasser och lägg i program.cs for now. 
+I program.cs har jag under ChooseVehicleType() 
+	case "Car":
+		Vehicle car = new Car();
+		praugeParking.FindFirstEmptyParkingSpot(car);
+där praugeParking inte är åtkombar pga reasons, och det tror jag man kanske kan komma runt om man sparar ner till en fil? så ska sätta mig in i JSON nu.

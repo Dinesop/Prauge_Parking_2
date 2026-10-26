@@ -9,13 +9,13 @@ namespace Prauge_Parking_2._0.Classes
     public class Menu
     {
         // Properties
-        public int MenuChoice { get; set; }
+        public string MenuChoice { get; set; }
         // Constructor
         public Menu()
         {
 
         }
-                   
+
 
 
     }

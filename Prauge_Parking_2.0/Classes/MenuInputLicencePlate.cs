@@ -7,13 +7,13 @@ namespace Prauge_Parking_2._0.Classes
 {
     public class MenuInputLicencePlate
     {
-        public static string GetMenuInputLicencePlate()
-        {
-            var name = AnsiConsole.Ask<string>("Please input the vehicle licence plate:");
-            return name;
+        //public static string GetMenuInputLicencePlate()
+        //{
+        //    var name = AnsiConsole.Ask<string>("Please input the vehicle licence plate:");
+        //    return name;
             
 
-        }
+        //}
 
     }
 }

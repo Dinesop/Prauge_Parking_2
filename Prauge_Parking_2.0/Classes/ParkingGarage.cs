@@ -48,9 +48,8 @@ namespace Prauge_Parking_2._0.Classes
 
         }
         public ParkingSpot FindParkingSpotId(int parkingSpotId)
-        { // TODO: Suggested LINQ query from Gemini to simplify the search 
-          // LINQ Query: "Give me the first spot where IsOccupied is false"
-          // ParkingSpot currentSpot = GetAllParkingSpots().FirstOrDefault(spot => !spot.IsOccupied);
+        { // TODO: Suggested LINQ query from Gemini to simplify the search ?
+
 
             foreach (var spot in _parkingSpots)
             { // added spot.IsOccupied to avoid null exceptions. Consider changing to a try-catch?
@@ -61,14 +60,12 @@ namespace Prauge_Parking_2._0.Classes
             }
             return null; // TODO: Set up an enum with errorcodes?
         }
-
         public void RetriveVehicle(string requestedLicencePlate)
         {
             ParkingSpot currentSpot = FindLicencePlateInParkingSpot(requestedLicencePlate);
             TimeSpan parkedDuration = currentSpot.ParkedVehicle.CheckIn - DateTime.UtcNow;
             currentSpot.VacateParkingSpot();
         }
-
         public void MoveVehicle(string requestedLicencePlate, int requestedNewSpot)
         {
             ParkingSpot currentSpot = FindLicencePlateInParkingSpot(requestedLicencePlate);

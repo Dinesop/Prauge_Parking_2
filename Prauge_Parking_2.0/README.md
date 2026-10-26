@@ -6,7 +6,7 @@
  - [x] Manuellt flytta fordon.
  - [x] Hämta ut fordon och ta bort det ur systemet.
  - [x] Söka efter fordon.
- - [ ] Systemet ska vara en textbaserad meny.
+ - [x] Systemet ska vara en textbaserad meny.
  - [x] Tidsstämplad lagring
  - [ ] Spara data 
  - [ ] Prislista
@@ -20,7 +20,7 @@
  - [x] Parkeringsrutorna är numrerade 1 - 100.
  - [ ] En parkeringsruta kan innehålla 1 bil eller upp till 2 motorcyklar.
  - [ ] Testköra på en annan dator.
- - [ ] Minst 5 klasser: Vehicle, Car, MC, ParkingSpot, ParkingGarage
+ - [x] Minst 5 klasser: Vehicle, Car, MC, ParkingSpot, ParkingGarage
  - [ ] Klassbibliotek för dataåtkomst
 
 ### För VG 

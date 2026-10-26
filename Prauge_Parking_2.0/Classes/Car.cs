@@ -12,7 +12,6 @@ namespace Prauge_Parking_2._0.Classes
         public Car()  :base ()
         {
             Size = 4;
-            CheckIn = DateTime.UtcNow;
         }
     }
 }

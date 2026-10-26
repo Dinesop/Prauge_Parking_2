@@ -1,23 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="Prauge_Parking_2._0.Program" Collapsed="true">
-    <Position X="10.5" Y="6.25" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
-      <FileName>Program.cs</FileName>
-    </TypeIdentifier>
-  </Class>
   <Class Name="Prauge_Parking_2._0.Classes.Car">
     <Position X="13.25" Y="4" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Classes\Car.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Prauge_Parking_2._0.Classes.ParkingGarage">
     <Position X="7" Y="0.75" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>ACAAAAAAACAAAAAAAQAAAgAAAAAAAAAAAAAAAAAAAQA=</HashCode>
+      <HashCode>ACAAAAAAACAAAIAAAQAAAgAAAAAAAAAAAAAAAAAAAQA=</HashCode>
       <FileName>Classes\ParkingGarage.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -31,7 +24,7 @@
   <Class Name="Prauge_Parking_2._0.Classes.Vehicle">
     <Position X="15.25" Y="0.5" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>AAAAAEAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAACIAAAA=</HashCode>
+      <HashCode>AAAAAEQAAAAAgAAAAAIAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Classes\Vehicle.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -46,23 +39,37 @@
     <Position X="1" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>ABAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAQAAAAAAAAAA=</HashCode>
-      <FileName>Classes\powerSwitch.cs</FileName>
+      <FileName>Classes\PowerSwitch.cs</FileName>
+      <NewMemberFileName>Classes\powerSwitch.cs</NewMemberFileName>
     </TypeIdentifier>
-    <Lollipop Position="0.2" />
   </Class>
   <Class Name="Prauge_Parking_2._0.Classes.Motorcycle">
-    <Position X="17.5" Y="4" Width="1.5" />
+    <Position X="17.5" Y="4.5" Width="3.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Classes\Motorcycle.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Interface Name="Prauge_Parking_2._0.Classes.ISwitch" Collapsed="true">
-    <Position X="1" Y="1.5" Width="1.5" />
+  <Class Name="Prauge_Parking_2._0.Classes.MenuChooseVehicleType" Collapsed="true">
+    <Position X="2" Y="4.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>ABAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAQAAAAAAAAAA=</HashCode>
-      <FileName>Classes\ISwitch.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\MenuChooseVehicleType.cs</FileName>
     </TypeIdentifier>
-  </Interface>
+  </Class>
+  <Class Name="Prauge_Parking_2._0.Classes.MenuInputLicencePlate" Collapsed="true">
+    <Position X="0.5" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\MenuInputLicencePlate.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Prauge_Parking_2._0.Program" Collapsed="true">
+    <Position X="9" Y="6.25" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>
