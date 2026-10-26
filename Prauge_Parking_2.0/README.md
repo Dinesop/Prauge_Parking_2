@@ -7,7 +7,7 @@
  - [x] Hämta ut fordon och ta bort det ur systemet.
  - [x] Söka efter fordon.
  - [ ] Systemet ska vara en textbaserad meny.
- - [ ] Tidsstämplad lagring
+ - [x] Tidsstämplad lagring
  - [ ] Spara data 
  - [ ] Prislista
  - [ ] Konfigurationsfil för antal p-platser, fordonstyp och antal fordon per p-plats
@@ -16,8 +16,8 @@
 ### Tekniska krav
  - [x] Identifiering av fordon sker genom registreringsnummer.
  - [ ] Registreringsnumrena är alltid strängar med en maxlängd på 10 tecken.
- - [ ] Det finns 100 parkeringsrutor
- - [ ] Parkeringsrutorna är numrerade 1 - 100.
+ - [x] Det finns 100 parkeringsrutor
+ - [x] Parkeringsrutorna är numrerade 1 - 100.
  - [ ] En parkeringsruta kan innehålla 1 bil eller upp till 2 motorcyklar.
  - [ ] Testköra på en annan dator.
  - [ ] Minst 5 klasser: Vehicle, Car, MC, ParkingSpot, ParkingGarage

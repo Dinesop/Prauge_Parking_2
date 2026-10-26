@@ -52,6 +52,17 @@ Okej, jag kan nu parkera en bil, det får vara bra nog för idag. Jag hoppas ren
 - Började försöka komma på hur man flyttar ett objekt utan att fastna i index träsket och lyckades byta plats på en parkerad bil men hade då 2 p-platser med samma id. 
 
 ## 24/10
-Jag började försöka få till så att LicencePlate och Size bara gick att deklarera vid instantieringen av ett fordons objekt men löste inte det. Fick städat upp lite bland fält och egenskaper dock. Nu ska vi se om allt fortfarande funkar och i så fall ska vi fortsätta försöka flytta ett objekt. 
-Nu kan vi flytta fordon också. 
-Tidsstämpla in och utcheckning - då behöver vi ett till fält kopplat till fordon. Den här gången ska jag komma ihåg att börja med en git gren.
+- Jag började försöka få till så att LicencePlate och Size bara gick att deklarera vid instantieringen av ett fordons objekt men löste inte det. Fick städat upp lite bland fält och egenskaper dock. Nu ska vi se om allt fortfarande funkar och i så fall ska vi fortsätta försöka flytta ett objekt. 
+- Nu kan vi flytta fordon också. 
+- Tidsstämpla in och utcheckning - då behöver vi ett till fält kopplat till fordon. Den här gången ska jag komma ihåg att börja med en git gren.
+- Börjat titta på meny systemet och inser att Spectre Console kan förenkla koden rejält. Vill också slänga in en enumerator för menyvalen, dels för att det känns lämpligt men också så jag lär mig hur de fungerar.
+
+## 25/10
+Jag kan gå in i huvudmenyn, komma vidare till välja fordonmenyn och sen komma tillbaka till huvudmenyn. Blir inte promtad för att ange regnr och ingen bil parkeras så det har vi inte kopplat ihop än. Det är nästa steg.
+Testade igen och parkering sker visst, så det är löst, ska bara koppla ihop ange regnr med menyn och parkera bil. 
+Har gjort en egen klass för att ange regNr men den metoden är inte anropsbar i meny klassen för att lägga in regNr, för den behöver ju ett objekt. Och istället för att ha ett registereingsnr objekt vill jag nog bara koppla det till egenskapen regNr i min fordonsklass. 
+
+## 26/10
+Det könns som att switch-case borde ligga någon annanstans än i menyerna. Oklart var bara... 
+Men har fått till att menyer runt att välja fordon och ange regnr. Nu ska vi bara få ihop det med switch-case och praugeParking variabeln. 
+TODO: Bryt ut switch-cases från menyklasser och lägg i program.cs for now. 

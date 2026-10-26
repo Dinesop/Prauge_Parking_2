@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Prauge_Parking_2._0.Classes
 {
-    public class PowerSwitch : ISwitch
+    public class PowerSwitch
     {
         public bool IsOn { get; set; }
         // Constructor

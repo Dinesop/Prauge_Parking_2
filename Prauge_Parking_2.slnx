@@ -3,6 +3,7 @@
     <Project Path="ConsoleApp1/ConsoleApp1.csproj" Id="255ba14e-4e84-4c94-96bf-6ba0fb398da4" />
     <Project Path="ConsoleApp2/ConsoleApp2.csproj" Id="ce383f8a-70fd-4d50-9a1e-8b211cb0ba19" />
     <Project Path="ConsoleApp3/ConsoleApp3.csproj" Id="19d00524-a11c-4fb1-b007-7ced6e121575" />
+    <Project Path="ConsoleApp5/ConsoleApp5.csproj" Id="2f8a1123-ab0d-422b-b588-d71ad0210ee1" />
     <Project Path="F13U2/F13U2.csproj" Id="fe34fc95-5b46-4d54-85d6-19a7038529cc" />
     <Project Path="U6F10/U6F10.csproj" Id="c937fead-5a6f-46a3-886c-64d6f6a69469" />
   </Folder>
