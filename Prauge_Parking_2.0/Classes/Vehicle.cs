@@ -13,18 +13,13 @@ namespace Prauge_Parking_2._0.Classes
         public abstract int Size { get; }
         public DateTime CheckIn { get; }
 
+        public abstract string VehicleType { get; }
+
         /* ---------- Constructors ---------- */
         public Vehicle()
-        { 
-            LicencePlate = GetLicencePlate();
+        {
+            LicencePlate = PrintOut.getLicencePlate();
             CheckIn = DateTime.UtcNow;
-        }
-
-        /* ---------- Methods ---------- */
-        public string GetLicencePlate()
-        { // TODO lägg till validering, is this splittable to keep all writing in console to a menu class?
-            var licencePlate = AnsiConsole.Ask<string>("Please input the vehicle licence plate:");
-            return licencePlate;
         }
 
     }

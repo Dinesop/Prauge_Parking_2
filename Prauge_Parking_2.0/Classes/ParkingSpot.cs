@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Spectre.Console;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -10,12 +11,14 @@ namespace Prauge_Parking_2._0.Classes
         public int ParkingSpotId { get; }
         public bool IsOccupied { get; set; }
         public Vehicle ParkedVehicle { get; set; }
+        public int SpotSize { get; }
 
         /* ---------- Constructors ---------- */
         public ParkingSpot(int parkingSpotId)
         {
             ParkingSpotId = parkingSpotId;
             IsOccupied = false;
+            SpotSize = 4;
         }
 
         /* ---------- Methods ---------- */

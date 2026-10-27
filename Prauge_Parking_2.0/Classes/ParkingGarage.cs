@@ -21,16 +21,17 @@ namespace Prauge_Parking_2._0.Classes
         }
 
         /* ---------- Methods ---------- */
-        public void FindFirstEmptyParkingSpot(Vehicle vehicle)
+        public ParkingSpot FindFirstEmptyParkingSpot(Vehicle vehicle)
         { // since the vehicle class can't access the parkingspot class without going through the parking garage we must have a main method in parking garage that reaches into parkingspot to park a vehicle.
             foreach (var spot in _parkingSpots)
             {
                 if (!spot.IsOccupied)
                 {
                     spot.ParkVehicleOnEmptySpot(vehicle);
-                    break;
+                    return spot;
                 }
             }
+            return null;
         }
         public ParkingSpot FindLicencePlateInParkingSpot(string requestedLicencePlate)
         { // TODO: Suggested LINQ query from Gemini to simplify the search 
@@ -60,11 +61,13 @@ namespace Prauge_Parking_2._0.Classes
             }
             return null; // TODO: Set up an enum with errorcodes?
         }
-        public void RetriveVehicle(string requestedLicencePlate)
+        public Receipt RetriveVehicle(string requestedLicencePlate)
         {
             ParkingSpot currentSpot = FindLicencePlateInParkingSpot(requestedLicencePlate);
             TimeSpan parkedDuration = currentSpot.ParkedVehicle.CheckIn - DateTime.UtcNow;
+            Receipt endedParking = new Receipt(currentSpot, parkedDuration);
             currentSpot.VacateParkingSpot();
+            return endedParking;
         }
         public void MoveVehicle(string requestedLicencePlate, int requestedNewSpot)
         {

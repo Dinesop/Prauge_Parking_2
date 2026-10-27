@@ -71,3 +71,16 @@ I program.cs har jag under ChooseVehicleType()
 		Vehicle car = new Car();
 		praugeParking.FindFirstEmptyParkingSpot(car);
 där praugeParking inte är åtkombar pga reasons, och det tror jag man kanske kan komma runt om man sparar ner till en fil? så ska sätta mig in i JSON nu.
+Eller så blir jag distraherad av menyn, men den är löst nu. Nu ska jag bara fixa så jag kan parkera bilar... 
+okej, så när jag väljer menyval bil, så skapar jag ett ny bil objekt som jag sen vill skicka in i mitt parkeringsgarage. Men jag kommer inte åt parkeringsgaraget från min switch case meny. 
+Okej, efter att ha bollat med AI föreslog den lite olika lösningar och den jag trodde mest på var att skicka med p-huset in i menyn. Och det funkade... Men hur ser jag till att den är uppdaterad och korrekt genom alla menyval?
+somehow it works and I am not questioning it at this point.
+Åh nej, har ju choose a vehicle switch som jag tänkt att använda för alla val, men den är ju specifikt för att lägga till in bil nu.
+Okej, jag måste skicka tillbaka menyvalet från ChooseAVehicle till min main menu switch och sen gå vidare med add car eller move bicycle etc.
+Eh, det blev en lösning, finns garanterat bättre sätt att lösa det på men det funkar. 
+Forstätt med att försöka lösa att flytta fordon. 
+Just nu försöker jag flytta ett fordon genom att skapa ett nytt fordon för att komma åt ange regnr metoden. men det är ju inte rätt, jag ska ju inte skapa ett nytt objekt, jag ska hitta ett existerande. 
+Okej, har hållt på och bollat runt objekt till höger och vänster hela morgonen och jag börjar förstå tjusningen i OOP. Fattar fortfarande inte hur saker hänger ihop och sätter mycket return null; för att det funkar, gör saker till static eller return bool true för att det får det att funka men ingen aning om varför. Men det kommer hoppas jag.
+
+Fråga till Stig:
+Jag har fordon, p-hus, p-plats och menyer. Hur kommer jag åt objekt eller metoder lagrade i fordons klassen om jag är i meny eller p-hus klassen? static method? vet att min p-spot klass har en Vehicle i sig men förstår liksom inte vad dessa lösningar gör.

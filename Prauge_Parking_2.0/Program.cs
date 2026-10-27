@@ -9,13 +9,10 @@ namespace Prauge_Parking_2._0
     {
         static void Main(string[] args)
         {
-            MainMenuSwitch mainMenuSwitch = new MainMenuSwitch();
+            ParkingGarage parkingGarage = new ParkingGarage(5);
+            MainMenuSwitch mainMenuSwitch = new MainMenuSwitch(parkingGarage);
 
-
-            ParkingGarage praugeParking = new ParkingGarage(5);
-            
-
-            Console.WriteLine("Placeholder");
+            Console.WriteLine("The End");
         }
     }
 }

@@ -14,9 +14,8 @@ namespace Prauge_Parking_2._0.Classes
                          new SelectionPrompt<string>()
                          .Title("Select the vehicle you wish to park:")
                          .AddChoices("Car", "Motorcycle", "Bus", "Bicycle", "Back"));
-
         }
-
+        
     }
 }
 

@@ -2,16 +2,16 @@
 
 ### Krav på systemet
  - [x] Ta emot fordon.
- - [ ] Tala om vilken parkeringsplats fordonet ska parkeras på.
+ - [x] Tala om vilken parkeringsplats fordonet ska parkeras på.
  - [x] Manuellt flytta fordon.
  - [x] Hämta ut fordon och ta bort det ur systemet.
  - [x] Söka efter fordon.
  - [x] Systemet ska vara en textbaserad meny.
  - [x] Tidsstämplad lagring
- - [ ] Spara data 
+ - [ ] Spara data som uppdateras varje gång det sker en förändring i p-huset.
  - [ ] Prislista
  - [ ] Konfigurationsfil för antal p-platser, fordonstyp och antal fordon per p-plats
- - [ ] Grafiskt gränssnitt
+ - [ ] Grafiskt översikt av Phuset
 
 ### Tekniska krav
  - [x] Identifiering av fordon sker genom registreringsnummer.

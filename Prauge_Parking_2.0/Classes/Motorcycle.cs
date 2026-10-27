@@ -4,14 +4,17 @@ using System.Text;
 
 namespace Prauge_Parking_2._0.Classes
 {
-    //public class Motorcycle : Vehicle
-    //{ // TODO update all changes made to car onto motorcycle with relevant adjustments
-    //    /* ---------- constructors ---------- */
-    //    public Motorcycle(string licencePlate) : base(licencePlate)
-    //    {
-    //        Size = 2;
-    //        LicencePlate = licencePlate;
-    //    }
-    //}
+    public class Motorcycle : Vehicle
+    {
+        public override int Size { get; }
+        public override string VehicleType { get; }
+
+        /* ---------- Constructors ---------- */
+        public Motorcycle() : base()
+        {
+            Size = 2;
+            VehicleType = "Motorcycle";
+        }
+    }
 
 }
