@@ -9,31 +9,42 @@ namespace Prauge_Parking_2._0.Classes
     {
         /* ---------- Properties ---------- */
         public int ParkingSpotId { get; }
-        public bool IsOccupied { get; set; }
-        public Vehicle ParkedVehicle { get; set; }
-        public int SpotSize { get; }
+        public bool IsEmpty { get; set; }
+        public List<Vehicle> ParkedVehicles { get; } = new List<Vehicle>(); // TODO consider removing Set here
+        public int TotalCapacity { get; }
+        public int RemainingSize { get; set; }
 
         /* ---------- Constructors ---------- */
         public ParkingSpot(int parkingSpotId)
         {
             ParkingSpotId = parkingSpotId;
-            IsOccupied = false;
-            SpotSize = 4;
+            IsEmpty = true;
+            TotalCapacity = 4;
+            RemainingSize = 4;
         }
 
         /* ---------- Methods ---------- */
-        public bool ParkVehicleOnEmptySpot(Vehicle vehicle)
+        public bool ParkVehicleOnSpot(Vehicle vehicle)
         {
-            ParkedVehicle = vehicle;
-            IsOccupied = true;
+            ParkedVehicles.Add(vehicle);
+            RemainingSize -= vehicle.Size;
+            IsEmpty = false;
 
             return true; // Gemini förklarade att man lägger in bool returns för att kunna kontrollera om den kör som planerat i framtiden. Först hade jag det bara som en to do men pillade runt och testade olika saker för att lösa problemet att samma fordon parkerades på ALLA lediga platser och nu får den vara kvar där. 
         }
 
-        public void VacateParkingSpot()
+        public void VacateVehicleSpot()
         {
-            IsOccupied = false;
-            ParkedVehicle = null;
+            //RemainingSize += 
+            if (RemainingSize == TotalCapacity)
+            {
+                IsEmpty = true;
+            }
+            else
+            {
+                IsEmpty = false;
+                
+            }
         }
 
     }

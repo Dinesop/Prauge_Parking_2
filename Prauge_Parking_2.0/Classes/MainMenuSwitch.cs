@@ -27,13 +27,13 @@ namespace Prauge_Parking_2._0.Classes
                             case "Car":
                                 Vehicle car = new Car();
                                 pSpot = parkingGarage.FindFirstEmptyParkingSpot(car);
-                                PrintOut.parkVehicleAtSpot(pSpot);
+                                PrintOut.parkVehicleAtSpot(pSpot, car);
                                 break;
 
                             case "Motorcycle":
                                 Vehicle motorCycle = new Motorcycle();
                                 pSpot = parkingGarage.FindFirstEmptyParkingSpot(motorCycle);
-                                PrintOut.parkVehicleAtSpot(pSpot);
+                                PrintOut.parkVehicleAtSpot(pSpot, motorCycle);
                                 break;
 
                             case "Bus":
@@ -49,7 +49,7 @@ namespace Prauge_Parking_2._0.Classes
 
                     case "Move a vehicle":
                         MenuChooseVehicleType chooseVehicleTypeToMove = new MenuChooseVehicleType();
-                        
+
                         switch (chooseVehicleTypeToMove.MenuChoice)
                         {
                             case "Car":
@@ -72,7 +72,7 @@ namespace Prauge_Parking_2._0.Classes
                                 break;
 
                         }
-                        
+
                         break;
 
                     case "Retrieve a vehicle":
@@ -106,7 +106,8 @@ namespace Prauge_Parking_2._0.Classes
                     case "Search for a vehicle":
                         requestedLicencePlate = PrintOut.getLicencePlate();
                         pSpot = parkingGarage.FindLicencePlateInParkingSpot(requestedLicencePlate);
-                        PrintOut.vehicleParkedAt(pSpot);
+                        Vehicle requestedVehicle = parkingGarage.FindLicencePlate(requestedLicencePlate);
+                        PrintOut.vehicleParkedAt(pSpot, requestedVehicle);
                         break;
 
                     case "Optimize MC parking":

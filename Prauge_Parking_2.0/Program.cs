@@ -12,6 +12,8 @@ namespace Prauge_Parking_2._0
             ParkingGarage parkingGarage = new ParkingGarage(5);
             MainMenuSwitch mainMenuSwitch = new MainMenuSwitch(parkingGarage);
 
+            
+
             Console.WriteLine("The End");
         }
     }

@@ -6,11 +6,11 @@ using System.Text;
 namespace Prauge_Parking_2._0.Classes
 {
     public class PrintOut
-    {
+    { //TODO: make static
         public string Text { get; set; }
         public PrintOut()
         {
-            
+
         }
 
         public static string getLicencePlate()
@@ -25,15 +25,15 @@ namespace Prauge_Parking_2._0.Classes
             return newSpot;
         }
 
-        public static bool parkVehicleAtSpot(ParkingSpot parkingSpot)
+        public static bool parkVehicleAtSpot(ParkingSpot parkingSpot, Vehicle vehicle)
         {
-            AnsiConsole.WriteLine($"The {parkingSpot.ParkedVehicle.VehicleType} with licence nr {parkingSpot.ParkedVehicle.LicencePlate} is assigned to parkingspot {parkingSpot.ParkingSpotId}.");
+            AnsiConsole.WriteLine($"The {vehicle.VehicleType} with licence nr {vehicle.LicencePlate} is assigned to parkingspot {parkingSpot.ParkingSpotId}.");
             pressAnyKeyToContinue();
             return true;
         }
-        public static bool vehicleParkedAt(ParkingSpot parkingSpot)
+        public static bool vehicleParkedAt(ParkingSpot parkingSpot, Vehicle vehicle)
         {
-            AnsiConsole.WriteLine($"The {parkingSpot.ParkedVehicle.VehicleType} with licence nr {parkingSpot.ParkedVehicle.LicencePlate} is parked at parkingspot {parkingSpot.ParkingSpotId}.");
+            AnsiConsole.WriteLine($"The {vehicle.VehicleType} with licence nr {vehicle.LicencePlate} is parked at parkingspot {parkingSpot.ParkingSpotId}.");
             pressAnyKeyToContinue();
             return true;
         }
@@ -52,5 +52,11 @@ namespace Prauge_Parking_2._0.Classes
             return true;
         }
 
+        public static bool parkingSpotIsFull(ParkingSpot parkingSpot, Vehicle vehicle)
+        {
+            AnsiConsole.WriteLine($"Parkingspot {parkingSpot.ParkingSpotId} doesn't have enough space available to park a {vehicle.VehicleType}, try a different spot.");
+            pressAnyKeyToContinue();
+            return true;
+        }
     }
 }

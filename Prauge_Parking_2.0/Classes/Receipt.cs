@@ -9,9 +9,9 @@ namespace Prauge_Parking_2._0.Classes
         public Vehicle ParkedVehicle { get; }
         public TimeSpan ParkedDuration { get; }
         public int ParkingSpotId { get; }
-        public Receipt(ParkingSpot parkingSpot, TimeSpan parkedDuration)
+        public Receipt(ParkingSpot parkingSpot, TimeSpan parkedDuration, Vehicle foundVehicle)
         {
-            ParkedVehicle = parkingSpot.ParkedVehicle;
+            ParkedVehicle = foundVehicle;
             ParkedDuration = parkedDuration;
             ParkingSpotId = parkingSpot.ParkingSpotId;
         }

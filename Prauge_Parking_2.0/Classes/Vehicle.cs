@@ -1,6 +1,7 @@
 ﻿using Spectre.Console;
 using System;
 using System.Collections.Generic;
+using System.Net.NetworkInformation;
 using System.Text;
 
 namespace Prauge_Parking_2._0.Classes
@@ -21,6 +22,9 @@ namespace Prauge_Parking_2._0.Classes
             LicencePlate = PrintOut.getLicencePlate();
             CheckIn = DateTime.UtcNow;
         }
+
+        /* ---------- Methods ---------- */
+        
 
     }
 }
