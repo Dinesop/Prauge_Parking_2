@@ -10,7 +10,7 @@ namespace Prauge_Parking_2._0.Classes
         /* ---------- Properties ---------- */
         public int ParkingSpotId { get; }
         public bool IsEmpty { get; set; }
-        public List<Vehicle> ParkedVehicles { get; } = new List<Vehicle>(); // TODO consider removing Set here
+        public List<Vehicle> ParkedVehicles { get; } = new List<Vehicle>(); 
         public int TotalCapacity { get; }
         public int RemainingSize { get; set; }
 

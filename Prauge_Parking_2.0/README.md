@@ -18,7 +18,7 @@
  - [ ] Registreringsnumrena är alltid strängar med en maxlängd på 10 tecken.
  - [x] Det finns 100 parkeringsrutor
  - [x] Parkeringsrutorna är numrerade 1 - 100.
- - [ ] En parkeringsruta kan innehålla 1 bil eller upp till 2 motorcyklar.
+ - [x] En parkeringsruta kan innehålla 1 bil eller upp till 2 motorcyklar.
  - [ ] Testköra på en annan dator.
  - [x] Minst 5 klasser: Vehicle, Car, MC, ParkingSpot, ParkingGarage
  - [ ] Klassbibliotek för dataåtkomst

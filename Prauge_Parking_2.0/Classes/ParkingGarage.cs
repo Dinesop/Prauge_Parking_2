@@ -7,7 +7,7 @@ namespace Prauge_Parking_2._0.Classes
     public class ParkingGarage
     {
         /* ---------- Fields ---------- */
-        // TODO: Göra om fältet till en egenskap.
+        // TODO: Göra om fältet till en egenskap.  - 27/10: later 
         private List<ParkingSpot> _parkingSpots = new List<ParkingSpot>(); // En lista som innehåller många objekt av typen ParkingSpot
 
 
@@ -45,16 +45,16 @@ namespace Prauge_Parking_2._0.Classes
                     return spot;
                 }
             }
-            return null; // TODO: Set up an enum with errorcodes?
+            return null; // TODO: Set up an enum with errorcodes?  - 27/10: later 
 
         }
         public Vehicle FindLicencePlate(string requestedLicencePlate)
         { 
             Vehicle vehicleInGarage = _parkingSpots.SelectMany(spot => spot.ParkedVehicles).FirstOrDefault(v => v.LicencePlate == requestedLicencePlate);
-            return vehicleInGarage; // TODO: Set up an enum with errorcodes?
+            return vehicleInGarage; 
         }
         public ParkingSpot FindParkingSpotId(int parkingSpotId)
-        { // TODO: Suggested LINQ query from Gemini to simplify the search ?
+        { // TODO: Suggested LINQ query from Gemini to simplify the search ?  - 27/10: later 
             foreach (var spot in _parkingSpots)
             { 
                 if (spot.ParkingSpotId == parkingSpotId)
@@ -62,7 +62,7 @@ namespace Prauge_Parking_2._0.Classes
                     return spot;
                 }
             }
-            return null; // TODO: Set up an enum with errorcodes?
+            return null; 
         }
         public Receipt RetriveVehicle(string requestedLicencePlate)
         {

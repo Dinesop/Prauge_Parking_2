@@ -84,3 +84,11 @@ Just nu försöker jag flytta ett fordon genom att skapa ett nytt fordon för at
 Okej, har hållt på och bollat runt objekt till höger och vänster hela morgonen och jag börjar förstå tjusningen i OOP. Fattar fortfarande inte hur saker hänger ihop och sätter mycket return null; för att det funkar, gör saker till static eller return bool true för att det får det att funka men ingen aning om varför. Men det kommer hoppas jag.
 Sitter med att försöka lösa size depenency i parkingsplatsern så man kan parkera olika stora fordon. 
 Bollade med Stig, Linnea, AI och i Discorden och kom fram till att ha parkerade fordon som en lista i p-platsen nog var det bästa sättet att lösa det på. 
+Size dependent parking är löst. Allt verkar funka med den nya implementeringen. 
+När jag bollade med Stig förut använde han en Validator klass som exempel och det blir nog nästa steg för att fixera "Registreringsnumrena är alltid strängar med en maxlängd på 10 tecken". Har ju löst en del av användarvalideringen genom att alltid skicka det via Spectre Consoles Ansi.Console så den validerar ju automatiskt att man anger rätt datatyp mot vad som är specificerat. Det har jag redan testat av misstag när jag hade glömt att ändra en text att fråga om specifik siffra istället för text och jag angav text. 
+Okej, jag har en validator som veriferer stränglängd på regnr etc men inget händer om man gör fel utöver ett felmeddelande. Så fixa imorgon!
+if (Validator.ValidateLicencePlate(licencePlate)) return licencePlate;
+            else return null; // TODO would be nice if null triggered a error message...  - 27/10: later 
+
+## 28/10
+Kom på igår kväll när jag skulle sova att vi gjorde egna exceptions i lektion 14, så ska kika på det och se om det är något sådant jag vill implementera istället.

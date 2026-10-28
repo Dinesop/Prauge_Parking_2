@@ -6,7 +6,7 @@ using System.Text;
 namespace Prauge_Parking_2._0.Classes
 {
     public class PrintOut
-    { //TODO: make static
+    { //TODO: make static - 27/10: later 
         public string Text { get; set; }
         public PrintOut()
         {
@@ -14,14 +14,16 @@ namespace Prauge_Parking_2._0.Classes
         }
 
         public static string getLicencePlate()
-        { // TODO lägg till validering, is this splittable to keep all writing in console to a menu class?
-            var licencePlate = AnsiConsole.Ask<string>("Please input the vehicle licence plate:");
+        {
+            string licencePlate = AnsiConsole.Ask<string>("Please input the vehicle licence plate:");
             return licencePlate;
+            if (Validator.ValidateLicencePlate(licencePlate)) return licencePlate;
+            else return null; // TODO would be nice if null triggered a error message...  - 27/10: later 
         }
 
         public static int requestedNewSpot()
-        { // TODO lägg till validering, is this splittable to keep all writing in console to a menu class?
-            var newSpot = AnsiConsole.Ask<int>("Please input the parking spot you wish to move the vehicle to:");
+        { 
+            int newSpot = AnsiConsole.Ask<int>("Please input the parking spot you wish to move the vehicle to:");
             return newSpot;
         }
 
@@ -56,6 +58,18 @@ namespace Prauge_Parking_2._0.Classes
         {
             AnsiConsole.WriteLine($"Parkingspot {parkingSpot.ParkingSpotId} doesn't have enough space available to park a {vehicle.VehicleType}, try a different spot.");
             pressAnyKeyToContinue();
+            return true;
+        }
+
+        public static bool ErrorNullOrWhiteSpace()
+        {
+            AnsiConsole.WriteLine("The text you provided is either null or whitespace. Try again.");
+            return true;
+        }
+
+        public static bool ErrorLicencePlateLenght()
+        {
+            AnsiConsole.WriteLine("The text you provided is too long, a licenceplate can be a maximum of 10 characters.");
             return true;
         }
     }
