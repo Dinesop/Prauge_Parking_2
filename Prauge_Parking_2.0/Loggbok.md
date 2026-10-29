@@ -92,3 +92,8 @@ if (Validator.ValidateLicencePlate(licencePlate)) return licencePlate;
 
 ## 28/10
 Kom på igår kväll när jag skulle sova att vi gjorde egna exceptions i lektion 14, så ska kika på det och se om det är något sådant jag vill implementera istället.
+Gav helt upp på exceptions, var slut i huvudet efter lektionen och satte mig för att fixa priser istället
+
+## 29/10
+Fortsätter med priserna, efter lite googlande och fipplande med timespan och avrundningar har vi nog en fungerande lösning, lägg på 30 min på parkedDuration så funkar avrundningen som jag vill, närmsta hela timme.
+I teorin borde det funka nu. Hade gärna haft en testfunktion up and running som jag kunde testa på, så bökigt med manuella tester. 

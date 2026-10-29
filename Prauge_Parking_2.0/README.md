@@ -9,7 +9,7 @@
  - [x] Systemet ska vara en textbaserad meny.
  - [x] Tidsstämplad lagring
  - [ ] Spara data som uppdateras varje gång det sker en förändring i p-huset.
- - [ ] Prislista
+ - [x] Prislista
  - [ ] Konfigurationsfil för antal p-platser, fordonstyp och antal fordon per p-plats
  - [ ] Grafiskt översikt av Phuset
 

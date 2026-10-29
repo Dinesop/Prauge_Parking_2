@@ -16,7 +16,7 @@ namespace Prauge_Parking_2._0.Classes
         public static string getLicencePlate()
         {
             string licencePlate = AnsiConsole.Ask<string>("Please input the vehicle licence plate:");
-            return licencePlate;
+            //return licencePlate;
             if (Validator.ValidateLicencePlate(licencePlate)) return licencePlate;
             else return null; // TODO would be nice if null triggered a error message...  - 27/10: later 
         }

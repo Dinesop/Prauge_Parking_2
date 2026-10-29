@@ -8,13 +8,12 @@ namespace Prauge_Parking_2._0.Classes
 {
     public abstract class Vehicle
     {
-        /* ---------- Properties ---------- */
-        // 
+        /* ---------- Properties ---------- */ 
         public string LicencePlate { get; }
         public abstract int Size { get; }
         public DateTime CheckIn { get; }
-
         public abstract string VehicleType { get; }
+        public abstract decimal Price { get; }
 
         /* ---------- Constructors ---------- */
         public Vehicle()

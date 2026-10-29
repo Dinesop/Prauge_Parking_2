@@ -69,7 +69,8 @@ namespace Prauge_Parking_2._0.Classes
             ParkingSpot currentSpot = FindLicencePlateInParkingSpot(requestedLicencePlate);
             Vehicle foundVehicle = CollectVehicleFromLicencePlate(currentSpot, requestedLicencePlate);
             TimeSpan parkedDuration = foundVehicle.CheckIn - DateTime.UtcNow;
-            Receipt endedParking = new Receipt(currentSpot, parkedDuration, foundVehicle);
+            TimeSpan freeParkingTime = new TimeSpan(0, 10, 0); // TODO point to config file
+            Receipt endedParking = new Receipt(currentSpot, parkedDuration, foundVehicle, freeParkingTime);
             currentSpot.VacateVehicleSpot();
             return endedParking;
         }

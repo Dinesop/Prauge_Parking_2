@@ -9,11 +9,13 @@ namespace Prauge_Parking_2._0.Classes
     {
         public override int Size { get; }
         public override string VehicleType { get; }
+        public override decimal Price { get; }
         /* ---------- Constructors ---------- */
         public Car()  :base ()
         {
             Size = 4;
             VehicleType = "Car";
+            Price = 20M;
         }
         
     }
