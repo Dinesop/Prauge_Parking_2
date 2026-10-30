@@ -6,7 +6,7 @@ using System.Text;
 namespace Prauge_Parking_2._0.Classes
 {
     public class PrintOut
-    { //TODO: make static - 27/10: later 
+    { //TODO: make static
         public string Text { get; set; }
         public PrintOut()
         {
@@ -15,10 +15,9 @@ namespace Prauge_Parking_2._0.Classes
 
         public static string getLicencePlate()
         {
-            string licencePlate = AnsiConsole.Ask<string>("Please input the vehicle licence plate:");
-            //return licencePlate;
+            string licencePlate = AnsiConsole.Ask<string>("Please input the vehicle licence plate:");;
             if (Validator.ValidateLicencePlate(licencePlate)) return licencePlate;
-            else return null; // TODO would be nice if null triggered a error message...  - 27/10: later 
+            else return null; 
         }
 
         public static int requestedNewSpot()

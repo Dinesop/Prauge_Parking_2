@@ -30,14 +30,5 @@ namespace Prauge_Parking_2._0.Classes
             LicencePlate = licencePlate;
             CheckIn = DateTime.UtcNow;
         }
-        //public Vehicle()
-        //{
-        //    LicencePlate = PrintOut.getLicencePlate();
-        //    CheckIn = DateTime.UtcNow;
-        //}
-
-        
-        
-
     }
 }

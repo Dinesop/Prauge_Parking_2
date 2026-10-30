@@ -33,7 +33,7 @@ namespace Prauge_Parking_2._0.Classes
                         switch (chooseVehicleTypeToAdd.MenuChoice)
                         {
                             case "Car":
-                                parkingGarage.ParkCar(); // TODO skicka med phus ist för att ladda in igen
+                                parkingGarage.ParkCar(); 
                                 break;
 
                             case "Motorcycle":
@@ -84,7 +84,7 @@ namespace Prauge_Parking_2._0.Classes
                         requestedLicencePlate = "";
 
                         switch (chooseVehicleTypeToRetrieve.MenuChoice)
-                        {
+                        { // TODO change to a method instead.
                             case "Car":
                                 requestedLicencePlate = PrintOut.getLicencePlate();
                                 endedParking = parkingGarage.RetriveVehicle(requestedLicencePlate);

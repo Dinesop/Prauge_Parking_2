@@ -9,8 +9,7 @@ namespace Prauge_Parking_2._0.Classes
     public class ParkingGarage
     {
         /* ---------- Fields ---------- */
-        // TODO: Göra om fältet till en egenskap.  - 27/10: later 
-        //private List<ParkingSpot> _parkingSpots = new List<ParkingSpot>(); // En lista som innehåller många objekt av typen ParkingSpot
+
         public List<ParkingSpot> ParkingSpots { get; set;  } = new List<ParkingSpot>();
 
         /* ---------- Constructors ---------- */
@@ -19,10 +18,10 @@ namespace Prauge_Parking_2._0.Classes
             
         }
         public ParkingGarage(int totalSpots)
-        { // Vi skapar (instansierar) ett parkingSpot-objekt för varje parkeringsplats i huset
+        { 
             for (int i = 1; i <= totalSpots; i++)
             {
-                //_parkingSpots.Add(new ParkingSpot(i));
+                
                 ParkingSpots.Add(new ParkingSpot(i));
             }
             
@@ -31,7 +30,7 @@ namespace Prauge_Parking_2._0.Classes
 
         /* ---------- Methods ---------- */
         public ParkingSpot FindFirstEmptyParkingSpot(Vehicle vehicle)
-        { // since the vehicle class can't access the parkingspot class without going through the parking garage we must have a main method in parking garage that reaches into parkingspot to park a vehicle.
+        { 
             foreach (var spot in ParkingSpots)
             {
 
@@ -56,7 +55,7 @@ namespace Prauge_Parking_2._0.Classes
                     return spot;
                 }
             }
-            return null; // TODO: Set up an enum with errorcodes?  - 27/10: later 
+            return null; 
 
         }
         public Vehicle FindLicencePlate(string requestedLicencePlate)
@@ -65,7 +64,7 @@ namespace Prauge_Parking_2._0.Classes
             return vehicleInGarage; 
         }
         public ParkingSpot FindParkingSpotId(int parkingSpotId)
-        { // TODO: LINQ query simplify the search ?  - 27/10: later 
+        { // TODO: LINQ query simplify the search
             foreach (var spot in ParkingSpots)
             { 
                 if (spot.ParkingSpotId == parkingSpotId)
@@ -124,7 +123,6 @@ namespace Prauge_Parking_2._0.Classes
 
         public static ParkingGarage LoadParkingGarage(string filePath)
         {
-            
             var unloadedJson = MyFiles.Read(filePath);
             try
             {
@@ -136,9 +134,8 @@ namespace Prauge_Parking_2._0.Classes
                 Console.WriteLine(e);
                 return null;
             }
-
-
         }
+
         public bool SaveParkingGarage(string filePath, ParkingGarage content)
         {
             string jsonString = JsonSerializer.Serialize(content);
@@ -162,7 +159,6 @@ namespace Prauge_Parking_2._0.Classes
             }
 
         }
-
 
         public void ParkMotorCycle()
         {
