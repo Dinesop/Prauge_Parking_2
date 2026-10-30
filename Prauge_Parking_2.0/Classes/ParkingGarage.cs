@@ -39,7 +39,7 @@ namespace Prauge_Parking_2._0.Classes
                 {
                     spot.ParkVehicleOnSpot(vehicle);
                     this.ParkingSpots.Contains(spot);
-                    SaveParkingGarage("parkingGarage2.json", this);
+                    SaveParkingGarage("parkingGarage.json", this);
                     return spot;
                 }
                 else continue;
@@ -107,7 +107,7 @@ namespace Prauge_Parking_2._0.Classes
         }
         public void ParkCar()
         {
-            ParkingGarage parkingGarage = LoadParkingGarage("parkingGarage2.json");
+            ParkingGarage parkingGarage = LoadParkingGarage("parkingGarage.json");
 
             Vehicle car = new Car(PrintOut.getLicencePlate());
 
@@ -126,7 +126,6 @@ namespace Prauge_Parking_2._0.Classes
             try
             {
                 ParkingGarage parkingGarage = JsonSerializer.Deserialize<ParkingGarage>(unloadedJson);
-                Console.WriteLine($"Loaded: spot 1 has {parkingGarage?.ParkingSpots[0].ParkedVehicles.Count} vehicles");
                 return parkingGarage;
             }
             catch (Exception e)
@@ -146,16 +145,16 @@ namespace Prauge_Parking_2._0.Classes
 
         public static ParkingGarage CheckExsistingParkingGarage()
         {
-            bool checkForFile = MyFiles.CheckForFile("parkingGarage2.json");
+            bool checkForFile = MyFiles.CheckForFile("parkingGarage.json");
             if (!checkForFile)
             {
                 ParkingGarage parkingGarage = new ParkingGarage(5);
-                parkingGarage.SaveParkingGarage("parkingGarage2.json", parkingGarage);
+                parkingGarage.SaveParkingGarage("parkingGarage.json", parkingGarage);
                 return parkingGarage;
             }
             else
             {
-                ParkingGarage parkingGarage = ParkingGarage.LoadParkingGarage("parkingGarage2.json");
+                ParkingGarage parkingGarage = ParkingGarage.LoadParkingGarage("parkingGarage.json");
                 return parkingGarage;
             }
 
