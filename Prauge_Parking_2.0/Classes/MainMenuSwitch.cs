@@ -11,14 +11,11 @@ namespace Prauge_Parking_2._0.Classes
     {
         public MainMenuSwitch()
         {
-            
-            
-
             PowerSwitch powerSwitchMainMenu = new PowerSwitch();
             while (powerSwitchMainMenu.IsOn)
             {
                 Menu mainMenu = new MainMenu();
-
+                AppConfig configFile = ParkingGarage.CheckExsistingConfigFile();
                 ParkingGarage parkingGarage = ParkingGarage.CheckExsistingParkingGarage();
 
                 ParkingSpot pSpot = null;
@@ -27,11 +24,11 @@ namespace Prauge_Parking_2._0.Classes
                 int newSpot = 0;
 
                 switch (mainMenu.MenuChoice)
-                {
+                {// TODO consider adding a default
                     case "Add a vehicle":
-                        MenuChooseVehicleType chooseVehicleTypeToAdd = new MenuChooseVehicleType();
+                        MenuChooseVehicleType chooseVehicleTypeToAdd = new MenuChooseVehicleType(configFile.allowedVehicleTypes);
                         switch (chooseVehicleTypeToAdd.MenuChoice)
-                        {
+                        { // TODO consider adding a default
                             case "Car":
                                 parkingGarage.ParkCar(); 
                                 break;
@@ -47,12 +44,15 @@ namespace Prauge_Parking_2._0.Classes
                             case "Bicycle":
 
                                 break;
+                            
+                            case "Back":
 
+                                break;
                         }
                         break;
 
                     case "Move a vehicle":
-                        MenuChooseVehicleType chooseVehicleTypeToMove = new MenuChooseVehicleType();
+                        MenuChooseVehicleType chooseVehicleTypeToMove = new MenuChooseVehicleType(configFile.allowedVehicleTypes);
 
                         switch (chooseVehicleTypeToMove.MenuChoice)
                         {
@@ -80,7 +80,7 @@ namespace Prauge_Parking_2._0.Classes
                         break;
 
                     case "Retrieve a vehicle":
-                        MenuChooseVehicleType chooseVehicleTypeToRetrieve = new MenuChooseVehicleType();
+                        MenuChooseVehicleType chooseVehicleTypeToRetrieve = new MenuChooseVehicleType(configFile.allowedVehicleTypes);
                         requestedLicencePlate = "";
 
                         switch (chooseVehicleTypeToRetrieve.MenuChoice)

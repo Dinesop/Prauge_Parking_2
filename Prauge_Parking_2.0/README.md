@@ -10,7 +10,7 @@
  - [x] Tidsstämplad lagring
  - [x] Spara data som uppdateras varje gång det sker en förändring i p-huset.
  - [x] Prislista
- - [ ] Konfigurationsfil för antal p-platser, fordonstyp och antal fordon per p-plats
+ - [x] Konfigurationsfil för antal p-platser, fordonstyp och antal fordon per p-plats
  - [ ] Grafiskt översikt av Phuset
 
 ### Tekniska krav

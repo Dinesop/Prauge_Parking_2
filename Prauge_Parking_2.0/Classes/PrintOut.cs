@@ -12,20 +12,17 @@ namespace Prauge_Parking_2._0.Classes
         {
 
         }
-
         public static string getLicencePlate()
         {
             string licencePlate = AnsiConsole.Ask<string>("Please input the vehicle licence plate:");;
             if (Validator.ValidateLicencePlate(licencePlate)) return licencePlate;
             else return null; 
         }
-
         public static int requestedNewSpot()
         { 
             int newSpot = AnsiConsole.Ask<int>("Please input the parking spot you wish to move the vehicle to:");
             return newSpot;
         }
-
         public static bool parkVehicleAtSpot(ParkingSpot parkingSpot, Vehicle vehicle)
         {
             AnsiConsole.WriteLine($"The {vehicle.VehicleType} with licence nr {vehicle.LicencePlate} is assigned to parkingspot {parkingSpot.ParkingSpotId}.");
@@ -38,38 +35,35 @@ namespace Prauge_Parking_2._0.Classes
             pressAnyKeyToContinue();
             return true;
         }
-
         public static bool pressAnyKeyToContinue()
         {
             AnsiConsole.WriteLine("Press any key to continue");
             AnsiConsole.Console.Input.ReadKey(false);
             return true;
         }
-
         public static bool retrieveVehicleAtSpot(Receipt endedParking)
         {
             AnsiConsole.WriteLine($"The {endedParking.ParkedVehicle.VehicleType} with licence nr {endedParking.ParkedVehicle.LicencePlate} is parked to parkingspot {endedParking.ParkingSpotId}. It was parked for {endedParking.ParkedDuration}. Please retrieve it as it is now flagged for departure.");
             pressAnyKeyToContinue();
             return true;
         }
-
         public static bool parkingSpotIsFull(ParkingSpot parkingSpot, Vehicle vehicle)
         {
             AnsiConsole.WriteLine($"Parkingspot {parkingSpot.ParkingSpotId} doesn't have enough space available to park a {vehicle.VehicleType}, try a different spot.");
             pressAnyKeyToContinue();
             return true;
         }
-
         public static bool ErrorNullOrWhiteSpace()
         {
             AnsiConsole.WriteLine("The text you provided is either null or whitespace. Try again.");
             return true;
         }
-
         public static bool ErrorLicencePlateLenght()
         {
             AnsiConsole.WriteLine("The text you provided is too long, a licenceplate can be a maximum of 10 characters.");
             return true;
         }
+        
+
     }
 }

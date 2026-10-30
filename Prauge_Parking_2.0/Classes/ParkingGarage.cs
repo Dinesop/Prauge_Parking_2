@@ -1,6 +1,7 @@
 ﻿using Class_Library_PP2;
 using System;
 using System.Collections.Generic;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Text.Json;
 
@@ -21,11 +22,8 @@ namespace Prauge_Parking_2._0.Classes
         { 
             for (int i = 1; i <= totalSpots; i++)
             {
-                
-                ParkingSpots.Add(new ParkingSpot(i));
-            }
-            
-           
+                ParkingSpots.Add(new ParkingSpot(i, CheckExsistingConfigFile().totalCapacity));
+            } 
         }
 
         /* ---------- Methods ---------- */
@@ -135,6 +133,20 @@ namespace Prauge_Parking_2._0.Classes
                 return null;
             }
         }
+        public static AppConfig LoadConfigFile(string filePath)
+        {
+            var unloadedJson = MyFiles.Read(filePath);
+            try
+            {
+                AppConfig configFile = JsonSerializer.Deserialize<AppConfig>(unloadedJson);
+                return configFile;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return null;
+            }
+        }
 
         public bool SaveParkingGarage(string filePath, ParkingGarage content)
         {
@@ -148,7 +160,8 @@ namespace Prauge_Parking_2._0.Classes
             bool checkForFile = MyFiles.CheckForFile("parkingGarage.json");
             if (!checkForFile)
             {
-                ParkingGarage parkingGarage = new ParkingGarage(5);
+                AppConfig configFile = CheckExsistingConfigFile();
+                ParkingGarage parkingGarage = new ParkingGarage(configFile.numberOfParkingSpots);
                 parkingGarage.SaveParkingGarage("parkingGarage.json", parkingGarage);
                 return parkingGarage;
             }
@@ -156,6 +169,22 @@ namespace Prauge_Parking_2._0.Classes
             {
                 ParkingGarage parkingGarage = ParkingGarage.LoadParkingGarage("parkingGarage.json");
                 return parkingGarage;
+            }
+
+        }
+        public static AppConfig CheckExsistingConfigFile()
+        {// TODO Move to AppConfig where it belongs. 
+            bool checkForFile = MyFiles.CheckForFile("PP2_config.json");
+            if (!checkForFile)
+            {
+                AppConfig configFile = new AppConfig();
+                SetupParkingGarageConfiguration(configFile);
+                return configFile;
+            }
+            else
+            {
+                AppConfig configFile = ParkingGarage.LoadConfigFile("PP2_config.json");
+                return configFile;
             }
 
         }
@@ -170,7 +199,27 @@ namespace Prauge_Parking_2._0.Classes
 
             PrintOut.parkVehicleAtSpot(pSpot, motorCycle);
         }
+        public static bool SetupParkingGarageConfiguration(AppConfig content)
+        {
+            string jsonString = JsonSerializer.Serialize(content);
+            MyFiles.Save("PP2_config.json", jsonString);
+            return true;
+        }
+        //public static bool ConfigNumberOfParkingSpots()
+        //{
 
+        //    return true;
+        //}
+        //public static bool ConfigVehicleTypes()
+        //{
+
+        //    return true;
+        //}
+        //public static bool ConfigPSpotTotalCapacity()
+        //{
+
+        //    return true;
+        //}
     }
 }
 

@@ -21,12 +21,12 @@ namespace Prauge_Parking_2._0.Classes
         {
             
         }
-        public ParkingSpot(int parkingSpotId)
+        public ParkingSpot(int parkingSpotId,int totalCapacity)
         {
             ParkingSpotId = parkingSpotId;
             IsEmpty = true;
-            TotalCapacity = 4;
-            RemainingSize = 4;
+            TotalCapacity = totalCapacity;
+            RemainingSize = totalCapacity;
         }
 
         /* ---------- Methods ---------- */

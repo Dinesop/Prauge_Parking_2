@@ -108,3 +108,4 @@ Det vi behöver är en fil som styr konfigurationen av p-huset.
 Where we're at: I park cars but the information does not follow back, the spots are just set to full. The ParkedVehicle does not get filled? Or does it not follow back?
 ## 30/10
 I have spent 2 days trying to figure this out. Apparently having no set; in the properties is a big issue when dealing with deserialization of json. So now all properties gets setters.
+It is working so now we are tackling the config file. 

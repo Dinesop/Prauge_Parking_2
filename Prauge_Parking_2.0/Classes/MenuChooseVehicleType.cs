@@ -8,12 +8,13 @@ namespace Prauge_Parking_2._0.Classes
     public class MenuChooseVehicleType : Menu
     {
         /* ---------- Constructor ---------- */
-        public MenuChooseVehicleType()
+        public MenuChooseVehicleType(List<string> allowedVehicleTypes)
         {
             MenuChoice = AnsiConsole.Prompt(
                          new SelectionPrompt<string>()
                          .Title("Select the vehicle you wish to park:")
-                         .AddChoices("Car", "Motorcycle", "Bus", "Bicycle", "Back"));
+                         .AddChoices(allowedVehicleTypes)
+                         .AddChoices("Back"));
         }
         
     }
