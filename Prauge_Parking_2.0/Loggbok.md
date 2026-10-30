@@ -97,3 +97,14 @@ Gav helt upp på exceptions, var slut i huvudet efter lektionen och satte mig f�
 ## 29/10
 Fortsätter med priserna, efter lite googlande och fipplande med timespan och avrundningar har vi nog en fungerande lösning, lägg på 30 min på parkedDuration så funkar avrundningen som jag vill, närmsta hela timme.
 I teorin borde det funka nu. Hade gärna haft en testfunktion up and running som jag kunde testa på, så bökigt med manuella tester. 
+För att lösa test tjofset måste jag först fixa file handling. Det har känts svårt och oöverskådligt men verkar också ganska lätt. 
+Första hindret är dock att man inte kan deserialize abstracta klasser så Vehicle is getting un-abstracted. Det lär skapa en hel del kaskadfel dock... 
+Okej, så jag gjorde egenskaperna Size, VehicleType och Price till virutal istället. Inga errors iaf. 
+Testade att deserialize a vehicle nu med den nya setupen och programmet stod ju inte på näsan, men det blev ju inte ett korrekt objekt heller, de virutella egenskaperna lästes inte in.
+Så jag kommer behöva veta vilken typ av fordon som ska läsas in eller ut. Men det kanske inte är ett problem iofs, iom att jag tvingar användaren att välja det i varje steg?
+okej, vi är tillbaka där vi började, Vehicle är abstract och Size, VehicleType och Price är abstract med. 
+Det vi behöver är en fil som styr konfigurationen av p-huset. 
+
+Where we're at: I park cars but the information does not follow back, the spots are just set to full. The ParkedVehicle does not get filled? Or does it not follow back?
+## 30/10
+I have spent 2 days trying to figure this out. Apparently having no set; in the properties is a big issue when dealing with deserialization of json. So now all properties gets setters.

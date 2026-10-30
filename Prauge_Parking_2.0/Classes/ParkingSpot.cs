@@ -1,7 +1,9 @@
-﻿using Spectre.Console;
+﻿using Class_Library_PP2;
+using Spectre.Console;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.Json;
 
 namespace Prauge_Parking_2._0.Classes
 {
@@ -10,11 +12,15 @@ namespace Prauge_Parking_2._0.Classes
         /* ---------- Properties ---------- */
         public int ParkingSpotId { get; }
         public bool IsEmpty { get; set; }
-        public List<Vehicle> ParkedVehicles { get; } = new List<Vehicle>(); 
+        public List<Vehicle> ParkedVehicles { get; set;  } = new List<Vehicle>(); 
         public int TotalCapacity { get; }
         public int RemainingSize { get; set; }
 
         /* ---------- Constructors ---------- */
+        public ParkingSpot()
+        {
+            
+        }
         public ParkingSpot(int parkingSpotId)
         {
             ParkingSpotId = parkingSpotId;
@@ -35,7 +41,6 @@ namespace Prauge_Parking_2._0.Classes
 
         public void VacateVehicleSpot()
         {
-            //RemainingSize += 
             if (RemainingSize == TotalCapacity)
             {
                 IsEmpty = true;
@@ -46,6 +51,5 @@ namespace Prauge_Parking_2._0.Classes
                 
             }
         }
-
     }
 }

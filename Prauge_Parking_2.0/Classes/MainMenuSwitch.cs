@@ -1,18 +1,26 @@
-﻿using Spectre.Console;
+﻿using Class_Library_PP2;
+using Spectre.Console;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.Json;
 
 namespace Prauge_Parking_2._0.Classes
 {
     public class MainMenuSwitch : Menu
     {
-        public MainMenuSwitch(ParkingGarage parkingGarage)
+        public MainMenuSwitch()
         {
+            
+            
+
             PowerSwitch powerSwitchMainMenu = new PowerSwitch();
             while (powerSwitchMainMenu.IsOn)
             {
                 Menu mainMenu = new MainMenu();
+
+                ParkingGarage parkingGarage = ParkingGarage.CheckExsistingParkingGarage();
+
                 ParkingSpot pSpot = null;
                 Receipt endedParking = null;
                 string requestedLicencePlate = "";
@@ -25,15 +33,13 @@ namespace Prauge_Parking_2._0.Classes
                         switch (chooseVehicleTypeToAdd.MenuChoice)
                         {
                             case "Car":
-                                Vehicle car = new Car();
-                                pSpot = parkingGarage.FindFirstEmptyParkingSpot(car);
-                                PrintOut.parkVehicleAtSpot(pSpot, car);
+                                parkingGarage.ParkCar(); // TODO skicka med phus ist för att ladda in igen
                                 break;
 
                             case "Motorcycle":
-                                Vehicle motorCycle = new Motorcycle();
-                                pSpot = parkingGarage.FindFirstEmptyParkingSpot(motorCycle);
-                                PrintOut.parkVehicleAtSpot(pSpot, motorCycle);
+                                //Vehicle motorCycle = new Motorcycle();
+                                //pSpot = parkingGarage.FindFirstEmptyParkingSpot(motorCycle);
+                                //PrintOut.parkVehicleAtSpot(pSpot, motorCycle);
                                 break;
 
                             case "Bus":
@@ -120,6 +126,7 @@ namespace Prauge_Parking_2._0.Classes
 
                     case "Quit":
                         powerSwitchMainMenu.TurnOff();
+                        Console.WriteLine("The End");
                         break;
                 }
             }

@@ -6,12 +6,12 @@ namespace Prauge_Parking_2._0.Classes
 {
     public class Motorcycle : Vehicle
     {
-        public override int Size { get; }
-        public override string VehicleType { get; }
-        public override decimal Price { get; }
+        public override int Size { get; set; }
+        public override string VehicleType { get; set; }
+        public override decimal Price { get; set; }
 
         /* ---------- Constructors ---------- */
-        public Motorcycle() : base()
+        public Motorcycle(string licencePlate) : base(licencePlate)
         {
             Size = 2;
             VehicleType = "Motorcycle";
