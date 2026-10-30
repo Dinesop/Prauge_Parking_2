@@ -82,7 +82,7 @@ namespace Prauge_Parking_2._0.Classes
             TimeSpan parkedDuration = foundVehicle.CheckIn - DateTime.UtcNow; // TODO look into TimeSpan Duration?
             TimeSpan freeParkingTime = new TimeSpan(0, 10, 0); // TODO point to config file
             Receipt endedParking = new Receipt(currentSpot, parkedDuration, foundVehicle, freeParkingTime);
-            currentSpot.VacateVehicleSpot();
+            currentSpot.VacateVehicleSpot(foundVehicle);
             return endedParking;
         }
         public void MoveVehicle(string requestedLicencePlate, int requestedNewSpot)
@@ -93,7 +93,13 @@ namespace Prauge_Parking_2._0.Classes
             if (newSpot.RemainingSize >= foundVehicle.Size)
             {
                 newSpot.ParkVehicleOnSpot(foundVehicle);
-                currentSpot.VacateVehicleSpot();
+                this.ParkingSpots.Contains(newSpot);
+                SaveParkingGarage("parkingGarage.json", this);
+
+                currentSpot.VacateVehicleSpot(foundVehicle);
+                this.ParkingSpots.Contains(currentSpot);
+                SaveParkingGarage("parkingGarage.json", this);
+
                 PrintOut.parkVehicleAtSpot(newSpot, foundVehicle);
             }
             else PrintOut.parkingSpotIsFull(newSpot, foundVehicle);
@@ -112,9 +118,6 @@ namespace Prauge_Parking_2._0.Classes
             Vehicle car = new Car(PrintOut.getLicencePlate());
 
             ParkingSpot pSpot = parkingGarage.FindFirstEmptyParkingSpot(car);
-            // vi får tillbaka en uppdaterad p-plats, som behövs skriva in i p-Huset
-            //var spot = parkingGarage.FirstOrDefault(s => s.ParkingSpotId == pSpot.ParkingSpotId);
-            int temp = pSpot.ParkingSpotId;
             
             PrintOut.parkVehicleAtSpot(pSpot, car);
         }
@@ -159,6 +162,19 @@ namespace Prauge_Parking_2._0.Classes
             }
 
         }
+
+
+        public void ParkMotorCycle()
+        {
+            ParkingGarage parkingGarage = LoadParkingGarage("parkingGarage.json");
+
+            Vehicle motorCycle = new Motorcycle(PrintOut.getLicencePlate());
+
+            ParkingSpot pSpot = parkingGarage.FindFirstEmptyParkingSpot(motorCycle);
+
+            PrintOut.parkVehicleAtSpot(pSpot, motorCycle);
+        }
+
     }
 }
 

@@ -37,9 +37,7 @@ namespace Prauge_Parking_2._0.Classes
                                 break;
 
                             case "Motorcycle":
-                                //Vehicle motorCycle = new Motorcycle();
-                                //pSpot = parkingGarage.FindFirstEmptyParkingSpot(motorCycle);
-                                //PrintOut.parkVehicleAtSpot(pSpot, motorCycle);
+                                parkingGarage.ParkMotorCycle();
                                 break;
 
                             case "Bus":

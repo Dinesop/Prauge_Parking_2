@@ -8,7 +8,7 @@
  - [x] Söka efter fordon.
  - [x] Systemet ska vara en textbaserad meny.
  - [x] Tidsstämplad lagring
- - [ ] Spara data som uppdateras varje gång det sker en förändring i p-huset.
+ - [x] Spara data som uppdateras varje gång det sker en förändring i p-huset.
  - [x] Prislista
  - [ ] Konfigurationsfil för antal p-platser, fordonstyp och antal fordon per p-plats
  - [ ] Grafiskt översikt av Phuset
@@ -21,7 +21,7 @@
  - [x] En parkeringsruta kan innehålla 1 bil eller upp till 2 motorcyklar.
  - [ ] Testköra på en annan dator.
  - [x] Minst 5 klasser: Vehicle, Car, MC, ParkingSpot, ParkingGarage
- - [ ] Klassbibliotek för dataåtkomst
+ - [x] Klassbibliotek för dataåtkomst
 
 ### För VG 
 Två av följande ska göras:
