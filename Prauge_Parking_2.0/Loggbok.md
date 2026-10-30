@@ -109,3 +109,4 @@ Where we're at: I park cars but the information does not follow back, the spots 
 ## 30/10
 I have spent 2 days trying to figure this out. Apparently having no set; in the properties is a big issue when dealing with deserialization of json. So now all properties gets setters.
 It is working so now we are tackling the config file. 
+Config file is done. It was a bit unclear what was the point of having Vehicle types in the config but I decided to use it to populate the menu, which was neat and makes for a nicer user experience. 
