@@ -113,10 +113,9 @@ namespace Prauge_Parking_2._0.Classes
             ParkingGarage parkingGarage = LoadParkingGarage(filePath);
 
             Vehicle car = new Car(PrintOut.getLicencePlate());
-
-            ParkingSpot pSpot = parkingGarage.FindFirstEmptyParkingSpot(car, filePath);
-
-            PrintOut.parkVehicleAtSpot(pSpot, car);
+            bool validationCheck = Validator.ValidateNewVehicle(car);
+            if (validationCheck) { ParkingSpot pSpot = parkingGarage.FindFirstEmptyParkingSpot(car, filePath); PrintOut.parkVehicleAtSpot(pSpot, car); }
+            else PrintOut.ParkingFailed();
         }
 
         public static ParkingGarage LoadParkingGarage(string filePath)
@@ -231,12 +230,10 @@ namespace Prauge_Parking_2._0.Classes
         public void ParkMotorCycle(string filePath)
         {
             ParkingGarage parkingGarage = LoadParkingGarage(filePath);
-
             Vehicle motorCycle = new Motorcycle(PrintOut.getLicencePlate());
-
-            ParkingSpot pSpot = parkingGarage.FindFirstEmptyParkingSpot(motorCycle, filePath);
-
-            PrintOut.parkVehicleAtSpot(pSpot, motorCycle);
+            bool validationCheck = Validator.ValidateNewVehicle(motorCycle);
+            if (validationCheck) { ParkingSpot pSpot = parkingGarage.FindFirstEmptyParkingSpot(motorCycle, filePath); PrintOut.parkVehicleAtSpot(pSpot, motorCycle); }
+            else PrintOut.ParkingFailed();
         }
         public static bool SetupParkingGarageConfiguration(AppConfig content)
         {

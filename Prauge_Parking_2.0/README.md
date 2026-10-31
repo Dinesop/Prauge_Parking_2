@@ -15,7 +15,7 @@
 
 ### Tekniska krav
  - [x] Identifiering av fordon sker genom registreringsnummer.
- - [ ] Registreringsnumrena är alltid strängar med en maxlängd på 10 tecken.
+ - [x] Registreringsnumrena är alltid strängar med en maxlängd på 10 tecken.
  - [x] Det finns 100 parkeringsrutor
  - [x] Parkeringsrutorna är numrerade 1 - 100.
  - [x] En parkeringsruta kan innehålla 1 bil eller upp till 2 motorcyklar.

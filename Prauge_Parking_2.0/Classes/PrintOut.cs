@@ -66,12 +66,19 @@ namespace Prauge_Parking_2._0.Classes
         public static bool WarningParkingGarageOverwriten()
         {
             AnsiConsole.WriteLine("The configuration and the parking garage did not match in the number of parking spots, but as the parking garage was empty the save file was adjusted to match the configuration settings.");
+            pressAnyKeyToContinue();
             return true;
         }
         public static bool WarningNewParkingGarageCreated()
         {
             AnsiConsole.WriteLine("The configuration and the parking garage did not match in the number of parking spots, but as the parking garage was empty a new file has been created and the exsisting vehicles have been moved over. ");
+            pressAnyKeyToContinue();
             return true;
+        }
+        public static void ParkingFailed()
+        {
+            AnsiConsole.WriteLine("The vehicle could not be entered into the system. Check input and try again.");
+            pressAnyKeyToContinue();
         }
 
     }

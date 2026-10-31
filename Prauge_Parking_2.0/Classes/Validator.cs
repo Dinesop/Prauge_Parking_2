@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Spectre.Console;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -33,6 +34,12 @@ namespace Prauge_Parking_2._0.Classes
                 PrintOut.ErrorLicencePlateLenght();
                 return false;
             }
+
+            else return true;
+        }
+        public static bool ValidateNewVehicle(Vehicle vehicle)
+        {
+            if (vehicle.LicencePlate == null) return false;
 
             else return true;
         }
