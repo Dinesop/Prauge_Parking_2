@@ -9,6 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Spectre.Console" Version="0.57.2" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Class_Library_PP2\Class_Library_PP2.csproj" />
   </ItemGroup>
 

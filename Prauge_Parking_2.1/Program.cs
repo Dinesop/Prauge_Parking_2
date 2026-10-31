@@ -1,10 +1,13 @@
-﻿namespace Prauge_Parking_2._1
+﻿using Prauge_Parking_2._0.Classes;
+
+namespace Prauge_Parking_2._1
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            MainMenuSwitch mainMenuSwitch = new MainMenuSwitch();
+
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Class_Library_PP2;
+using Prauge_Parking_2._1.Classes;
 using System;
 using System.Collections.Generic;
 using System.Reflection.Metadata;
@@ -156,6 +157,7 @@ namespace Prauge_Parking_2._0.Classes
 
         public static ParkingGarage CheckExsistingParkingGarage(AppConfig configFile)
         { // 31/10 Fixing backup for if config file and parking garage missmatch. Changed from hardcoded filePath to based in config file and dynamic if missmatch between config and parkingGarage.
+            // TODO this should be split up.
             string filePath = configFile.ConfigFilePath + ".json";
             bool checkForFile = MyFiles.CheckForFile(filePath);
             if (!checkForFile)
@@ -206,7 +208,7 @@ namespace Prauge_Parking_2._0.Classes
                         PrintOut.WarningParkingGarageOverwriten();
                         return parkingGarage;
                     }
-                   
+
                 }
             }
         }
@@ -242,6 +244,25 @@ namespace Prauge_Parking_2._0.Classes
             MyFiles.Save(filePath, jsonString);
             return true;
         }
+        public void ParkBicycle(string filePath)
+        {// 31/10 added method
+            ParkingGarage parkingGarage = LoadParkingGarage(filePath);
+            Vehicle bicycle = new Bicycle(PrintOut.getBicycleColor());
+            int nrOfBikes = BicycleCounter(parkingGarage);
+            int bikeId = nrOfBikes + 1;
+            string completeBikeId = bicycle.LicencePlate + bikeId;
+            bicycle.LicencePlate = completeBikeId;
+            bool validationCheck = Validator.ValidateNewVehicle(bicycle);
+
+            if (validationCheck) { ParkingSpot pSpot = parkingGarage.FindFirstEmptyParkingSpot(bicycle, filePath); PrintOut.parkVehicleAtSpot(pSpot, bicycle); }
+            else PrintOut.ParkingFailed();
+        }
+        public int BicycleCounter(ParkingGarage parkingGarage)
+        {// 31/10 added a counter to check for all bicycles in the system
+            List<Vehicle> bicycleList = parkingGarage.ParkingSpots.SelectMany(spot => spot.ParkedVehicles).Where(v => v.VehicleType == "Bicycle").ToList();
+            return bicycleList.Count;
+        }
+
 
     }
 }

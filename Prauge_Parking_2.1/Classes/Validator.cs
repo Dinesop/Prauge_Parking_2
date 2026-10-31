@@ -9,11 +9,12 @@ namespace Prauge_Parking_2._0.Classes
     {
         /* ---------- Methods ---------- */
         public static bool ValidateLicencePlate(string submittedLicencePlate)
-        {
-            bool test1 = CheckNullOrWhiteSpace(submittedLicencePlate);
-            bool test2 = CheckLicencePlateLenght(submittedLicencePlate);
+        {// 31/10 commented out CheckedLicencePlateLenght because realiszed it was not in the new spec. 
 
-            if (test1 && test2) return true;
+            bool test1 = CheckNullOrWhiteSpace(submittedLicencePlate);
+            //bool test2 = CheckLicencePlateLenght(submittedLicencePlate);
+
+            if (test1) return true;
             else return false;
         }
 

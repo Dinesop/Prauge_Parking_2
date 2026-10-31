@@ -14,7 +14,7 @@ namespace Prauge_Parking_2._0.Classes
         }
         public static string getLicencePlate()
         {
-            string licencePlate = AnsiConsole.Ask<string>("Please input the vehicle licence plate:");;
+            string licencePlate = AnsiConsole.Ask<string>("Please input the vehicle licence plate:");
             if (Validator.ValidateLicencePlate(licencePlate)) return licencePlate;
             else return null; 
         }
@@ -79,6 +79,12 @@ namespace Prauge_Parking_2._0.Classes
         {
             AnsiConsole.WriteLine("The vehicle could not be entered into the system. Check input and try again.");
             pressAnyKeyToContinue();
+        }
+        public static string getBicycleColor()
+        {
+            string bicycleColor = AnsiConsole.Ask<string>("Please input the color of the bicycle:");
+            if (Validator.ValidateLicencePlate(bicycleColor)) return bicycleColor;
+            else return null;
         }
 
     }

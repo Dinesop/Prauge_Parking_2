@@ -13,11 +13,6 @@ namespace Prauge_Parking_2._0
         { // TODO: när saker returnerar null om de går fel, kan man använda ArgumentNullException.ThrowIfNull eller liknande.
 
             MainMenuSwitch mainMenuSwitch = new MainMenuSwitch();
-
-
-
-
-
         }
     }
 }

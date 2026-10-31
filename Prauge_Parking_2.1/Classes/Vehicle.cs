@@ -1,4 +1,5 @@
-﻿using Spectre.Console;
+﻿using Prauge_Parking_2._1.Classes;
+using Spectre.Console;
 using System;
 using System.Collections.Generic;
 using System.Net.NetworkInformation;
@@ -10,6 +11,7 @@ namespace Prauge_Parking_2._0.Classes
     [JsonPolymorphic(TypeDiscriminatorPropertyName = "$type")]
     [JsonDerivedType(typeof(Car), "Car")]
     [JsonDerivedType(typeof(Motorcycle), "Motorcycle")]
+    [JsonDerivedType(typeof(Bicycle), "Bicycle")]
     public abstract class Vehicle
     {
         /* ---------- Properties ---------- */
