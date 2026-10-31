@@ -6,12 +6,12 @@ namespace Prauge_Parking_2._0.Classes
 {
     public class Receipt 
     {
-        public Vehicle ParkedVehicle { get; }
+        public IVehicle ParkedVehicle { get; }
         public TimeSpan ParkedDuration { get; }
         public int ParkingSpotId { get; }
         public decimal CostOfParking { get;  }
         public TimeSpan FreeParkingTime { get; }
-        public Receipt(ParkingSpot parkingSpot, TimeSpan parkedDuration, Vehicle foundVehicle, TimeSpan freeParkingTime)
+        public Receipt(ParkingSpot parkingSpot, TimeSpan parkedDuration, IVehicle foundVehicle, TimeSpan freeParkingTime)
         {
             ParkedVehicle = foundVehicle;
             ParkedDuration = parkedDuration;
@@ -20,7 +20,7 @@ namespace Prauge_Parking_2._0.Classes
             FreeParkingTime = freeParkingTime;
         }
 
-        public decimal CalculatedCostOfParking(TimeSpan parkedDuration, Vehicle vehicle, TimeSpan freeParkingTime)
+        public decimal CalculatedCostOfParking(TimeSpan parkedDuration, IVehicle vehicle, TimeSpan freeParkingTime)
         {
             if (parkedDuration < freeParkingTime) return 0M;
 

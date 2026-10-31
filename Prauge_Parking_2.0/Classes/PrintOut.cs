@@ -23,13 +23,13 @@ namespace Prauge_Parking_2._0.Classes
             int newSpot = AnsiConsole.Ask<int>("Please input the parking spot you wish to move the vehicle to:");
             return newSpot;
         }
-        public static bool parkVehicleAtSpot(ParkingSpot parkingSpot, Vehicle vehicle)
+        public static bool parkVehicleAtSpot(ParkingSpot parkingSpot, IVehicle vehicle)
         {
             AnsiConsole.WriteLine($"The {vehicle.VehicleType} with licence nr {vehicle.LicencePlate} is assigned to parkingspot {parkingSpot.ParkingSpotId}.");
             pressAnyKeyToContinue();
             return true;
         }
-        public static bool vehicleParkedAt(ParkingSpot parkingSpot, Vehicle vehicle)
+        public static bool vehicleParkedAt(ParkingSpot parkingSpot, IVehicle vehicle)
         {
             AnsiConsole.WriteLine($"The {vehicle.VehicleType} with licence nr {vehicle.LicencePlate} is parked at parkingspot {parkingSpot.ParkingSpotId}.");
             pressAnyKeyToContinue();
@@ -47,7 +47,7 @@ namespace Prauge_Parking_2._0.Classes
             pressAnyKeyToContinue();
             return true;
         }
-        public static bool parkingSpotIsFull(ParkingSpot parkingSpot, Vehicle vehicle)
+        public static bool parkingSpotIsFull(ParkingSpot parkingSpot, IVehicle vehicle)
         {
             AnsiConsole.WriteLine($"Parkingspot {parkingSpot.ParkingSpotId} doesn't have enough space available to park a {vehicle.VehicleType}, try a different spot.");
             pressAnyKeyToContinue();

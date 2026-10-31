@@ -5,7 +5,7 @@ using System.Text;
 namespace Prauge_Parking_2._0.Classes
 {
     
-    public class Car : Vehicle
+    public class Car : IVehicle
     {
         /* ---------- Properties ---------- */
         public override int Size { get; set; }

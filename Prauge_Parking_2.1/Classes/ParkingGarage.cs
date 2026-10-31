@@ -28,7 +28,7 @@ namespace Prauge_Parking_2._0.Classes
         }
 
         /* ---------- Methods ---------- */
-        public ParkingSpot FindFirstEmptyParkingSpot(Vehicle vehicle, string filePath)
+        public ParkingSpot FindFirstEmptyParkingSpot(IVehicle vehicle, string filePath)
         {
             foreach (var spot in ParkingSpots)
             {
@@ -48,7 +48,7 @@ namespace Prauge_Parking_2._0.Classes
         {
             foreach (var spot in ParkingSpots)
             {
-                Vehicle foundVehicle = CollectVehicleFromLicencePlate(spot, requestedLicencePlate);
+                IVehicle foundVehicle = CollectVehicleFromLicencePlate(spot, requestedLicencePlate);
                 if (foundVehicle != null)
                 {
                     return spot;
@@ -57,9 +57,9 @@ namespace Prauge_Parking_2._0.Classes
             return null;
 
         }
-        public Vehicle FindLicencePlate(string requestedLicencePlate)
+        public IVehicle FindLicencePlate(string requestedLicencePlate)
         {
-            Vehicle vehicleInGarage = ParkingSpots.SelectMany(spot => spot.ParkedVehicles).FirstOrDefault(v => v.LicencePlate == requestedLicencePlate);
+            IVehicle vehicleInGarage = ParkingSpots.SelectMany(spot => spot.ParkedVehicles).FirstOrDefault(v => v.LicencePlate == requestedLicencePlate);
             return vehicleInGarage;
         }
         public ParkingSpot FindParkingSpotId(int parkingSpotId)
@@ -76,7 +76,7 @@ namespace Prauge_Parking_2._0.Classes
         public Receipt RetriveVehicle(string requestedLicencePlate, AppConfig appConfig, string filePath)
         {
             ParkingSpot currentSpot = FindLicencePlateInParkingSpot(requestedLicencePlate);
-            Vehicle foundVehicle = CollectVehicleFromLicencePlate(currentSpot, requestedLicencePlate);
+            IVehicle foundVehicle = CollectVehicleFromLicencePlate(currentSpot, requestedLicencePlate);
             TimeSpan parkedDuration = foundVehicle.CheckIn - DateTime.UtcNow; // TODO look into TimeSpan Duration?
             TimeSpan freeParkingTime = appConfig.FreeParkingTime;
             Receipt endedParking = new Receipt(currentSpot, parkedDuration, foundVehicle, freeParkingTime);
@@ -87,7 +87,7 @@ namespace Prauge_Parking_2._0.Classes
         public void MoveVehicle(string requestedLicencePlate, int requestedNewSpot, string filePath)
         {
             ParkingSpot currentSpot = FindLicencePlateInParkingSpot(requestedLicencePlate);
-            Vehicle foundVehicle = CollectVehicleFromLicencePlate(currentSpot, requestedLicencePlate);
+            IVehicle foundVehicle = CollectVehicleFromLicencePlate(currentSpot, requestedLicencePlate);
             ParkingSpot newSpot = FindParkingSpotId(requestedNewSpot);
             if (newSpot.RemainingSize >= foundVehicle.Size)
             {
@@ -105,16 +105,16 @@ namespace Prauge_Parking_2._0.Classes
 
         }
 
-        public static Vehicle CollectVehicleFromLicencePlate(ParkingSpot parkingSpot, string requestedLicencePlate)
+        public static IVehicle CollectVehicleFromLicencePlate(ParkingSpot parkingSpot, string requestedLicencePlate)
         {
-            Vehicle foundVehicle = parkingSpot.ParkedVehicles.FirstOrDefault(v => v.LicencePlate == requestedLicencePlate);
+            IVehicle foundVehicle = parkingSpot.ParkedVehicles.FirstOrDefault(v => v.LicencePlate == requestedLicencePlate);
             return foundVehicle;
         }
         public void ParkCar(string filePath, AppConfig appConfig)
         {
             ParkingGarage parkingGarage = LoadParkingGarage(filePath);
 
-            Vehicle car = new Car(PrintOut.getLicencePlate(), appConfig);
+            IVehicle car = new Car(PrintOut.getLicencePlate(), appConfig);
             bool validationCheck = Validator.ValidateNewVehicle(car);
             if (validationCheck) { ParkingSpot pSpot = parkingGarage.FindFirstEmptyParkingSpot(car, filePath); PrintOut.parkVehicleAtSpot(pSpot, car); }
             else PrintOut.ParkingFailed();
@@ -218,7 +218,7 @@ namespace Prauge_Parking_2._0.Classes
         public void ParkMotorCycle(string filePath, AppConfig appConfig)
         {
             ParkingGarage parkingGarage = LoadParkingGarage(filePath);
-            Vehicle motorCycle = new Motorcycle(PrintOut.getLicencePlate(), appConfig);
+            IVehicle motorCycle = new Motorcycle(PrintOut.getLicencePlate(), appConfig);
             bool validationCheck = Validator.ValidateNewVehicle(motorCycle);
             if (validationCheck) { ParkingSpot pSpot = parkingGarage.FindFirstEmptyParkingSpot(motorCycle, filePath); PrintOut.parkVehicleAtSpot(pSpot, motorCycle); }
             else PrintOut.ParkingFailed();
@@ -233,7 +233,7 @@ namespace Prauge_Parking_2._0.Classes
         public void ParkBicycle(string filePath, AppConfig appConfig)
         {// 31/10 added method
             ParkingGarage parkingGarage = LoadParkingGarage(filePath);
-            Vehicle bicycle = new Bicycle(PrintOut.getBicycleColor(), appConfig);
+            IVehicle bicycle = new Bicycle(PrintOut.getBicycleColor(), appConfig);
             int nrOfBikes = BicycleCounter(parkingGarage);
             int bikeId = nrOfBikes + 1;
             string completeBikeId = bicycle.LicencePlate + bikeId;
@@ -245,7 +245,7 @@ namespace Prauge_Parking_2._0.Classes
         }
         public int BicycleCounter(ParkingGarage parkingGarage)
         {// 31/10 added a counter to check for all bicycles in the system
-            List<Vehicle> bicycleList = parkingGarage.ParkingSpots.SelectMany(spot => spot.ParkedVehicles).Where(v => v.VehicleType == "Bicycle").ToList();
+            List<IVehicle> bicycleList = parkingGarage.ParkingSpots.SelectMany(spot => spot.ParkedVehicles).Where(v => v.VehicleType == "Bicycle").ToList();
             return bicycleList.Count;
         }
         

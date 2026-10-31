@@ -38,7 +38,7 @@ namespace Prauge_Parking_2._0.Classes
 
             else return true;
         }
-        public static bool ValidateNewVehicle(Vehicle vehicle)
+        public static bool ValidateNewVehicle(IVehicle vehicle)
         {
             if (vehicle.LicencePlate == null) return false;
 

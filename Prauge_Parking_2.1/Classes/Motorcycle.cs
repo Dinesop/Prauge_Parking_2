@@ -4,18 +4,22 @@ using System.Text;
 
 namespace Prauge_Parking_2._0.Classes
 {
-    public class Motorcycle : Vehicle
+    public class Motorcycle : IVehicle
     {
-        public override int Size { get; set; }
-        public override string VehicleType { get; set; }
-        public override decimal Price { get; set; }
+        public int Size { get; set; }
+        public string VehicleType { get; set; }
+        public decimal Price { get; set; }
+        public string LicencePlate { get; set; }
+        public DateTime CheckIn { get; set; }
 
         /* ---------- Constructors ---------- */
-        public Motorcycle(string licencePlate, AppConfig appConfig) : base(licencePlate, appConfig)
+        public Motorcycle(string licencePlate, AppConfig appConfig)
         {
             Size = appConfig.VehicleSetup["Motorcycle"];
             VehicleType = "Motorcycle";
             Price = appConfig.VehiclePrices["Motorcycle"];
+            LicencePlate = licencePlate;
+            CheckIn = DateTime.UtcNow;
         }
     }
 

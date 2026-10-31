@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Prauge_Parking_2._0.Classes
 {
-    public class Motorcycle : Vehicle
+    public class Motorcycle : IVehicle
     {
         public override int Size { get; set; }
         public override string VehicleType { get; set; }

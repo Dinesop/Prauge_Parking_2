@@ -111,7 +111,7 @@ namespace Prauge_Parking_2._0.Classes
                     case "Search for a vehicle":
                         requestedLicencePlate = PrintOut.getLicencePlate();
                         pSpot = parkingGarage.FindLicencePlateInParkingSpot(requestedLicencePlate);
-                        Vehicle requestedVehicle = parkingGarage.FindLicencePlate(requestedLicencePlate);
+                        IVehicle requestedVehicle = parkingGarage.FindLicencePlate(requestedLicencePlate);
                         PrintOut.vehicleParkedAt(pSpot, requestedVehicle);
                         break;
 

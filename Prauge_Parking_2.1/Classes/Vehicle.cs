@@ -13,7 +13,7 @@ namespace Prauge_Parking_2._0.Classes
     [JsonDerivedType(typeof(Motorcycle), "Motorcycle")]
     [JsonDerivedType(typeof(Bicycle), "Bicycle")]
     //[JsonDerivedType(typeof(Bus), "Bus")]
-    public abstract class Vehicle
+    public abstract class Vehicle : IVehicle
     {
         /* ---------- Properties ---------- */
         // TODO if there is time, try changing to private set with JsonInclude instead
