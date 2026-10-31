@@ -11,24 +11,24 @@ namespace Prauge_Parking_2._0.Classes
     {
         /* ---------- Fields ---------- */
 
-        public List<ParkingSpot> ParkingSpots { get; set;  } = new List<ParkingSpot>();
+        public List<ParkingSpot> ParkingSpots { get; set; } = new List<ParkingSpot>();
 
         /* ---------- Constructors ---------- */
         public ParkingGarage()
         {
-            
+
         }
         public ParkingGarage(int totalSpots)
-        { 
+        {
             for (int i = 1; i <= totalSpots; i++)
             {
-                ParkingSpots.Add(new ParkingSpot(i, CheckExsistingConfigFile().totalCapacity));
-            } 
+                ParkingSpots.Add(new ParkingSpot(i, CheckExsistingConfigFile().TotalCapacity));
+            }
         }
 
         /* ---------- Methods ---------- */
-        public ParkingSpot FindFirstEmptyParkingSpot(Vehicle vehicle)
-        { 
+        public ParkingSpot FindFirstEmptyParkingSpot(Vehicle vehicle, string filePath)
+        {
             foreach (var spot in ParkingSpots)
             {
 
@@ -36,7 +36,7 @@ namespace Prauge_Parking_2._0.Classes
                 {
                     spot.ParkVehicleOnSpot(vehicle);
                     this.ParkingSpots.Contains(spot);
-                    SaveParkingGarage("parkingGarage.json", this);
+                    SaveParkingGarage(filePath, this);
                     return spot;
                 }
                 else continue;
@@ -44,7 +44,7 @@ namespace Prauge_Parking_2._0.Classes
             return null;
         }
         public ParkingSpot FindLicencePlateInParkingSpot(string requestedLicencePlate)
-        { 
+        {
             foreach (var spot in ParkingSpots)
             {
                 Vehicle foundVehicle = CollectVehicleFromLicencePlate(spot, requestedLicencePlate);
@@ -53,24 +53,24 @@ namespace Prauge_Parking_2._0.Classes
                     return spot;
                 }
             }
-            return null; 
+            return null;
 
         }
         public Vehicle FindLicencePlate(string requestedLicencePlate)
-        { 
+        {
             Vehicle vehicleInGarage = ParkingSpots.SelectMany(spot => spot.ParkedVehicles).FirstOrDefault(v => v.LicencePlate == requestedLicencePlate);
-            return vehicleInGarage; 
+            return vehicleInGarage;
         }
         public ParkingSpot FindParkingSpotId(int parkingSpotId)
         { // TODO: LINQ query simplify the search
             foreach (var spot in ParkingSpots)
-            { 
+            {
                 if (spot.ParkingSpotId == parkingSpotId)
                 {
                     return spot;
                 }
             }
-            return null; 
+            return null;
         }
         public Receipt RetriveVehicle(string requestedLicencePlate)
         {
@@ -82,7 +82,7 @@ namespace Prauge_Parking_2._0.Classes
             currentSpot.VacateVehicleSpot(foundVehicle);
             return endedParking;
         }
-        public void MoveVehicle(string requestedLicencePlate, int requestedNewSpot)
+        public void MoveVehicle(string requestedLicencePlate, int requestedNewSpot, string filePath)
         {
             ParkingSpot currentSpot = FindLicencePlateInParkingSpot(requestedLicencePlate);
             Vehicle foundVehicle = CollectVehicleFromLicencePlate(currentSpot, requestedLicencePlate);
@@ -91,16 +91,16 @@ namespace Prauge_Parking_2._0.Classes
             {
                 newSpot.ParkVehicleOnSpot(foundVehicle);
                 this.ParkingSpots.Contains(newSpot);
-                SaveParkingGarage("parkingGarage.json", this);
+                SaveParkingGarage(filePath, this);
 
                 currentSpot.VacateVehicleSpot(foundVehicle);
                 this.ParkingSpots.Contains(currentSpot);
-                SaveParkingGarage("parkingGarage.json", this);
+                SaveParkingGarage(filePath, this);
 
                 PrintOut.parkVehicleAtSpot(newSpot, foundVehicle);
             }
             else PrintOut.parkingSpotIsFull(newSpot, foundVehicle);
-                
+
         }
 
         public static Vehicle CollectVehicleFromLicencePlate(ParkingSpot parkingSpot, string requestedLicencePlate)
@@ -108,14 +108,14 @@ namespace Prauge_Parking_2._0.Classes
             Vehicle foundVehicle = parkingSpot.ParkedVehicles.FirstOrDefault(v => v.LicencePlate == requestedLicencePlate);
             return foundVehicle;
         }
-        public void ParkCar()
+        public void ParkCar(string filePath)
         {
-            ParkingGarage parkingGarage = LoadParkingGarage("parkingGarage.json");
+            ParkingGarage parkingGarage = LoadParkingGarage(filePath);
 
             Vehicle car = new Car(PrintOut.getLicencePlate());
 
-            ParkingSpot pSpot = parkingGarage.FindFirstEmptyParkingSpot(car);
-            
+            ParkingSpot pSpot = parkingGarage.FindFirstEmptyParkingSpot(car, filePath);
+
             PrintOut.parkVehicleAtSpot(pSpot, car);
         }
 
@@ -155,26 +155,66 @@ namespace Prauge_Parking_2._0.Classes
             return true;
         }
 
-        public static ParkingGarage CheckExsistingParkingGarage()
-        {
-            bool checkForFile = MyFiles.CheckForFile("parkingGarage.json");
+        public static ParkingGarage CheckExsistingParkingGarage(AppConfig configFile)
+        { // 31/10 Fixing backup for if config file and parking garage missmatch. Changed from hardcoded filePath to based in config file and dynamic if missmatch between config and parkingGarage.
+            string filePath = configFile.ConfigFilePath + ".json";
+            bool checkForFile = MyFiles.CheckForFile(filePath);
             if (!checkForFile)
             {
-                AppConfig configFile = CheckExsistingConfigFile();
-                ParkingGarage parkingGarage = new ParkingGarage(configFile.numberOfParkingSpots);
-                parkingGarage.SaveParkingGarage("parkingGarage.json", parkingGarage);
+                ParkingGarage parkingGarage = new ParkingGarage(configFile.NumberOfParkingSpots);
+                parkingGarage.SaveParkingGarage(filePath, parkingGarage);
                 return parkingGarage;
             }
             else
             {
-                ParkingGarage parkingGarage = ParkingGarage.LoadParkingGarage("parkingGarage.json");
-                return parkingGarage;
+                ParkingGarage parkingGarage = ParkingGarage.LoadParkingGarage(filePath);
+                if (configFile.NumberOfParkingSpots == parkingGarage.ParkingSpots.Count) return parkingGarage;
+                else if (parkingGarage.ParkingSpots.Count == 0)
+                {
+                    parkingGarage = new ParkingGarage(configFile.NumberOfParkingSpots);
+                    parkingGarage.SaveParkingGarage(filePath, parkingGarage);
+                    PrintOut.WarningParkingGarageOverwriten();
+                    return parkingGarage;
+                }
+                else
+                {
+                    string output = string.Concat(filePath.Where(Char.IsDigit));
+                    bool numberCheck = int.TryParse(output, out int iterationNumber);
+                    if (numberCheck)
+                    {
+                        iterationNumber++;
+                        ParkingGarage parkingGarage_placeholder = new ParkingGarage(configFile.NumberOfParkingSpots);
+                        int counter = parkingGarage.ParkingSpots.Count;
+                        for (int i = 0; i < counter; i++)
+                        {
+                            parkingGarage_placeholder.ParkingSpots[i] = parkingGarage.ParkingSpots[i]; // reference copy, but is fine since we won't use it after we saved to file.
+                        }
+                        filePath = configFile.ConfigFilePath + iterationNumber + ".json";
+                        parkingGarage_placeholder.SaveParkingGarage(filePath, parkingGarage_placeholder);
+                        PrintOut.WarningParkingGarageOverwriten();
+                        return parkingGarage;
+                    }
+                    else
+                    {
+                        ParkingGarage parkingGarage_placeholder = new ParkingGarage(configFile.NumberOfParkingSpots);
+                        int counter = parkingGarage.ParkingSpots.Count;
+                        for (int i = 0; i < counter; i++)
+                        {
+                            parkingGarage_placeholder.ParkingSpots[i] = parkingGarage.ParkingSpots[i]; // reference copy, but is fine since we won't use it after we saved to file.
+                        }
+                        filePath = configFile.ConfigFilePath + "2" + ".json";
+                        parkingGarage_placeholder.SaveParkingGarage(filePath, parkingGarage_placeholder);
+                        PrintOut.WarningParkingGarageOverwriten();
+                        return parkingGarage;
+                    }
+                   
+                }
             }
-
         }
         public static AppConfig CheckExsistingConfigFile()
         {// TODO Move to AppConfig where it belongs. 
-            bool checkForFile = MyFiles.CheckForFile("PP2_config.json");
+            string filePath = "ConfigFile" + ".json";
+            bool checkForFile = MyFiles.CheckForFile(filePath);
             if (!checkForFile)
             {
                 AppConfig configFile = new AppConfig();
@@ -183,43 +223,29 @@ namespace Prauge_Parking_2._0.Classes
             }
             else
             {
-                AppConfig configFile = ParkingGarage.LoadConfigFile("PP2_config.json");
+                AppConfig configFile = ParkingGarage.LoadConfigFile(filePath);
                 return configFile;
             }
-
         }
 
-        public void ParkMotorCycle()
+        public void ParkMotorCycle(string filePath)
         {
-            ParkingGarage parkingGarage = LoadParkingGarage("parkingGarage.json");
+            ParkingGarage parkingGarage = LoadParkingGarage(filePath);
 
             Vehicle motorCycle = new Motorcycle(PrintOut.getLicencePlate());
 
-            ParkingSpot pSpot = parkingGarage.FindFirstEmptyParkingSpot(motorCycle);
+            ParkingSpot pSpot = parkingGarage.FindFirstEmptyParkingSpot(motorCycle, filePath);
 
             PrintOut.parkVehicleAtSpot(pSpot, motorCycle);
         }
         public static bool SetupParkingGarageConfiguration(AppConfig content)
         {
             string jsonString = JsonSerializer.Serialize(content);
-            MyFiles.Save("PP2_config.json", jsonString);
+            string filePath = content.ConfigFilePath + ".json";
+            MyFiles.Save(filePath, jsonString);
             return true;
         }
-        //public static bool ConfigNumberOfParkingSpots()
-        //{
 
-        //    return true;
-        //}
-        //public static bool ConfigVehicleTypes()
-        //{
-
-        //    return true;
-        //}
-        //public static bool ConfigPSpotTotalCapacity()
-        //{
-
-        //    return true;
-        //}
     }
 }
 

@@ -110,3 +110,8 @@ Where we're at: I park cars but the information does not follow back, the spots 
 I have spent 2 days trying to figure this out. Apparently having no set; in the properties is a big issue when dealing with deserialization of json. So now all properties gets setters.
 It is working so now we are tackling the config file. 
 Config file is done. It was a bit unclear what was the point of having Vehicle types in the config but I decided to use it to populate the menu, which was neat and makes for a nicer user experience. 
+I wrapped up most of the grapic interface as well, except for a out of bounds error.
+## 31/10
+I realized that the out of bounds error was because the config said 100 parkingspots but the parking garage only had 10 since it never created a new file to match the changes. So are currently handling that. 
+Also talked to a friend that works in IT and he practially begged me to document my code properly so that is something I will try to do. 
+Everything is done, except actually making the code throw if you try to add more than 10 characters. Right now it shows an error and then parks the car anyway.

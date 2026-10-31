@@ -11,7 +11,7 @@
  - [x] Spara data som uppdateras varje gång det sker en förändring i p-huset.
  - [x] Prislista
  - [x] Konfigurationsfil för antal p-platser, fordonstyp och antal fordon per p-plats
- - [ ] Grafiskt översikt av Phuset
+ - [x] Grafiskt översikt av Phuset
 
 ### Tekniska krav
  - [x] Identifiering av fordon sker genom registreringsnummer.

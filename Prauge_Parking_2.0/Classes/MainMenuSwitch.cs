@@ -14,27 +14,28 @@ namespace Prauge_Parking_2._0.Classes
             PowerSwitch powerSwitchMainMenu = new PowerSwitch();
             while (powerSwitchMainMenu.IsOn)
             {
-                Menu mainMenu = new MainMenu();
                 AppConfig configFile = ParkingGarage.CheckExsistingConfigFile();
-                ParkingGarage parkingGarage = ParkingGarage.CheckExsistingParkingGarage();
-
+                ParkingGarage parkingGarage = ParkingGarage.CheckExsistingParkingGarage(configFile);
+                Menu mainMenu = new MainMenu();
+                
                 ParkingSpot pSpot = null;
                 Receipt endedParking = null;
                 string requestedLicencePlate = "";
+                string filePath = configFile.ParkingGarageFilePath + ".json";
                 int newSpot = 0;
 
                 switch (mainMenu.MenuChoice)
                 {// TODO consider adding a default
                     case "Add a vehicle":
-                        MenuChooseVehicleType chooseVehicleTypeToAdd = new MenuChooseVehicleType(configFile.allowedVehicleTypes);
+                        MenuChooseVehicleType chooseVehicleTypeToAdd = new MenuChooseVehicleType(configFile.AllowedVehicleTypes);
                         switch (chooseVehicleTypeToAdd.MenuChoice)
                         { // TODO consider adding a default
                             case "Car":
-                                parkingGarage.ParkCar(); 
+                                parkingGarage.ParkCar(filePath); 
                                 break;
 
                             case "Motorcycle":
-                                parkingGarage.ParkMotorCycle();
+                                parkingGarage.ParkMotorCycle(filePath);
                                 break;
 
                             case "Bus":
@@ -52,20 +53,20 @@ namespace Prauge_Parking_2._0.Classes
                         break;
 
                     case "Move a vehicle":
-                        MenuChooseVehicleType chooseVehicleTypeToMove = new MenuChooseVehicleType(configFile.allowedVehicleTypes);
+                        MenuChooseVehicleType chooseVehicleTypeToMove = new MenuChooseVehicleType(configFile.AllowedVehicleTypes);
 
                         switch (chooseVehicleTypeToMove.MenuChoice)
                         {
                             case "Car":
                                 requestedLicencePlate = PrintOut.getLicencePlate();
                                 newSpot = PrintOut.requestedNewSpot();
-                                parkingGarage.MoveVehicle(requestedLicencePlate, newSpot);
+                                parkingGarage.MoveVehicle(requestedLicencePlate, newSpot, filePath);
                                 break;
 
                             case "Motorcycle":
                                 requestedLicencePlate = PrintOut.getLicencePlate();
                                 newSpot = PrintOut.requestedNewSpot();
-                                parkingGarage.MoveVehicle(requestedLicencePlate, newSpot);
+                                parkingGarage.MoveVehicle(requestedLicencePlate, newSpot, filePath);
                                 break;
 
                             case "Bus":
@@ -80,7 +81,7 @@ namespace Prauge_Parking_2._0.Classes
                         break;
 
                     case "Retrieve a vehicle":
-                        MenuChooseVehicleType chooseVehicleTypeToRetrieve = new MenuChooseVehicleType(configFile.allowedVehicleTypes);
+                        MenuChooseVehicleType chooseVehicleTypeToRetrieve = new MenuChooseVehicleType(configFile.AllowedVehicleTypes);
                         requestedLicencePlate = "";
 
                         switch (chooseVehicleTypeToRetrieve.MenuChoice)
@@ -119,7 +120,7 @@ namespace Prauge_Parking_2._0.Classes
                         break;
 
                     case "Overview":
-
+                        GraphicLayout.VisualizeParkingGarage(parkingGarage);
                         break;
 
                     case "Quit":
