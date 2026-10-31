@@ -88,13 +88,13 @@ namespace Prauge_Parking_2._0.Classes
                         { // TODO change to a method instead.
                             case "Car":
                                 requestedLicencePlate = PrintOut.getLicencePlate();
-                                endedParking = parkingGarage.RetriveVehicle(requestedLicencePlate, configFile);
+                                endedParking = parkingGarage.RetriveVehicle(requestedLicencePlate, configFile, filePath);
                                 PrintOut.retrieveVehicleAtSpot(endedParking);
                                 break;
 
                             case "Motorcycle":
                                 requestedLicencePlate = PrintOut.getLicencePlate();
-                                endedParking = parkingGarage.RetriveVehicle(requestedLicencePlate, configFile);
+                                endedParking = parkingGarage.RetriveVehicle(requestedLicencePlate, configFile, filePath);
                                 PrintOut.retrieveVehicleAtSpot(endedParking);
                                 break;
 

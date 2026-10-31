@@ -73,7 +73,7 @@ namespace Prauge_Parking_2._0.Classes
             }
             return null;
         }
-        public Receipt RetriveVehicle(string requestedLicencePlate, AppConfig appConfig)
+        public Receipt RetriveVehicle(string requestedLicencePlate, AppConfig appConfig, string filePath)
         {
             ParkingSpot currentSpot = FindLicencePlateInParkingSpot(requestedLicencePlate);
             Vehicle foundVehicle = CollectVehicleFromLicencePlate(currentSpot, requestedLicencePlate);
@@ -81,6 +81,7 @@ namespace Prauge_Parking_2._0.Classes
             TimeSpan freeParkingTime = appConfig.FreeParkingTime;
             Receipt endedParking = new Receipt(currentSpot, parkedDuration, foundVehicle, freeParkingTime);
             currentSpot.VacateVehicleSpot(foundVehicle);
+            SaveParkingGarage(filePath, this);
             return endedParking;
         }
         public void MoveVehicle(string requestedLicencePlate, int requestedNewSpot, string filePath)
