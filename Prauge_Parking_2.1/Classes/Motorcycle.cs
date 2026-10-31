@@ -11,11 +11,11 @@ namespace Prauge_Parking_2._0.Classes
         public override decimal Price { get; set; }
 
         /* ---------- Constructors ---------- */
-        public Motorcycle(string licencePlate) : base(licencePlate)
+        public Motorcycle(string licencePlate, AppConfig appConfig) : base(licencePlate, appConfig)
         {
             Size = 2;
             VehicleType = "Motorcycle";
-            Price = 10M;
+            Price = appConfig.VehiclePrices["Motorcycle"];
         }
     }
 

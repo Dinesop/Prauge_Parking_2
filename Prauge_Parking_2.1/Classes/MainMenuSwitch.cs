@@ -14,7 +14,7 @@ namespace Prauge_Parking_2._0.Classes
             PowerSwitch powerSwitchMainMenu = new PowerSwitch();
             while (powerSwitchMainMenu.IsOn)
             {
-                AppConfig configFile = ParkingGarage.CheckExsistingConfigFile();
+                AppConfig configFile = AppConfig.CheckExsistingConfigFile();
                 ParkingGarage parkingGarage = ParkingGarage.CheckExsistingParkingGarage(configFile);
                 Menu mainMenu = new MainMenu();
                 
@@ -31,11 +31,11 @@ namespace Prauge_Parking_2._0.Classes
                         switch (chooseVehicleTypeToAdd.MenuChoice)
                         { // TODO consider adding a default
                             case "Car":
-                                parkingGarage.ParkCar(filePath); 
+                                parkingGarage.ParkCar(filePath, configFile); 
                                 break;
 
                             case "Motorcycle":
-                                parkingGarage.ParkMotorCycle(filePath);
+                                parkingGarage.ParkMotorCycle(filePath, configFile);
                                 break;
 
                             case "Bus":
@@ -43,7 +43,7 @@ namespace Prauge_Parking_2._0.Classes
                                 break;
 
                             case "Bicycle":
-                                parkingGarage.ParkBicycle(filePath);
+                                parkingGarage.ParkBicycle(filePath, configFile);
                                 break;
                             
                             case "Back":
@@ -88,13 +88,13 @@ namespace Prauge_Parking_2._0.Classes
                         { // TODO change to a method instead.
                             case "Car":
                                 requestedLicencePlate = PrintOut.getLicencePlate();
-                                endedParking = parkingGarage.RetriveVehicle(requestedLicencePlate);
+                                endedParking = parkingGarage.RetriveVehicle(requestedLicencePlate, configFile);
                                 PrintOut.retrieveVehicleAtSpot(endedParking);
                                 break;
 
                             case "Motorcycle":
                                 requestedLicencePlate = PrintOut.getLicencePlate();
-                                endedParking = parkingGarage.RetriveVehicle(requestedLicencePlate);
+                                endedParking = parkingGarage.RetriveVehicle(requestedLicencePlate, configFile);
                                 PrintOut.retrieveVehicleAtSpot(endedParking);
                                 break;
 

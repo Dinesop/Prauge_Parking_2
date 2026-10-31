@@ -16,11 +16,11 @@ namespace Prauge_Parking_2._0.Classes
         {
             
         }
-        public Car(string licencePlate)  :base (licencePlate)
+        public Car(string licencePlate, AppConfig appConfig) : base(licencePlate, appConfig)
         {
             Size = 4;
             VehicleType = "Car";
-            Price = 20M;
+            Price = appConfig.VehiclePrices["Car"];
         }
         
     }

@@ -19,11 +19,11 @@ namespace Prauge_Parking_2._0.Classes
         {
 
         }
-        public ParkingGarage(int totalSpots)
+        public ParkingGarage(AppConfig appConfig)
         {
-            for (int i = 1; i <= totalSpots; i++)
+            for (int i = 1; i <= appConfig.NumberOfParkingSpots; i++)
             {
-                ParkingSpots.Add(new ParkingSpot(i, CheckExsistingConfigFile().TotalCapacity));
+                ParkingSpots.Add(new ParkingSpot(i, appConfig.TotalCapacity));
             }
         }
 
@@ -73,12 +73,12 @@ namespace Prauge_Parking_2._0.Classes
             }
             return null;
         }
-        public Receipt RetriveVehicle(string requestedLicencePlate)
+        public Receipt RetriveVehicle(string requestedLicencePlate, AppConfig appConfig)
         {
             ParkingSpot currentSpot = FindLicencePlateInParkingSpot(requestedLicencePlate);
             Vehicle foundVehicle = CollectVehicleFromLicencePlate(currentSpot, requestedLicencePlate);
             TimeSpan parkedDuration = foundVehicle.CheckIn - DateTime.UtcNow; // TODO look into TimeSpan Duration?
-            TimeSpan freeParkingTime = new TimeSpan(0, 10, 0); // TODO point to config file
+            TimeSpan freeParkingTime = appConfig.FreeParkingTime;
             Receipt endedParking = new Receipt(currentSpot, parkedDuration, foundVehicle, freeParkingTime);
             currentSpot.VacateVehicleSpot(foundVehicle);
             return endedParking;
@@ -109,11 +109,11 @@ namespace Prauge_Parking_2._0.Classes
             Vehicle foundVehicle = parkingSpot.ParkedVehicles.FirstOrDefault(v => v.LicencePlate == requestedLicencePlate);
             return foundVehicle;
         }
-        public void ParkCar(string filePath)
+        public void ParkCar(string filePath, AppConfig appConfig)
         {
             ParkingGarage parkingGarage = LoadParkingGarage(filePath);
 
-            Vehicle car = new Car(PrintOut.getLicencePlate());
+            Vehicle car = new Car(PrintOut.getLicencePlate(), appConfig);
             bool validationCheck = Validator.ValidateNewVehicle(car);
             if (validationCheck) { ParkingSpot pSpot = parkingGarage.FindFirstEmptyParkingSpot(car, filePath); PrintOut.parkVehicleAtSpot(pSpot, car); }
             else PrintOut.ParkingFailed();
@@ -162,7 +162,7 @@ namespace Prauge_Parking_2._0.Classes
             bool checkForFile = MyFiles.CheckForFile(filePath);
             if (!checkForFile)
             {
-                ParkingGarage parkingGarage = new ParkingGarage(configFile.NumberOfParkingSpots);
+                ParkingGarage parkingGarage = new ParkingGarage(configFile);
                 parkingGarage.SaveParkingGarage(filePath, parkingGarage);
                 return parkingGarage;
             }
@@ -172,7 +172,7 @@ namespace Prauge_Parking_2._0.Classes
                 if (configFile.NumberOfParkingSpots == parkingGarage.ParkingSpots.Count) return parkingGarage;
                 else if (parkingGarage.ParkingSpots.Count == 0)
                 {
-                    parkingGarage = new ParkingGarage(configFile.NumberOfParkingSpots);
+                    parkingGarage = new ParkingGarage(configFile);
                     parkingGarage.SaveParkingGarage(filePath, parkingGarage);
                     PrintOut.WarningParkingGarageOverwriten();
                     return parkingGarage;
@@ -184,7 +184,7 @@ namespace Prauge_Parking_2._0.Classes
                     if (numberCheck)
                     {
                         iterationNumber++;
-                        ParkingGarage parkingGarage_placeholder = new ParkingGarage(configFile.NumberOfParkingSpots);
+                        ParkingGarage parkingGarage_placeholder = new ParkingGarage(configFile);
                         int counter = parkingGarage.ParkingSpots.Count;
                         for (int i = 0; i < counter; i++)
                         {
@@ -197,7 +197,7 @@ namespace Prauge_Parking_2._0.Classes
                     }
                     else
                     {
-                        ParkingGarage parkingGarage_placeholder = new ParkingGarage(configFile.NumberOfParkingSpots);
+                        ParkingGarage parkingGarage_placeholder = new ParkingGarage(configFile);
                         int counter = parkingGarage.ParkingSpots.Count;
                         for (int i = 0; i < counter; i++)
                         {
@@ -212,42 +212,27 @@ namespace Prauge_Parking_2._0.Classes
                 }
             }
         }
-        public static AppConfig CheckExsistingConfigFile()
-        {// TODO Move to AppConfig where it belongs. 
-            string configFilePath = "ConfigFile" + ".json";
-            bool checkForFile = MyFiles.CheckForFile(configFilePath);
-            if (!checkForFile)
-            {
-                AppConfig configFile = new AppConfig();
-                SetupParkingGarageConfiguration(configFile);
-                return configFile;
-            }
-            else
-            {
-                AppConfig configFile = ParkingGarage.LoadConfigFile(configFilePath);
-                return configFile;
-            }
-        }
+        
 
-        public void ParkMotorCycle(string filePath)
+        public void ParkMotorCycle(string filePath, AppConfig appConfig)
         {
             ParkingGarage parkingGarage = LoadParkingGarage(filePath);
-            Vehicle motorCycle = new Motorcycle(PrintOut.getLicencePlate());
+            Vehicle motorCycle = new Motorcycle(PrintOut.getLicencePlate(), appConfig);
             bool validationCheck = Validator.ValidateNewVehicle(motorCycle);
             if (validationCheck) { ParkingSpot pSpot = parkingGarage.FindFirstEmptyParkingSpot(motorCycle, filePath); PrintOut.parkVehicleAtSpot(pSpot, motorCycle); }
             else PrintOut.ParkingFailed();
         }
-        public static bool SetupParkingGarageConfiguration(AppConfig content)
-        {
+        public static bool SaveConfigFile(AppConfig content)
+        {// Saves the config file
             string jsonString = JsonSerializer.Serialize(content);
             string configFilePath = content.ConfigFilePath + ".json";
             MyFiles.Save(configFilePath, jsonString);
             return true;
         }
-        public void ParkBicycle(string filePath)
+        public void ParkBicycle(string filePath, AppConfig appConfig)
         {// 31/10 added method
             ParkingGarage parkingGarage = LoadParkingGarage(filePath);
-            Vehicle bicycle = new Bicycle(PrintOut.getBicycleColor());
+            Vehicle bicycle = new Bicycle(PrintOut.getBicycleColor(), appConfig);
             int nrOfBikes = BicycleCounter(parkingGarage);
             int bikeId = nrOfBikes + 1;
             string completeBikeId = bicycle.LicencePlate + bikeId;
@@ -262,7 +247,7 @@ namespace Prauge_Parking_2._0.Classes
             List<Vehicle> bicycleList = parkingGarage.ParkingSpots.SelectMany(spot => spot.ParkedVehicles).Where(v => v.VehicleType == "Bicycle").ToList();
             return bicycleList.Count;
         }
-
+        
 
     }
 }

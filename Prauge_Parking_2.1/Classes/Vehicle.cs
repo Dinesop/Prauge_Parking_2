@@ -12,6 +12,7 @@ namespace Prauge_Parking_2._0.Classes
     [JsonDerivedType(typeof(Car), "Car")]
     [JsonDerivedType(typeof(Motorcycle), "Motorcycle")]
     [JsonDerivedType(typeof(Bicycle), "Bicycle")]
+    //[JsonDerivedType(typeof(Bus), "Bus")]
     public abstract class Vehicle
     {
         /* ---------- Properties ---------- */
@@ -28,6 +29,11 @@ namespace Prauge_Parking_2._0.Classes
             
         }
         public Vehicle(string licencePlate)
+        {
+            LicencePlate = licencePlate;
+            CheckIn = DateTime.UtcNow;
+        }
+        public Vehicle(string licencePlate, AppConfig appConfig)
         {
             LicencePlate = licencePlate;
             CheckIn = DateTime.UtcNow;

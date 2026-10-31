@@ -13,7 +13,7 @@ namespace Prauge_Parking_2._0.Classes
 
         public GraphicLayout()
         {
-            AppConfig configFile = ParkingGarage.CheckExsistingConfigFile();
+            AppConfig configFile = AppConfig.CheckExsistingConfigFile();
             int testOfDivisability = configFile.NumberOfParkingSpots % 10;
             if (testOfDivisability == 0)
             {

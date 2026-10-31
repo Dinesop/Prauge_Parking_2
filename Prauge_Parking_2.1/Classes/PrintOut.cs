@@ -13,7 +13,7 @@ namespace Prauge_Parking_2._0.Classes
 
         }
         public static string getLicencePlate()
-        {
+        { // TODO add a "press escape to go back" function.
             string licencePlate = AnsiConsole.Ask<string>("Please input the vehicle licence plate:");
             if (Validator.ValidateLicencePlate(licencePlate)) return licencePlate;
             else return null; 

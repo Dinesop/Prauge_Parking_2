@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.Runtime.ConstrainedExecution;
@@ -25,11 +26,27 @@ namespace Class_Library_PP2
             return true;
         }
 
+
         public static bool CheckForFile(string filePath)
         {
             if (System.IO.File.Exists(filePath)) return true;
             else return false;
-            
+
+        }
+        public static bool CreateFile(string filePath)
+        {
+            System.IO.File.Create(filePath); return true;
+        }
+        public static bool WriteDictionaryToTxtFile(string filePath, Dictionary<string, decimal> dictionary)
+        {
+            StreamWriter reader = new StreamWriter(filePath);
+            using (reader)
+            {
+                foreach (var entry in dictionary)
+                    reader.WriteLine("{0} {1}", entry.Key, entry.Value);
+            }
+
+            return true;
         }
 
 
