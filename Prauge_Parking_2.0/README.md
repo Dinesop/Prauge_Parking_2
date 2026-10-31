@@ -24,7 +24,7 @@
 ### För VG 
  - [ ] Minst två gränssnitt (interface) i systemet. Det kan till exempel vara IVehicle och IParkingSpot. Kodning skall primärt göras mot dessa gränssnitt och inte de konkreta klasserna.
  - [ ] Bussar ( storlek 16, endast 50 första p-platserna)
- - [ ] Cyklar ( 0.25 bilar)
+ - [x] Cyklar ( 0.25 bilar)
  - [ ] Fordonstyp och deras storlek sparas i konfig filen
  - [ ] Timtaxa för cyklar och bussar CZK 5/timma, för bussar är det CZK 80.
  - [ ] Automatiskt skapad fil som fylls med testdata
