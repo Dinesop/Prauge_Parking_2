@@ -115,12 +115,21 @@ namespace Prauge_Parking_2._0.Classes
                         PrintOut.vehicleParkedAt(pSpot, requestedVehicle);
                         break;
 
-                    case "Optimize MC parking":
+                    case "Optimize parking":
+                        // TODO add an optimizer
 
                         break;
 
                     case "Overview":
                         GraphicLayout.VisualizeParkingGarage(parkingGarage);
+                        break;
+
+                    case "Change pricing":
+
+                        break;
+
+                    case "Change parking garage configuration":
+
                         break;
 
                     case "Quit":

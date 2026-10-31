@@ -133,9 +133,9 @@ namespace Prauge_Parking_2._0.Classes
                 return null;
             }
         }
-        public static AppConfig LoadConfigFile(string filePath)
+        public static AppConfig LoadConfigFile(string configFilePath)
         {
-            var unloadedJson = MyFiles.Read(filePath);
+            var unloadedJson = MyFiles.Read(configFilePath);
             try
             {
                 AppConfig configFile = JsonSerializer.Deserialize<AppConfig>(unloadedJson);
@@ -158,7 +158,7 @@ namespace Prauge_Parking_2._0.Classes
         public static ParkingGarage CheckExsistingParkingGarage(AppConfig configFile)
         { // 31/10 Fixing backup for if config file and parking garage missmatch. Changed from hardcoded filePath to based in config file and dynamic if missmatch between config and parkingGarage.
             // TODO this should be split up.
-            string filePath = configFile.ConfigFilePath + ".json";
+            string filePath = configFile.ParkingGarageFilePath + ".json";
             bool checkForFile = MyFiles.CheckForFile(filePath);
             if (!checkForFile)
             {
@@ -190,7 +190,7 @@ namespace Prauge_Parking_2._0.Classes
                         {
                             parkingGarage_placeholder.ParkingSpots[i] = parkingGarage.ParkingSpots[i]; // reference copy, but is fine since we won't use it after we saved to file.
                         }
-                        filePath = configFile.ConfigFilePath + iterationNumber + ".json";
+                        filePath = configFile.ParkingGarageFilePath + iterationNumber + ".json";
                         parkingGarage_placeholder.SaveParkingGarage(filePath, parkingGarage_placeholder);
                         PrintOut.WarningParkingGarageOverwriten();
                         return parkingGarage;
@@ -203,7 +203,7 @@ namespace Prauge_Parking_2._0.Classes
                         {
                             parkingGarage_placeholder.ParkingSpots[i] = parkingGarage.ParkingSpots[i]; // reference copy, but is fine since we won't use it after we saved to file.
                         }
-                        filePath = configFile.ConfigFilePath + "2" + ".json";
+                        filePath = configFile.ParkingGarageFilePath + "2" + ".json";
                         parkingGarage_placeholder.SaveParkingGarage(filePath, parkingGarage_placeholder);
                         PrintOut.WarningParkingGarageOverwriten();
                         return parkingGarage;
@@ -214,8 +214,8 @@ namespace Prauge_Parking_2._0.Classes
         }
         public static AppConfig CheckExsistingConfigFile()
         {// TODO Move to AppConfig where it belongs. 
-            string filePath = "ConfigFile" + ".json";
-            bool checkForFile = MyFiles.CheckForFile(filePath);
+            string configFilePath = "ConfigFile" + ".json";
+            bool checkForFile = MyFiles.CheckForFile(configFilePath);
             if (!checkForFile)
             {
                 AppConfig configFile = new AppConfig();
@@ -224,7 +224,7 @@ namespace Prauge_Parking_2._0.Classes
             }
             else
             {
-                AppConfig configFile = ParkingGarage.LoadConfigFile(filePath);
+                AppConfig configFile = ParkingGarage.LoadConfigFile(configFilePath);
                 return configFile;
             }
         }
@@ -240,8 +240,8 @@ namespace Prauge_Parking_2._0.Classes
         public static bool SetupParkingGarageConfiguration(AppConfig content)
         {
             string jsonString = JsonSerializer.Serialize(content);
-            string filePath = content.ConfigFilePath + ".json";
-            MyFiles.Save(filePath, jsonString);
+            string configFilePath = content.ConfigFilePath + ".json";
+            MyFiles.Save(configFilePath, jsonString);
             return true;
         }
         public void ParkBicycle(string filePath)
