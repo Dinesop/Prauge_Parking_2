@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Prauge_Parking_2._0.Classes
 {
-    public class MainMenu : Menu
+    public class MainMenu : IMenu
     {
         public MainMenu()
         {

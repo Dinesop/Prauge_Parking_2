@@ -5,9 +5,9 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 
-namespace Prauge_Parking_2._0.Classes
+namespace Prauge_Parking_2._1.Classes
 {
-    public class MainMenuSwitch : Menu
+    public class MainMenuSwitch
     {
         public MainMenuSwitch()
         {
@@ -16,7 +16,7 @@ namespace Prauge_Parking_2._0.Classes
             {
                 AppConfig configFile = AppConfig.CheckExsistingConfigFile();
                 ParkingGarage parkingGarage = ParkingGarage.CheckExsistingParkingGarage(configFile);
-                Menu mainMenu = new MainMenu();
+                IMenu mainMenu = new MainMenu();
                 
                 ParkingSpot pSpot = null;
                 Receipt endedParking = null;

@@ -6,7 +6,7 @@ using System.Net.NetworkInformation;
 using System.Text;
 using System.Text.Json.Serialization;
 
-namespace Prauge_Parking_2._0.Classes
+namespace Prauge_Parking_2._1.Classes
 {
     [JsonPolymorphic(TypeDiscriminatorPropertyName = "$type")]
     [JsonDerivedType(typeof(Car), "Car")]

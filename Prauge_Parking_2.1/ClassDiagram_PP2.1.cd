@@ -1,0 +1,143 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Prauge_Parking_2._1.Classes.Validator" Collapsed="true">
+    <Position X="0.75" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAACAAAAAAAEAABAAAAAAACAAA=</HashCode>
+      <FileName>Classes\Validator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Prauge_Parking_2._1.Classes.Receipt" Collapsed="true">
+    <Position X="0.75" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAAAAAAAAABAAAAgAAAAACEAAAAAAAAgA=</HashCode>
+      <FileName>Classes\Receipt.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Prauge_Parking_2._1.Classes.PrintOut" Collapsed="true">
+    <Position X="0.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>DAAAAAABgAEMQAAAAIEABAECAAAAAAAAAAAACAAAAAA=</HashCode>
+      <FileName>Classes\PrintOut.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Prauge_Parking_2._1.Classes.PriceList" Collapsed="true">
+    <Position X="0.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\PriceList.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Prauge_Parking_2._1.Classes.PowerSwitch" Collapsed="true">
+    <Position X="0.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>Classes\powerSwitch.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Prauge_Parking_2._1.Classes.ParkingSpot" Collapsed="true">
+    <Position X="6.75" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QABAAACAAAAAAAAAAAAAAAAAAAEAAAAAEAAAEQAAAAE=</HashCode>
+      <FileName>Classes\ParkingSpot.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Prauge_Parking_2._1.Classes.ParkingGarage" Collapsed="true">
+    <Position X="6.75" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAACAAIIAEAQAAAiCgAAABAAAABAAAEQAAEQA=</HashCode>
+      <FileName>Classes\ParkingGarage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Prauge_Parking_2._1.Classes.Motorcycle" Collapsed="true">
+    <Position X="9.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAQAAgAAAAAIAAAAAAAAAAAAAAAAAAAACAAA=</HashCode>
+      <FileName>Classes\Motorcycle.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Prauge_Parking_2._1.Classes.MenuChooseVehicleType" Collapsed="true">
+    <Position X="3.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\MenuChooseVehicleType.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Prauge_Parking_2._1.Classes.MainMenu" Collapsed="true">
+    <Position X="3.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\MainMenu.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Prauge_Parking_2._1.Classes.GraphicLayout" Collapsed="true">
+    <Position X="0.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAAAAAAAAAAAAAAAAACAQAAAAAAAAAgAAAAAA=</HashCode>
+      <FileName>Classes\GraphicLayout.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Prauge_Parking_2._1.Classes.Car" Collapsed="true">
+    <Position X="9.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAQAAgAAAAAIAAAAAAAAAAAAAAAAAAAACAAA=</HashCode>
+      <FileName>Classes\Car.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Prauge_Parking_2._1.Classes.Bus" Collapsed="true">
+    <Position X="9.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAQAAgAAAAAIAAAAAAAAAAAAAAAAAAAACAAA=</HashCode>
+      <FileName>Classes\Bus.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Prauge_Parking_2._1.Classes.Bicycle" Collapsed="true">
+    <Position X="9.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAQAAgAAAAAIAAAAAAAAAAAAAAAAAAAACAAA=</HashCode>
+      <FileName>Classes\Bicycle.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Prauge_Parking_2._1.Classes.AppConfig" Collapsed="true">
+    <Position X="0.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QIAAAAAQIAAAAIAAAIAACAAAAgEAAAAAQAAAEAAAAEg=</HashCode>
+      <FileName>Classes\AppConfig.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Prauge_Parking_2._1.Classes.MainMenuSwitch" Collapsed="true">
+    <Position X="3.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\MainMenuSwitch.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="Prauge_Parking_2._1.Classes.IVehicle" Collapsed="true">
+    <Position X="9.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAQAAgAAAAAIAAAAAAAAAAAAAAAAAAAACAAA=</HashCode>
+      <FileName>Classes\IVehicle.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Prauge_Parking_2._1.Classes.ParkingGarage" Collapsed="true">
+    <Position X="6.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAA=</HashCode>
+      <FileName>Classes\IParkingGarage.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Prauge_Parking_2._1.Classes.IMenu" Collapsed="true">
+    <Position X="3.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\IMenu.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

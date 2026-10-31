@@ -1,12 +1,14 @@
-﻿using Spectre.Console;
+﻿using Prauge_Parking_2._1.Classes;
+using Spectre.Console;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Prauge_Parking_2._0.Classes
+namespace Prauge_Parking_2._1.Classes
 {
-    public class MainMenu : Menu
+    public class MainMenu : IMenu
     {
+        public string MenuChoice { get; set; }
         public MainMenu()
         {
             List<string> menuChoices = new List<string>{ "Add a vehicle", "Move a vehicle", "Retrieve a vehicle", "Search for a vehicle", "Overview", "Change pricing", "Change parking garage configuration", "Quit" };

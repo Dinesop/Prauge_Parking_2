@@ -6,9 +6,9 @@ using System.Reflection.Metadata;
 using System.Text;
 using System.Text.Json;
 
-namespace Prauge_Parking_2._0.Classes
+namespace Prauge_Parking_2._1.Classes
 {
-    public class ParkingGarage
+    public class ParkingGarage : IParkingGarage
     {
         /* ---------- Fields ---------- */
 

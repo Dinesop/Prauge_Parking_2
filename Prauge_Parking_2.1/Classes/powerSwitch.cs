@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace Prauge_Parking_2._0.Classes
+namespace Prauge_Parking_2._1.Classes
 {
     public class PowerSwitch
     {

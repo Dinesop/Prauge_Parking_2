@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Prauge_Parking_2._0.Classes
 {
-    public class MenuChooseVehicleType : Menu
+    public class MenuChooseVehicleType : IMenu
     {
         /* ---------- Constructor ---------- */
         public MenuChooseVehicleType(List<string> allowedVehicleTypes)

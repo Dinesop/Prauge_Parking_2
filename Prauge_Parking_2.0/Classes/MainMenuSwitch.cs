@@ -7,7 +7,7 @@ using System.Text.Json;
 
 namespace Prauge_Parking_2._0.Classes
 {
-    public class MainMenuSwitch : Menu
+    public class MainMenuSwitch : IMenu
     {
         public MainMenuSwitch()
         {
@@ -16,7 +16,7 @@ namespace Prauge_Parking_2._0.Classes
             {
                 AppConfig configFile = ParkingGarage.CheckExsistingConfigFile();
                 ParkingGarage parkingGarage = ParkingGarage.CheckExsistingParkingGarage(configFile);
-                Menu mainMenu = new MainMenu();
+                IMenu mainMenu = new MainMenu();
                 
                 ParkingSpot pSpot = null;
                 Receipt endedParking = null;

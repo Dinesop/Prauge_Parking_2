@@ -22,7 +22,7 @@
  - [x] Data om de parkerade fordonen lagras i en json fil och uppdateras varje gång det sker en förändring i P-huset. 
 
 ### För VG 
- - [ ] Minst två gränssnitt (interface) i systemet. Det kan till exempel vara IVehicle och IParkingSpot. Kodning skall primärt göras mot dessa gränssnitt och inte de konkreta klasserna.
+ - [x] Minst två gränssnitt (interface) i systemet. Det kan till exempel vara IVehicle och IParkingSpot. Kodning skall primärt göras mot dessa gränssnitt och inte de konkreta klasserna.
  - [ ] Bussar ( storlek 16, endast 50 första p-platserna)
  - [x] Cyklar ( 0.25 bilar)
  - [x] Fordonstyp och deras storlek sparas i konfig filen
