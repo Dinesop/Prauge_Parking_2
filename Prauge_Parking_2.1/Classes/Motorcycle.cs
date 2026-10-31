@@ -13,7 +13,7 @@ namespace Prauge_Parking_2._0.Classes
         /* ---------- Constructors ---------- */
         public Motorcycle(string licencePlate, AppConfig appConfig) : base(licencePlate, appConfig)
         {
-            Size = 2;
+            Size = appConfig.VehicleSetup["Motorcycle"];
             VehicleType = "Motorcycle";
             Price = appConfig.VehiclePrices["Motorcycle"];
         }

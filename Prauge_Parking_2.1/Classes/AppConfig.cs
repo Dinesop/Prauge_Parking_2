@@ -13,6 +13,7 @@ namespace Prauge_Parking_2._0.Classes
         public int NumberOfParkingSpots { get; set; } = 2;
         public List<string> AllowedVehicleTypes { get; set; } = new List<string> { "Car", "Motorcycle", "Bicycle" };
         public Dictionary<string, decimal> VehiclePrices { get; set; } = new();
+        public Dictionary <string, int> VehicleSetup { get; set; } = new();
 
         public int TotalCapacity { get; set; } = 4;
         public string ConfigFilePath { get; set; } = "ConfigFile";
@@ -27,6 +28,7 @@ namespace Prauge_Parking_2._0.Classes
         public AppConfig()
         {
             VehiclePrices = CheckExsistingPriceList();
+            VehicleSetup = SetupVehicleConfig();
         }
 
         public static Dictionary<string, decimal> CheckExsistingPriceList()
@@ -91,6 +93,12 @@ namespace Prauge_Parking_2._0.Classes
                 AppConfig configFile = ParkingGarage.LoadConfigFile(configFilePath);
                 return configFile;
             }
+        }
+
+        public static Dictionary<string, int> SetupVehicleConfig()
+        {
+            Dictionary<string, int> vehiclePrices = new Dictionary<string, int> { { "Car", 4 }, { "Motorcycle", 2 }, { "Bicycle", 1 } };
+            return vehiclePrices;
         }
 
 
