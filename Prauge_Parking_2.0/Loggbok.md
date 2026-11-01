@@ -133,4 +133,7 @@ Testing on husbands computer with husband (who  should consider a career in test
 - [ ] Bold the word color in the bicycle id color step
 - [ ] show all vehicles (with licenceplate) in text
 - [x] no null exception handling for parking buses past their allowed slots.
+
 "Ingen plan överlever kontakt med fienden"
+
+Now I am calling it here. I tried fixing the last things but now I don't understand anything I read anymore so then it is time to call it. 

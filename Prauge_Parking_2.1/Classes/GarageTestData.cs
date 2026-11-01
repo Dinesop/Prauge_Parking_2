@@ -75,7 +75,7 @@ namespace Prauge_Parking_2._1.Classes
         }
         public static string GenerateLicencePlate(Random? rng = null)
         {
-            string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            string chars = "abcdefghijklmnopqrstuvwxyzåäö";
             string digits = "0123456789";
             int length = 10;
 

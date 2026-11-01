@@ -17,6 +17,7 @@ namespace Prauge_Parking_2._1.Classes
         public static string getLicencePlate()
         { // TODO add a "press escape to go back" function.
             string licencePlate = AnsiConsole.Ask<string>("Please input the vehicle licence plate:");
+            licencePlate.Trim().ToUpper();
             if (Validator.ValidateLicencePlate(licencePlate)) return licencePlate;
             else return null;
         }
@@ -96,7 +97,7 @@ namespace Prauge_Parking_2._1.Classes
         }
         public static string getBicycleColor()
         {
-            string bicycleColor = AnsiConsole.Ask<string>("Please input the color of the bicycle:");
+            string bicycleColor = AnsiConsole.Ask<string>("Please input the color of the bicycle:").Trim().ToUpper();
             if (Validator.ValidateLicencePlate(bicycleColor)) return bicycleColor;
             else return null;
         }
@@ -319,7 +320,7 @@ namespace Prauge_Parking_2._1.Classes
         }
         public static bool RunSimulation()
         {
-            if (AnsiConsole.Confirm("[red bold]WARNING, this will populate the garage with fake vehicles for testing purposes, are you sure you want to proceed?[/]"))
+            if (AnsiConsole.Confirm("[red bold]WARNING, this will populate the garage with simulated vehicles for testing purposes, are you sure you want to proceed?[/] \nAll simulated vehicles will have licenceplates with lowercase while all real vehicles will have licenceplates in upper case."))
             {
                 return true;
             }

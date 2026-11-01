@@ -41,6 +41,7 @@ namespace Prauge_Parking_2._1.Classes
         {
             if (vehicle.LicencePlate == null) return false;
 
+
             else return true;
         }
         public static bool TrySetNumberOfParkingSpots(int newCount, AppConfig configFile)
