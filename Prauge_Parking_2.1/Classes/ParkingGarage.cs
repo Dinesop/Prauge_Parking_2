@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.Reflection.Metadata;
+using System.Runtime.ConstrainedExecution;
 using System.Text;
 using System.Text.Json;
 
@@ -135,7 +136,11 @@ namespace Prauge_Parking_2._1.Classes
 
             IVehicle car = new Car(PrintOut.getLicencePlate(), appConfig);
             bool validationCheck = Validator.ValidateNewVehicle(car);
-            if (validationCheck) { ParkingSpot pSpot = parkingGarage.FindFirstEmptyParkingSpot(car, filePath); PrintOut.parkVehicleAtSpot(pSpot, car); }
+            if (validationCheck)
+            {
+                ParkingSpot pSpot = parkingGarage.FindFirstEmptyParkingSpot(car, filePath);
+                if (pSpot != null) PrintOut.parkVehicleAtSpot(pSpot, car);
+            }
             else PrintOut.ParkingFailed();
         }
         public static ParkingGarage LoadParkingGarage(string filePath)
@@ -234,7 +239,12 @@ namespace Prauge_Parking_2._1.Classes
             ParkingGarage parkingGarage = LoadParkingGarage(filePath);
             IVehicle motorCycle = new Motorcycle(PrintOut.getLicencePlate(), appConfig);
             bool validationCheck = Validator.ValidateNewVehicle(motorCycle);
-            if (validationCheck) { ParkingSpot pSpot = parkingGarage.FindFirstEmptyParkingSpot(motorCycle, filePath); PrintOut.parkVehicleAtSpot(pSpot, motorCycle); }
+            if (validationCheck) 
+            { 
+                ParkingSpot pSpot = parkingGarage.FindFirstEmptyParkingSpot(motorCycle, filePath);
+                if (pSpot != null) PrintOut.parkVehicleAtSpot(pSpot, motorCycle);
+                
+            }
             else PrintOut.ParkingFailed();
         }
         public static bool SaveConfigFile(AppConfig content)
@@ -254,7 +264,11 @@ namespace Prauge_Parking_2._1.Classes
             bicycle.LicencePlate = completeBikeId;
             bool validationCheck = Validator.ValidateNewVehicle(bicycle);
 
-            if (validationCheck) { ParkingSpot pSpot = parkingGarage.FindFirstEmptyParkingSpot(bicycle, filePath); PrintOut.parkVehicleAtSpot(pSpot, bicycle); }
+            if (validationCheck) 
+            { 
+                ParkingSpot pSpot = parkingGarage.FindFirstEmptyParkingSpot(bicycle, filePath);
+                if (pSpot != null) PrintOut.parkVehicleAtSpot(pSpot, bicycle); 
+            }
             else PrintOut.ParkingFailed();
         }
         public int BicycleCounter(ParkingGarage parkingGarage)
@@ -267,7 +281,11 @@ namespace Prauge_Parking_2._1.Classes
             ParkingGarage parkingGarage = LoadParkingGarage(filePath);
             IVehicle bus = new Bus(PrintOut.getLicencePlate(), appConfig);
             bool validationCheck = Validator.ValidateNewVehicle(bus);
-            if (validationCheck) { List<ParkingSpot> pSpot = parkingGarage.FindFirstEmptyParkingSpotForBus(bus, filePath, appConfig); PrintOut.parkBusAtSpot(pSpot, bus); }
+            if (validationCheck) 
+            {
+                List<ParkingSpot> pSpot = parkingGarage.FindFirstEmptyParkingSpotForBus(bus, filePath, appConfig);
+                if (pSpot != null) PrintOut.parkBusAtSpot(pSpot, bus);
+            }
             else PrintOut.ParkingFailed();
         }
         public List<ParkingSpot> FindFirstEmptyParkingSpotForBus(IVehicle vehicle, string filePath, AppConfig appConfig)

@@ -36,7 +36,7 @@ namespace Prauge_Parking_2._1.Classes
             
             IVehicle car = new Car(GenerateLicencePlate(), appConfig);
             bool validationCheck = Validator.ValidateNewVehicle(car);
-            if (validationCheck) { ParkingSpot pSpot = parkingGarage.FindFirstEmptyParkingSpot(car, filePath); PrintOut.simParkVehicleAtSpot(pSpot, car); }
+            if (validationCheck) { ParkingSpot pSpot = parkingGarage.FindFirstEmptyParkingSpot(car, filePath); if (pSpot != null) PrintOut.simParkVehicleAtSpot(pSpot, car); }
             else PrintOut.ParkingFailed();
             return car;
         }
@@ -44,7 +44,7 @@ namespace Prauge_Parking_2._1.Classes
         {
             IVehicle motorcycle = new Motorcycle(GenerateLicencePlate(), appConfig);
             bool validationCheck = Validator.ValidateNewVehicle(motorcycle);
-            if (validationCheck) { ParkingSpot pSpot = parkingGarage.FindFirstEmptyParkingSpot(motorcycle, filePath); PrintOut.simParkVehicleAtSpot(pSpot, motorcycle); }
+            if (validationCheck) { ParkingSpot pSpot = parkingGarage.FindFirstEmptyParkingSpot(motorcycle, filePath); if (pSpot != null) PrintOut.simParkVehicleAtSpot(pSpot, motorcycle); }
             else PrintOut.ParkingFailed();
 
             return motorcycle;
@@ -53,7 +53,11 @@ namespace Prauge_Parking_2._1.Classes
         {
             IVehicle bus = new Bus(GenerateLicencePlate(), appConfig);
             bool validationCheck = Validator.ValidateNewVehicle(bus);
-            if (validationCheck) { List<ParkingSpot> pSpot = parkingGarage.FindFirstEmptyParkingSpotForBus(bus, filePath, appConfig); PrintOut.simParkBusAtSpot(pSpot, bus); }
+            if (validationCheck) 
+            { 
+                List<ParkingSpot> pSpot = parkingGarage.FindFirstEmptyParkingSpotForBus(bus, filePath, appConfig); 
+                if (pSpot != null) PrintOut.simParkBusAtSpot(pSpot, bus); 
+            }
             else PrintOut.ParkingFailed();
             return bus;
         }
@@ -65,7 +69,7 @@ namespace Prauge_Parking_2._1.Classes
             IVehicle bike = new Bicycle(completeBikeId, appConfig);
             bool validationCheck = Validator.ValidateNewVehicle(bike);
 
-            if (validationCheck) { ParkingSpot pSpot = parkingGarage.FindFirstEmptyParkingSpot(bike, filePath); PrintOut.simParkVehicleAtSpot(pSpot, bike); }
+            if (validationCheck) { ParkingSpot pSpot = parkingGarage.FindFirstEmptyParkingSpot(bike, filePath); if (pSpot != null) PrintOut.simParkVehicleAtSpot(pSpot, bike); }
             else PrintOut.ParkingFailed();
             return bike;
         }
