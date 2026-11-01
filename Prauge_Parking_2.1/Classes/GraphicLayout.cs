@@ -73,7 +73,7 @@ namespace Prauge_Parking_2._1.Classes
                              .AddItem($"", 1, Spectre.Console.Color.Green));
                         }
 
-                        else if (parkingGarage.ParkingSpots[index].RemainingSize != 0)
+                        else if (parkingGarage.ParkingSpots[index].RemainingSize > 0 && parkingGarage.ParkingSpots[index].RemainingSize < 4)
                         {
                             table.UpdateCell(row, col, new BarChart()
                             .HideValues()
