@@ -105,7 +105,6 @@ namespace Prauge_Parking_2._1.Classes
             else PrintOut.parkingSpotIsFull(newSpot, foundVehicle);
 
         }
-
         public static IVehicle CollectVehicleFromLicencePlate(ParkingSpot parkingSpot, string requestedLicencePlate)
         {
             IVehicle foundVehicle = parkingSpot.ParkedVehicles.FirstOrDefault(v => v.LicencePlate == requestedLicencePlate);
@@ -120,7 +119,6 @@ namespace Prauge_Parking_2._1.Classes
             if (validationCheck) { ParkingSpot pSpot = parkingGarage.FindFirstEmptyParkingSpot(car, filePath); PrintOut.parkVehicleAtSpot(pSpot, car); }
             else PrintOut.ParkingFailed();
         }
-
         public static ParkingGarage LoadParkingGarage(string filePath)
         {
             var unloadedJson = MyFiles.Read(filePath);
@@ -149,14 +147,12 @@ namespace Prauge_Parking_2._1.Classes
                 return null;
             }
         }
-
         public bool SaveParkingGarage(string filePath, ParkingGarage content)
         {
             string jsonString = JsonSerializer.Serialize(content);
             MyFiles.Save(filePath, jsonString);
             return true;
         }
-
         public static ParkingGarage CheckExsistingParkingGarage(AppConfig configFile)
         { // 31/10 Fixing backup for if config file and parking garage missmatch. Changed from hardcoded filePath to based in config file and dynamic if missmatch between config and parkingGarage.
             // TODO this should be split up.
@@ -214,8 +210,6 @@ namespace Prauge_Parking_2._1.Classes
                 }
             }
         }
-        
-
         public void ParkMotorCycle(string filePath, AppConfig appConfig)
         {
             ParkingGarage parkingGarage = LoadParkingGarage(filePath);
@@ -266,24 +260,20 @@ namespace Prauge_Parking_2._1.Classes
                     if (ParkingSpots[index + 1].IsEmpty && ParkingSpots[index + 2].IsEmpty && ParkingSpots[index + 3].IsEmpty)
                     {
                         List<ParkingSpot> selectedParkingSpots = new List<ParkingSpot> { ParkingSpots[index], ParkingSpots[index + 1], ParkingSpots[index + 2], ParkingSpots[index + 3] };
-                        
-                        ParkingSpot spot1 = selectedParkingSpots[0];
-                        spot1.ParkVehicleOnSpot(vehicle);
 
-                        ParkingSpot spot2 = selectedParkingSpots[1];
-                        spot2.ParkVehicleOnSpot(vehicle);
+                        //ParkingSpot spot1 = selectedParkingSpots[0];
+                        //spot1.ParkVehicleOnSpot(vehicle);
 
-                        ParkingSpot spot3 = selectedParkingSpots[2]; ;
-                        spot3.ParkVehicleOnSpot(vehicle);
+                        //ParkingSpot spot2 = selectedParkingSpots[1];
+                        //spot2.ParkVehicleOnSpot(vehicle);
 
-                        ParkingSpot spot4 = selectedParkingSpots[3];
-                        spot4.ParkVehicleOnSpot(vehicle);
+                        //ParkingSpot spot3 = selectedParkingSpots[2]; ;
+                        //spot3.ParkVehicleOnSpot(vehicle);
 
-                        foreach (var spot in selectedParkingSpots)
-                        {
-                            this.ParkingSpots.Contains(spot);
-                            SaveParkingGarage(filePath, this);
-                        }
+                        //ParkingSpot spot4 = selectedParkingSpots[3];
+                        //spot4.ParkVehicleOnSpot(vehicle);
+
+                        AddBusToSystem(selectedParkingSpots, vehicle, filePath);
                         return selectedParkingSpots;
                     }
                     else continue;
@@ -292,10 +282,80 @@ namespace Prauge_Parking_2._1.Classes
             }
             return null;
         }
+        public void MoveBus(string requestedLicencePlate, int requestedNewSpot, string filePath)
+        {
+            ParkingSpot currentSpot = FindLicencePlateInParkingSpot(requestedLicencePlate);
+            IVehicle foundVehicle = CollectVehicleFromLicencePlate(currentSpot, requestedLicencePlate);
+
+            List<ParkingSpot> selectedNewParkingSpots = FindBusParkingSpots(requestedNewSpot);
+
+            if (selectedNewParkingSpots[0].IsEmpty && selectedNewParkingSpots[1].IsEmpty && selectedNewParkingSpots[3].IsEmpty && selectedNewParkingSpots[3].IsEmpty)
+            {
+                AddBusToSystem(selectedNewParkingSpots, foundVehicle, filePath);
+
+                List<ParkingSpot> selectedOldParkingSpots = FindBusParkingSpots(currentSpot);
+
+                RemoveBusFromSystem(selectedOldParkingSpots, foundVehicle, filePath);
+                PrintOut.parkBusAtSpot(selectedNewParkingSpots, foundVehicle);
+            }
+            else PrintOut.parkingSpotIsFull(selectedNewParkingSpots[1], foundVehicle);
+        }
+        public void AddBusToSystem (List<ParkingSpot> selectedParkingSpots, IVehicle vehicle, string filePath)
+        {
+            foreach (var spot in selectedParkingSpots)
+            {
+                spot.ParkVehicleOnSpot(vehicle);
+                this.ParkingSpots.Contains(spot);
+                SaveParkingGarage(filePath, this);
+            }
+        }
+        public void RemoveBusFromSystem (List<ParkingSpot> selectedParkingSpots, IVehicle vehicle, string filePath)
+        {
+            foreach (var spot in selectedParkingSpots)
+            {
+                spot.VacateVehicleSpot(vehicle);
+                this.ParkingSpots.Contains(spot);
+                SaveParkingGarage(filePath, this);
+            }
+        }
+        public Receipt RetriveBus(string requestedLicencePlate, AppConfig appConfig, string filePath)
+        {
+            ParkingSpot currentSpot = FindLicencePlateInParkingSpot(requestedLicencePlate);
+
+            List<ParkingSpot> selectedParkingSpots = FindBusParkingSpots(currentSpot);
+            IVehicle foundVehicle = CollectVehicleFromLicencePlate(currentSpot, requestedLicencePlate);
+            TimeSpan parkedDuration = foundVehicle.CheckIn - DateTime.UtcNow; // TODO look into TimeSpan Duration
+            TimeSpan freeParkingTime = appConfig.FreeParkingTime;
+            Receipt endedParking = new Receipt(currentSpot, parkedDuration, foundVehicle, freeParkingTime);
+            RemoveBusFromSystem(selectedParkingSpots, foundVehicle, filePath);
             
+            SaveParkingGarage(filePath, this);
+            return endedParking;
+        }
+        public List<ParkingSpot> FindBusParkingSpots (ParkingSpot currentSpot)
+        {
+            ParkingSpot spot1 = FindParkingSpotId(currentSpot.ParkingSpotId);
+            ParkingSpot spot2 = FindParkingSpotId(currentSpot.ParkingSpotId + 1);
+            ParkingSpot spot3 = FindParkingSpotId(currentSpot.ParkingSpotId + 2);
+            ParkingSpot spot4 = FindParkingSpotId(currentSpot.ParkingSpotId + 3);
+
+            List<ParkingSpot> selectedParkingSpots = new List<ParkingSpot> { spot1, spot2, spot3, spot4 };
+            return selectedParkingSpots;
+        }
+        public List<ParkingSpot> FindBusParkingSpots (int requestedSpot)
+        {
+            ParkingSpot spot1 = FindParkingSpotId(requestedSpot);
+            ParkingSpot spot2 = FindParkingSpotId(requestedSpot + 1);
+            ParkingSpot spot3 = FindParkingSpotId(requestedSpot + 2);
+            ParkingSpot spot4 = FindParkingSpotId(requestedSpot + 3);
+
+            List<ParkingSpot> selectedParkingSpots = new List<ParkingSpot> { spot1, spot2, spot3, spot4 };
+            return selectedParkingSpots;
         }
 
-
     }
+
+}
+
 
 

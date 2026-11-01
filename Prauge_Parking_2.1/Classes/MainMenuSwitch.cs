@@ -70,7 +70,9 @@ namespace Prauge_Parking_2._1.Classes
                                 break;
 
                             case "Bus":
-
+                                requestedLicencePlate = PrintOut.getLicencePlate();
+                                newSpot = PrintOut.requestedNewSpot();
+                                parkingGarage.MoveBus(requestedLicencePlate, newSpot, filePath);
                                 break;
 
                             case "Bicycle":
@@ -99,10 +101,15 @@ namespace Prauge_Parking_2._1.Classes
                                 break;
 
                             case "Bus":
-
+                                requestedLicencePlate = PrintOut.getLicencePlate();
+                                endedParking = parkingGarage.RetriveBus(requestedLicencePlate, configFile, filePath);
+                                PrintOut.retrieveVehicleAtSpot(endedParking);
                                 break;
 
                             case "Bicycle":
+                                requestedLicencePlate = PrintOut.getLicencePlate();
+                                endedParking = parkingGarage.RetriveVehicle(requestedLicencePlate, configFile, filePath);
+                                PrintOut.retrieveVehicleAtSpot(endedParking);
                                 break;
 
                         }
