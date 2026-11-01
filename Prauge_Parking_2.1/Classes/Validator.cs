@@ -44,5 +44,36 @@ namespace Prauge_Parking_2._1.Classes
 
             else return true;
         }
+        public static bool TrySetNumberOfParkingSpots(int newCount, AppConfig configFile)
+        {
+            if (newCount < 0)
+                return false;
+
+            // Increasing (or unchanged) is always safe — nothing gets removed.
+            if (newCount >= configFile.NumberOfParkingSpots)
+            {
+                return true;
+            }
+            return true;
+        }
+        public static bool TrySetNumberOfParkingSpots(int newCount, AppConfig configFile, ParkingGarage parkingGarage)
+        {
+            if (newCount < 0)
+                return false;
+
+            // Increasing (or unchanged) is always safe — nothing gets removed.
+            if (newCount >= configFile.NumberOfParkingSpots)
+            {
+                return true;
+            }
+
+            // Decreasing: check ONLY the spots that would disappear.
+            for (int i = newCount; i < configFile.NumberOfParkingSpots; i++)
+            {
+                if (!parkingGarage.ParkingSpots[i].IsEmpty)
+                    return false; // refuse — a spot being removed still has a vehicle
+            }
+            return true;
+        }
     }
 }

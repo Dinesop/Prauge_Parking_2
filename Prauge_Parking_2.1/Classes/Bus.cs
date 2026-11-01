@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.Json.Serialization;
 
 namespace Prauge_Parking_2._1.Classes
 {
@@ -13,6 +14,7 @@ namespace Prauge_Parking_2._1.Classes
         public string VehicleType { get; set; }
         public decimal Price { get; set; }
         /* ---------- Constructors ---------- */
+        [JsonConstructor]
         public Bus()
         {
 

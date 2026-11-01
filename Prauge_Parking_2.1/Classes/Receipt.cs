@@ -26,7 +26,7 @@ namespace Prauge_Parking_2._1.Classes
 
             TimeSpan bufferTime = new TimeSpan(0, 30, 0);
             TimeSpan hourStarted = parkedDuration + bufferTime;
-            int covertedTimespan = Convert.ToInt32(hourStarted);// TODO lägg i ett try catch block
+            int covertedTimespan = Convert.ToInt32(hourStarted.TotalHours);// TODO lägg i ett try catch block
             return vehicle.Price * covertedTimespan;
 
         }

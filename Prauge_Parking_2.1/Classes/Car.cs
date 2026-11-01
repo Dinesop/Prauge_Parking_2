@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.Json.Serialization;
 
 namespace Prauge_Parking_2._1.Classes
 {
@@ -15,6 +16,7 @@ namespace Prauge_Parking_2._1.Classes
         public DateTime CheckIn { get; set ; }
 
         /* ---------- Constructors ---------- */
+        [JsonConstructor]
         public Car()
         {
             

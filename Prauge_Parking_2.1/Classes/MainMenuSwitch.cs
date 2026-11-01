@@ -47,7 +47,6 @@ namespace Prauge_Parking_2._1.Classes
                                 break;
                             
                             case "Back":
-
                                 break;
                         }
                         break;
@@ -72,44 +71,48 @@ namespace Prauge_Parking_2._1.Classes
                             case "Bus":
                                 requestedLicencePlate = PrintOut.getLicencePlate();
                                 newSpot = PrintOut.requestedNewSpot();
-                                parkingGarage.MoveBus(requestedLicencePlate, newSpot, filePath);
+                                parkingGarage.MoveBus(requestedLicencePlate, newSpot, filePath, configFile);
                                 break;
 
                             case "Bicycle":
+                                requestedLicencePlate = PrintOut.getLicencePlate();
+                                newSpot = PrintOut.requestedNewSpot();
+                                parkingGarage.MoveVehicle(requestedLicencePlate, newSpot, filePath);
                                 break;
-
                         }
-
                         break;
 
                     case "Retrieve a vehicle":
                         MenuChooseVehicleType chooseVehicleTypeToRetrieve = new MenuChooseVehicleType(configFile.AllowedVehicleTypes);
-                        requestedLicencePlate = "";
 
                         switch (chooseVehicleTypeToRetrieve.MenuChoice)
                         { // TODO change to a method instead.
                             case "Car":
                                 requestedLicencePlate = PrintOut.getLicencePlate();
                                 endedParking = parkingGarage.RetriveVehicle(requestedLicencePlate, configFile, filePath);
-                                PrintOut.retrieveVehicleAtSpot(endedParking);
+                                if (endedParking == null) break;
+                                else PrintOut.retrieveVehicleAtSpot(endedParking);
                                 break;
 
                             case "Motorcycle":
                                 requestedLicencePlate = PrintOut.getLicencePlate();
                                 endedParking = parkingGarage.RetriveVehicle(requestedLicencePlate, configFile, filePath);
-                                PrintOut.retrieveVehicleAtSpot(endedParking);
+                                if (endedParking == null) break;
+                                else PrintOut.retrieveVehicleAtSpot(endedParking);
                                 break;
 
                             case "Bus":
                                 requestedLicencePlate = PrintOut.getLicencePlate();
                                 endedParking = parkingGarage.RetriveBus(requestedLicencePlate, configFile, filePath);
-                                PrintOut.retrieveVehicleAtSpot(endedParking);
+                                if (endedParking == null) break;
+                                else PrintOut.retrieveVehicleAtSpot(endedParking);
                                 break;
 
                             case "Bicycle":
                                 requestedLicencePlate = PrintOut.getLicencePlate();
                                 endedParking = parkingGarage.RetriveVehicle(requestedLicencePlate, configFile, filePath);
-                                PrintOut.retrieveVehicleAtSpot(endedParking);
+                                if (endedParking == null) break;
+                                else PrintOut.retrieveVehicleAtSpot(endedParking);
                                 break;
 
                         }
@@ -119,7 +122,9 @@ namespace Prauge_Parking_2._1.Classes
                         requestedLicencePlate = PrintOut.getLicencePlate();
                         pSpot = parkingGarage.FindLicencePlateInParkingSpot(requestedLicencePlate);
                         IVehicle requestedVehicle = parkingGarage.FindLicencePlate(requestedLicencePlate);
-                        PrintOut.vehicleParkedAt(pSpot, requestedVehicle);
+                        if (pSpot == null || requestedVehicle == null)
+                            PrintOut.ErrorLicencePlateDontExsist();
+                        else  PrintOut.vehicleParkedAt(pSpot, requestedVehicle);
                         break;
 
                     case "Optimize parking":
@@ -132,16 +137,26 @@ namespace Prauge_Parking_2._1.Classes
                         break;
 
                     case "Change pricing":
-
+                        AppConfig.ChangePrices(configFile);
                         break;
 
                     case "Change parking garage configuration":
+                        AppConfig.ChangeConfigSetup(configFile);
+                        break;
 
+                    case "Simulation":
+                        bool confirmation = PrintOut.RunSimulation();
+                        if (confirmation)
+                        {
+                            int vehicleCount = PrintOut.SubmittNrOfFakeVehicles();
+                            GarageTestData.Populate(configFile, vehicleCount);
+                        }
+                        else continue;
                         break;
 
                     case "Quit":
                         powerSwitchMainMenu.TurnOff();
-                        Console.WriteLine("The End");
+                        Console.WriteLine("Shutting down.");
                         break;
                 }
             }

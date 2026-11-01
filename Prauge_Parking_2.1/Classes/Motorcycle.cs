@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.Json.Serialization;
 
 namespace Prauge_Parking_2._1.Classes
 {
@@ -13,6 +14,11 @@ namespace Prauge_Parking_2._1.Classes
         public DateTime CheckIn { get; set; }
 
         /* ---------- Constructors ---------- */
+        [JsonConstructor]
+        public Motorcycle()
+        {
+            
+        }
         public Motorcycle(string licencePlate, AppConfig appConfig)
         {
             Size = appConfig.VehicleSetup["Motorcycle"];

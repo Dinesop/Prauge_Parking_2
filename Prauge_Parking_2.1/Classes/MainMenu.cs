@@ -11,7 +11,7 @@ namespace Prauge_Parking_2._1.Classes
         public string MenuChoice { get; set; }
         public MainMenu()
         {
-            List<string> menuChoices = new List<string>{ "Add a vehicle", "Move a vehicle", "Retrieve a vehicle", "Search for a vehicle", "Overview", "Change pricing", "Change parking garage configuration", "Quit" };
+            List<string> menuChoices = new List<string>{ "Add a vehicle", "Move a vehicle", "Retrieve a vehicle", "Search for a vehicle", "Overview", "Change pricing", "Change parking garage configuration", "Simulation", "Quit" };
             AnsiConsole.Clear();
             MenuChoice = AnsiConsole.Prompt(
                          new SelectionPrompt<string>()

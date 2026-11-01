@@ -10,39 +10,32 @@ namespace Prauge_Parking_2._1.Classes
 {
     public class AppConfig
     {
-        public int NumberOfParkingSpots { get; set; } = 100;
-        public List<string> AllowedVehicleTypes { get; set; } = new List<string> { "Car", "Motorcycle", "Bicycle", "Bus"};
-        public Dictionary<string, decimal> VehiclePrices { get; set; } = new();
-        public Dictionary <string, int> VehicleSetup { get; set; } = new();
-
-        public int TotalCapacity { get; set; } = 4;
-        public string ConfigFilePath { get; set; } = "ConfigFile";
+        public int NumberOfParkingSpots { get; set; }
+        public List<string> AllowedVehicleTypes { get; set; }
+        public Dictionary<string, decimal> VehiclePrices { get; set; }
+        public Dictionary <string, int> VehicleSetup { get; set; }
+        public int TotalCapacity { get; set; }
+        public string ConfigFilePath { get; set; }
         // I am not adding the file-ending here because I want to be able to add numbers into the string if needed at CheckExsistingParkingGarage() backup handling
 
-        public string ParkingGarageFilePath { get; set; } = "ParkingGarage";
-        public string PriceListFilePath { get; set; } = "PriceList";
-
-        public TimeSpan FreeParkingTime { get; set; } = new TimeSpan(0, 10, 0);
-
+        public string ParkingGarageFilePath { get; set; }
+        public string PriceListFilePath { get; set; }
+        public TimeSpan FreeParkingTime { get; set; }
         public int AvailableBusSpots { get; set; }
-
 
         public AppConfig()
         {
-            VehiclePrices = CheckExsistingPriceList();
-            VehicleSetup = SetupVehicleConfig();
-            AvailableBusSpots = DeterminAvailableBusSpots(NumberOfParkingSpots);
-
+            
         }
 
-        public static Dictionary<string, decimal> CheckExsistingPriceList()
+        public static Dictionary<string, decimal> CheckExsistingPriceList(AppConfig appConfig)
         {
-            string priceFilePath = "Pricelist" + ".txt";
+            string priceFilePath = appConfig.PriceListFilePath + ".txt"; // default filename
             bool checkForFile = MyFiles.CheckForFile(priceFilePath);
             if (!checkForFile)
             {
-                //MyFiles.CreateFile(priceFilePath);
-                Dictionary<string, decimal> vehiclePrices = new Dictionary<string, decimal> { { "Car", 20M }, { "Motorcycle", 10M }, { "Bicycle", 5M }, {"Bus", 80M } };
+
+                Dictionary<string, decimal> vehiclePrices = appConfig.VehiclePrices;
                 MyFiles.WriteDictionaryToTxtFile(priceFilePath, vehiclePrices);
                 return vehiclePrices;
             }
@@ -52,7 +45,6 @@ namespace Prauge_Parking_2._1.Classes
                 return vehiclePrices;
             }
         }
-
         public static Dictionary<string, decimal> LoadPricelist(string priceFilePath)
         {
             var prices = new Dictionary<string, decimal>(StringComparer.OrdinalIgnoreCase);
@@ -60,9 +52,9 @@ namespace Prauge_Parking_2._1.Classes
             foreach (var line in File.ReadLines(priceFilePath))
             {
                 if (string.IsNullOrWhiteSpace(line) || line.TrimStart().StartsWith("#"))
-                    continue; // skip blanks and comments like "# weekend rates"
+                    continue; 
 
-                var parts = line.Split(' ', 2);   // max 2 parts: type, price
+                var parts = line.Split(' ', 2);   
                 if (parts.Length != 2)
                 {
                     AnsiConsole.MarkupLine($"[yellow]Warning:[/] skipping malformed line: '{line}'");
@@ -76,21 +68,34 @@ namespace Prauge_Parking_2._1.Classes
                     continue;
                 }
 
-                prices[type] = price;   // indexer assignment: later duplicates overwrite earlier ones
+                prices[type] = price;
             }
-
             return prices;
         }
         public static AppConfig CheckExsistingConfigFile()
-        {// TODO Move to AppConfig where it belongs. 
+        { 
             string configFilePath = "ConfigFile" + ".json";
             bool checkForFile = MyFiles.CheckForFile(configFilePath);
+            
             if (!checkForFile)
             {
-
-                AppConfig configFile = new AppConfig();
-                ParkingGarage.SaveConfigFile(configFile);
-                return configFile;
+                string filePathGarage = "ParkingGarage" + ".json";
+                bool checkForGarageFile = MyFiles.CheckForFile(filePathGarage);
+                if (checkForGarageFile)
+                {
+                    ParkingGarage parkingGarage_temp = ParkingGarage.LoadParkingGarage(filePathGarage);
+                    AppConfig configFile = new AppConfig();
+                    configFile.SetupConfigFile(configFile, parkingGarage_temp);
+                    ParkingGarage.SaveConfigFile(configFile);
+                    return configFile;
+                }
+                else
+                {
+                    AppConfig configFile = new AppConfig();
+                    configFile.SetupConfigFile(configFile);
+                    ParkingGarage.SaveConfigFile(configFile);
+                    return configFile;
+                } 
             }
             else
             {
@@ -98,11 +103,10 @@ namespace Prauge_Parking_2._1.Classes
                 return configFile;
             }
         }
-
         public static Dictionary<string, int> SetupVehicleConfig()
         {
-            Dictionary<string, int> vehiclePrices = new Dictionary<string, int> { { "Car", 4 }, { "Motorcycle", 2 }, { "Bicycle", 1 }, { "Bus", 16 } };
-            return vehiclePrices;
+            Dictionary<string, int> vehicleSizes = new Dictionary<string, int> { { "Car", 4 }, { "Motorcycle", 2 }, { "Bicycle", 1 }, { "Bus", 16 } };
+            return vehicleSizes;
         }
         public static int DeterminAvailableBusSpots(int NumberOfParkingSpots)
         {
@@ -114,7 +118,92 @@ namespace Prauge_Parking_2._1.Classes
 
             else{ availableBusSpots = 0;  PrintOut.NoBusParkingAvailable(); return availableBusSpots; }
         }
+
+        public static void ChangePrices(AppConfig appConfig)
+        {
+            string priceFilePath =  appConfig.PriceListFilePath + ".txt";
+            List<string> vehicleTypesToChange = PrintOut.VehiclePriceSelection();
+            Dictionary<string, decimal> priceList = CheckExsistingPriceList(appConfig);
+            foreach (var type in vehicleTypesToChange)
+            {
+                priceList[type] = PrintOut.AskForPrice(type);
+            }
+            MyFiles.WriteDictionaryToTxtFile(priceFilePath, priceList);
+            PrintOut.Prices(priceList);
+        }
+        public bool SetupConfigFile(AppConfig configFile, ParkingGarage parkingGarage)
+        {
+            bool choice = PrintOut.AskForManualConfigSetUp();
+            if (choice)
+            {
+                NumberOfParkingSpots = PrintOut.AskForNumberOfParkingSpots(configFile, parkingGarage);
+                AllowedVehicleTypes = PrintOut.VehicleSelection();
+                VehiclePrices = CheckExsistingPriceList(configFile);
+                VehicleSetup = SetupVehicleConfig();
+                TotalCapacity = PrintOut.AskForTotalCapacity();
+                ConfigFilePath = PrintOut.AskForConfigFilePath();
+                ParkingGarageFilePath = PrintOut.AskForParkingGarageFilePath();
+                PriceListFilePath = PrintOut.AskForPriceListFilePath();
+                FreeParkingTime = PrintOut.AskForFreeTimeSpan();
+                AvailableBusSpots = DeterminAvailableBusSpots(NumberOfParkingSpots);
+                return true;
+            }
+            else
+            {
+                NumberOfParkingSpots = 100;
+                AllowedVehicleTypes = new List<string>{ "Car", "Motorcycle", "Bicycle", "Bus" };
+                VehiclePrices = new Dictionary<string, decimal> { { "Car", 20M }, { "Motorcycle", 10M }, { "Bicycle", 5M }, { "Bus", 80M } };
+                VehicleSetup = new Dictionary<string, int> { { "Car", 4 }, { "Motorcycle", 2 }, { "Bicycle", 1 }, { "Bus", 16 } };
+                TotalCapacity = 4;
+                ConfigFilePath = "ConfigFile";
+                ParkingGarageFilePath = "ParkingGarage";
+                PriceListFilePath = "PriceList";
+                FreeParkingTime = new TimeSpan(0, 10, 0);
+                AvailableBusSpots = 47;
+                return true;
+            }
             
+        }
+        public bool SetupConfigFile(AppConfig configFile)
+        {
+            bool choice = PrintOut.AskForManualConfigSetUp();
+            if (choice)
+            {
+                NumberOfParkingSpots = PrintOut.AskForNumberOfParkingSpots(configFile);
+                AllowedVehicleTypes = PrintOut.VehicleSelection();
+                VehiclePrices = CheckExsistingPriceList(configFile);
+                VehicleSetup = SetupVehicleConfig();
+                TotalCapacity = PrintOut.AskForTotalCapacity();
+                ConfigFilePath = PrintOut.AskForConfigFilePath();
+                ParkingGarageFilePath = PrintOut.AskForParkingGarageFilePath();
+                PriceListFilePath = PrintOut.AskForPriceListFilePath();
+                FreeParkingTime = PrintOut.AskForFreeTimeSpan();
+                AvailableBusSpots = DeterminAvailableBusSpots(NumberOfParkingSpots);
+                return true;
+            }
+            else
+            {
+                NumberOfParkingSpots = 100;
+                AllowedVehicleTypes = new List<string>{ "Car", "Motorcycle", "Bicycle", "Bus" };
+                VehiclePrices = new Dictionary<string, decimal> { { "Car", 20M }, { "Motorcycle", 10M }, { "Bicycle", 5M }, { "Bus", 80M } };
+                VehicleSetup = new Dictionary<string, int> { { "Car", 4 }, { "Motorcycle", 2 }, { "Bicycle", 1 }, { "Bus", 16 } };
+                TotalCapacity = 4;
+                ConfigFilePath = "ConfigFile";
+                ParkingGarageFilePath = "ParkingGarage";
+                PriceListFilePath = "PriceList";
+                FreeParkingTime = new TimeSpan(0, 10, 0);
+                AvailableBusSpots = 47;
+                return true;
+            }
+            
+        }
+        public static bool ChangeConfigSetup(AppConfig configFile)
+        {
+            configFile.SetupConfigFile(configFile);
+            ParkingGarage.SaveConfigFile(configFile);
+            return true;
+        }
+
 
 
     }

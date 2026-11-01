@@ -57,40 +57,43 @@ namespace Prauge_Parking_2._1.Classes
 
             // Fyll tabellen med stapeldiagram för att visa om p-platserna är fulla, halvfulla eller tomma. 
 
-            for (int index = 0; index < parkingGarage.ParkingSpots.Count; index++)
-            {// Added a for loop with index to stop eternal looping of rows.
-                for (int row = 0; row < RowSetupMax; row++)
+            //for (int index = 0; index < parkingGarage.ParkingSpots.Count; index++)
+            //{// Added a for loop with index to stop eternal looping of rows.
+            int index = 0;
+            for (int row = 0; row < RowSetupMax; row++)
+            {
+                for (int col = 0; col < ColumnSetupMax; col++)
                 {
-                    for (int col = 0; col < ColumnSetupMax; col++)
                     {
+                        if (parkingGarage.ParkingSpots[index].IsEmpty)
                         {
-                            if (parkingGarage.ParkingSpots[index].IsEmpty)
-                            {
-                                table.UpdateCell(row, col, new BarChart()
-                                 .HideValues()
-                                 .AddItem($"", 1, Spectre.Console.Color.Green)
-                                 .AddItem($"", 1, Spectre.Console.Color.Green));
-                            }
-
-                            else if (parkingGarage.ParkingSpots[index].RemainingSize != 0)
-                            {
-                                table.UpdateCell(row, col, new BarChart()
-                                .HideValues()
-                                .AddItem($"", 1, Spectre.Console.Color.Yellow));
-                            }
-
-                            else //(parkingGarage[index].Contains("BIL") || parkingGarage[index].Contains("|"))
-                            {
-                                table.UpdateCell(row, col, new BarChart()
-                                 .HideValues()
-                                 .AddItem($"", 1, Spectre.Console.Color.Red3)
-                                 .AddItem($"", 1, Spectre.Console.Color.Red3));
-                            }
-
+                            table.UpdateCell(row, col, new BarChart()
+                             .HideValues()
+                             .AddItem($"", 1, Spectre.Console.Color.Green)
+                             .AddItem($"", 1, Spectre.Console.Color.Green));
                         }
+
+                        else if (parkingGarage.ParkingSpots[index].RemainingSize != 0)
+                        {
+                            table.UpdateCell(row, col, new BarChart()
+                            .HideValues()
+                            .AddItem($"", 1, Spectre.Console.Color.Yellow));
+                        }
+
+                        else //(parkingGarage[index].Contains("BIL") || parkingGarage[index].Contains("|"))
+                        {
+                            table.UpdateCell(row, col, new BarChart()
+                             .HideValues()
+                             .AddItem($"", 1, Spectre.Console.Color.Red3)
+                             .AddItem($"", 1, Spectre.Console.Color.Red3));
+                        }
+
                     }
+                    index++;
                 }
+
             }
+            //}
             // Skriver ut tabellen i konsolfönstret
             AnsiConsole.Write(table);
             PrintOut.pressAnyKeyToContinue();
