@@ -140,6 +140,7 @@ namespace Prauge_Parking_2._1.Classes
             {
                 ParkingSpot pSpot = parkingGarage.FindFirstEmptyParkingSpot(car, filePath);
                 if (pSpot != null) PrintOut.parkVehicleAtSpot(pSpot, car);
+                else PrintOut.ParkingFailed();
             }
             else PrintOut.ParkingFailed();
         }
@@ -243,7 +244,8 @@ namespace Prauge_Parking_2._1.Classes
             { 
                 ParkingSpot pSpot = parkingGarage.FindFirstEmptyParkingSpot(motorCycle, filePath);
                 if (pSpot != null) PrintOut.parkVehicleAtSpot(pSpot, motorCycle);
-                
+                else PrintOut.ParkingFailed();
+
             }
             else PrintOut.ParkingFailed();
         }
@@ -267,7 +269,8 @@ namespace Prauge_Parking_2._1.Classes
             if (validationCheck) 
             { 
                 ParkingSpot pSpot = parkingGarage.FindFirstEmptyParkingSpot(bicycle, filePath);
-                if (pSpot != null) PrintOut.parkVehicleAtSpot(pSpot, bicycle); 
+                if (pSpot != null) PrintOut.parkVehicleAtSpot(pSpot, bicycle);
+                else PrintOut.ParkingFailed();
             }
             else PrintOut.ParkingFailed();
         }
@@ -290,7 +293,8 @@ namespace Prauge_Parking_2._1.Classes
         }
         public List<ParkingSpot> FindFirstEmptyParkingSpotForBus(IVehicle vehicle, string filePath, AppConfig appConfig)
         {
-            for (int index = 0; index < appConfig.AvailableBusSpots; index++)// if spot 47 isn't empty, bus won't fit on the last 4 spots before spot 50.
+            int index = 0;
+            for (index = 0; index < appConfig.AvailableBusSpots; index++)// if spot 47 isn't empty, bus won't fit on the last 4 spots before spot 50.
             {
                 if (ParkingSpots[index].IsEmpty)
                 {
@@ -305,6 +309,7 @@ namespace Prauge_Parking_2._1.Classes
                 }
                 else continue;
             }
+            PrintOut.parkingSpotIsFull(index, vehicle);
             return null;
         }
         public void MoveBus(string requestedLicencePlate, int requestedNewSpot,string filePath, AppConfig appConfig)

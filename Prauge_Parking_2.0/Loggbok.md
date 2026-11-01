@@ -132,5 +132,5 @@ Testing on husbands computer with husband (who  should consider a career in test
 - [ ] I STILL don't have a press escape to get back to main menu in the submit licenceplate stage..
 - [ ] Bold the word color in the bicycle id color step
 - [ ] show all vehicles (with licenceplate) in text
-- [ ] no null exception handling for parking buses past their allowed slots.
+- [x] no null exception handling for parking buses past their allowed slots.
 "Ingen plan överlever kontakt med fienden"
