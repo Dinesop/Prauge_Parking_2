@@ -337,5 +337,11 @@ namespace Prauge_Parking_2._1.Classes
             AnsiConsole.WriteLine("The requested licenceplate couldn't be found, verify and try again.");
             pressAnyKeyToContinue();
         }
+
+        internal static void ExceedingParkingSpotLimit()
+        {
+            AnsiConsole.WriteLine("The requested amount of simulated vehicles exceeds the number of parking spots available in the parking garage.");
+            pressAnyKeyToContinue();
+        }
     }
 }

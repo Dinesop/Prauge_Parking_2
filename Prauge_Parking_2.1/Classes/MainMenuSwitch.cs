@@ -149,7 +149,8 @@ namespace Prauge_Parking_2._1.Classes
                         if (confirmation)
                         {
                             int vehicleCount = PrintOut.SubmittNrOfFakeVehicles();
-                            GarageTestData.Populate(configFile, vehicleCount);
+                            if (vehicleCount > configFile.NumberOfParkingSpots) PrintOut.ExceedingParkingSpotLimit();
+                            else GarageTestData.Populate(configFile, vehicleCount);
                         }
                         else continue;
                         break;
