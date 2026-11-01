@@ -12,12 +12,11 @@ namespace Prauge_Parking_2._1.Classes
         {// 31/10 commented out CheckedLicencePlateLenght because realiszed it was not in the new spec. 
 
             bool test1 = CheckNullOrWhiteSpace(submittedLicencePlate);
-            //bool test2 = CheckLicencePlateLenght(submittedLicencePlate);
+            bool test2 = CheckLicencePlateLenght(submittedLicencePlate);
 
-            if (test1) return true;
+            if (test1 && test2) return true;
             else return false;
         }
-
         static bool CheckNullOrWhiteSpace(string submittedLicencePlate)
         {
             if (String.IsNullOrWhiteSpace(submittedLicencePlate))
@@ -49,7 +48,6 @@ namespace Prauge_Parking_2._1.Classes
             if (newCount < 0)
                 return false;
 
-            // Increasing (or unchanged) is always safe — nothing gets removed.
             if (newCount >= configFile.NumberOfParkingSpots)
             {
                 return true;
@@ -61,17 +59,15 @@ namespace Prauge_Parking_2._1.Classes
             if (newCount < 0)
                 return false;
 
-            // Increasing (or unchanged) is always safe — nothing gets removed.
             if (newCount >= configFile.NumberOfParkingSpots)
             {
                 return true;
             }
 
-            // Decreasing: check ONLY the spots that would disappear.
             for (int i = newCount; i < configFile.NumberOfParkingSpots; i++)
             {
                 if (!parkingGarage.ParkingSpots[i].IsEmpty)
-                    return false; // refuse — a spot being removed still has a vehicle
+                    return false; 
             }
             return true;
         }

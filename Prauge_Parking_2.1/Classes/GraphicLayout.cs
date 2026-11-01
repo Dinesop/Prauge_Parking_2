@@ -99,67 +99,6 @@ namespace Prauge_Parking_2._1.Classes
             PrintOut.pressAnyKeyToContinue();
         }
 
-        public static void TestLive()
-        {
-            // Create status table
-            var statusTable = new Table()
-                .Border(TableBorder.Rounded)
-                .BorderColor(Color.Cyan)
-                .AddColumn("Service")
-                .AddColumn("Status")
-                .AddColumn("Requests/sec");
-
-            // Create metrics table
-            var metricsTable = new Table()
-                .Border(TableBorder.Rounded)
-                .BorderColor(Color.Yellow)
-                .AddColumn("Metric")
-                .AddColumn("Current")
-                .AddColumn("Average");
-
-            // Create layout with both tables
-            var layout = new Layout("Root")
-                .SplitRows(
-                    new Layout("Header"),
-                    new Layout("Body").SplitColumns(
-                        new Layout("Status"),
-                        new Layout("Metrics")
-                    )
-                );
-
-            layout["Header"].Update(
-                new Panel("[bold cyan]Real-Time Dashboard[/]")
-                    .BorderColor(Color.Blue)
-                    .Padding(1, 0)
-            );
-
-            layout["Status"].Update(new Panel(statusTable).Header("Services"));
-            layout["Metrics"].Update(new Panel(metricsTable).Header("System Metrics"));
-
-            AnsiConsole.Live(layout)
-                .Start(ctx =>
-                {
-                    for (int i = 0; i < 15; i++)
-                    {
-                        // Update status table
-                        statusTable.Rows.Clear();
-                        statusTable.AddRow("API Gateway", "[green]Healthy[/]", $"{Random.Shared.Next(100, 500)}");
-                        statusTable.AddRow("Auth Service", "[green]Healthy[/]", $"{Random.Shared.Next(50, 200)}");
-                        statusTable.AddRow("Database", i > 10 ? "[yellow]Degraded[/]" : "[green]Healthy[/]", $"{Random.Shared.Next(200, 800)}");
-                        statusTable.AddRow("Cache", "[green]Healthy[/]", $"{Random.Shared.Next(1000, 3000)}");
-
-                        // Update metrics table
-                        metricsTable.Rows.Clear();
-                        metricsTable.AddRow("CPU", $"{Random.Shared.Next(20, 75)}%", "45%");
-                        metricsTable.AddRow("Memory", $"{Random.Shared.Next(4, 12)} GB", "8 GB");
-                        metricsTable.AddRow("Disk I/O", $"{Random.Shared.Next(10, 90)} MB/s", "45 MB/s");
-                        metricsTable.AddRow("Network", $"{Random.Shared.Next(100, 500)} MB/s", "250 MB/s");
-
-                        ctx.Refresh();
-                        Thread.Sleep(1000);
-                    }
-                });
-        }
     }
 }
 

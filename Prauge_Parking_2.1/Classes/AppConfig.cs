@@ -118,7 +118,6 @@ namespace Prauge_Parking_2._1.Classes
 
             else{ availableBusSpots = 0;  PrintOut.NoBusParkingAvailable(); return availableBusSpots; }
         }
-
         public static void ChangePrices(AppConfig appConfig)
         {
             string priceFilePath =  appConfig.PriceListFilePath + ".txt";
@@ -203,8 +202,5 @@ namespace Prauge_Parking_2._1.Classes
             ParkingGarage.SaveConfigFile(configFile);
             return true;
         }
-
-
-
     }
 }

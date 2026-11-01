@@ -115,5 +115,22 @@ I wrapped up most of the grapic interface as well, except for a out of bounds er
 I realized that the out of bounds error was because the config said 100 parkingspots but the parking garage only had 10 since it never created a new file to match the changes. So are currently handling that. 
 Also talked to a friend that works in IT and he practially begged me to document my code properly so that is something I will try to do. 
 Everything is done, except actually making the code throw if you try to add more than 10 characters. Right now it shows an error and then parks the car anyway.
-That is fixed and I did the interfaces, even if one is a very symbolical one. I just didn't make any sense of having my parking garage class or my parkingspot class as an interface. But I slapped on IParkingSpot anyway. I also made IVehcile which made a lot of sense, and IMenu which made the most sense. 
+That is fixed and I did the interfaces, even if one is a very symbolical one. I just didn't make any sense of having my parking garage class or my parkingspot class as an interface. But I slapped on IParkingSpot anyway. I also made IVehicle which made a lot of sense, and IMenu which made the most sense. 
 I am going to try for buses now and see where it gets me. 
+I managed to get the config and the price list and the testdata running. 
+Testing on husbands computer with husband (who  should consider a career in testing...):
+- Busses aren't displayed as filled only half full in the overview.
+- He tried to add questionmarks in the filepath names, I did not put up safeguards for that.
+- He added identical vehicles: car a123, twice, as I have forgotten put up a check for duplicates.
+- Bicycles are displayed as half full parkingspaces in the overview, optimally I should split the overview cell in 4 pieces and display each vehicle type as a different colour as well. 
+- if two licencenrs are the same, it will only find the first one
+- wrong text in move vechilce vehicle choice
+- no suggestions for empty spots if the selected one is full. 
+- when moving a vehicle and the selected parkingspot is full, instead of allowing the user to chose a new parkingspot you are returned to the main menu.
+- simulation don't check if wanted added vehicles exceed the actual nr of parkingspots.
+- simulation don't handle null exceptions in parkingspot especially when trying to park buses past its limited spots.
+- I STILL don't have a press escape to get back to main menu in the submit licenceplate stage..
+- Bold the word color in the bicycle id color step
+- show all vehicles (with licenceplate) in text
+- no null exception handling for parking buses past their allowed slots.
+"Ingen plan överlever kontakt med fienden"

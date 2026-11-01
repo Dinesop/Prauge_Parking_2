@@ -18,7 +18,7 @@
 ### Tekniska krav
  - [x] Minst 5 klasser: Vehicle, Car, MC, ParkingSpot, ParkingGarage
  - [x] Klassbibliotek för dataåtkomst
- - [ ] Testköra på en annan dator.
+ - [x] Testköra på en annan dator.
  - [x] Data om de parkerade fordonen lagras i en json fil och uppdateras varje gång det sker en förändring i P-huset. 
 
 ### För VG 
@@ -32,4 +32,4 @@
 
 
 ##### Personlig reflektion 
- - [ ] Skapa en personlig reflektion över kursen och projektet på ca 3 sidor. 
+ - [x] Skapa en personlig reflektion över kursen och projektet på ca 3 sidor. 
