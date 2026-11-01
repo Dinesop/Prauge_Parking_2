@@ -7,7 +7,8 @@ namespace Prauge_Parking_2._1
     {
         static void Main(string[] args)
         {
-            MainMenuSwitch mainMenuSwitch = new MainMenuSwitch();
+            //MainMenuSwitch mainMenuSwitch = new MainMenuSwitch();
+          
         }
     }
 }

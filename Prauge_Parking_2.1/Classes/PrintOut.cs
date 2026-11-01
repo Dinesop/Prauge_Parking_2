@@ -18,10 +18,10 @@ namespace Prauge_Parking_2._1.Classes
         { // TODO add a "press escape to go back" function.
             string licencePlate = AnsiConsole.Ask<string>("Please input the vehicle licence plate:");
             if (Validator.ValidateLicencePlate(licencePlate)) return licencePlate;
-            else return null; 
+            else return null;
         }
         public static int requestedNewSpot()
-        { 
+        {
             int newSpot = AnsiConsole.Ask<int>("Please input the parking spot you wish to move the vehicle to:");
             return newSpot;
         }
@@ -147,10 +147,10 @@ namespace Prauge_Parking_2._1.Classes
         }
         public static decimal AskForPrice(string type)
         {
-           int price = AnsiConsole.Ask<int>($"Set the price for {type}:");
+            int price = AnsiConsole.Ask<int>($"Set the price for {type}:");
             return price;
         }
-        public static void Prices (Dictionary<string, decimal> priceList)
+        public static void Prices(Dictionary<string, decimal> priceList)
         {
             foreach (var type in priceList)
             {
@@ -206,19 +206,107 @@ namespace Prauge_Parking_2._1.Classes
 
         public static string AskForConfigFilePath()
         {
-            string configFilePath = AnsiConsole.Ask<string>("Submit the name of the config file: ");
+            string configFilePath = AnsiConsole.Prompt(
+                new TextPrompt<string>("Submit the name of the config file:")
+                    .Validate(path =>
+                    {
+                        // 1. Reject characters illegal in Windows file names
+                        char[] invalidChars = Path.GetInvalidPathChars()
+                        .Concat(Path.GetInvalidFileNameChars())
+                        .Distinct()
+                        .ToArray();
+
+                        if (path.IndexOfAny(invalidChars) >= 0)
+                            return ValidationResult.Error(
+                            $"Path contains invalid characters such as '?'.");
+
+                        // 2. Reject malformed paths (e.g. empty, bad format)
+                        if (string.IsNullOrWhiteSpace(path))
+                            return ValidationResult.Error("Path cannot be empty.");
+
+                        try
+                        {
+                            _ = Path.GetFullPath(path); // throws on malformed paths
+                        }
+                        catch (Exception e) when (e is ArgumentException or PathTooLongException
+                                          or NotSupportedException)
+                        {
+                            return ValidationResult.Error("That is not a valid file path.");
+                        }
+
+                        return ValidationResult.Success();
+                    }));
             return configFilePath;
         }
 
         public static string AskForParkingGarageFilePath()
         {
-            string parkingGarageFilePath = AnsiConsole.Ask<string>("Submit the name of the parking garage file: ");
+            string parkingGarageFilePath = AnsiConsole.Prompt(
+                new TextPrompt<string>("Submit the name of the parking garage file:")
+                    .Validate(path =>
+                    {
+                    // 1. Reject characters illegal in Windows file names
+                    char[] invalidChars = Path.GetInvalidPathChars()
+                    .Concat(Path.GetInvalidFileNameChars())
+                    .Distinct()
+                    .ToArray();
+
+                    if (path.IndexOfAny(invalidChars) >= 0)
+                    return ValidationResult.Error(
+                    $"Path contains invalid characters such as '?'.");
+
+                    // 2. Reject malformed paths (e.g. empty, bad format)
+                    if (string.IsNullOrWhiteSpace(path))
+                    return ValidationResult.Error("Path cannot be empty.");
+
+                    try
+                    {
+                        _ = Path.GetFullPath(path); // throws on malformed paths
+                    }
+                    catch (Exception e) when (e is ArgumentException or PathTooLongException
+                                      or NotSupportedException)
+                    {
+                        return ValidationResult.Error("That is not a valid file path.");
+                    }
+
+                    return ValidationResult.Success();
+                    }));
+
             return parkingGarageFilePath;
         }
 
         public static string AskForPriceListFilePath()
         {
-            string priceListFilePath = AnsiConsole.Ask<string>("Submit the name of the price list file: ");
+            string priceListFilePath = AnsiConsole.Prompt(
+                new TextPrompt<string>("Submit the name of the parking garage file:")
+                    .Validate(path =>
+                    {
+                        // 1. Reject characters illegal in Windows file names
+                        char[] invalidChars = Path.GetInvalidPathChars()
+                        .Concat(Path.GetInvalidFileNameChars())
+                        .Distinct()
+                        .ToArray();
+
+                        if (path.IndexOfAny(invalidChars) >= 0)
+                            return ValidationResult.Error(
+                            $"Path contains invalid characters such as '?'.");
+
+                        // 2. Reject malformed paths (e.g. empty, bad format)
+                        if (string.IsNullOrWhiteSpace(path))
+                            return ValidationResult.Error("Path cannot be empty.");
+
+                        try
+                        {
+                            _ = Path.GetFullPath(path); // throws on malformed paths
+                        }
+                        catch (Exception e) when (e is ArgumentException or PathTooLongException
+                                          or NotSupportedException)
+                        {
+                            return ValidationResult.Error("That is not a valid file path.");
+                        }
+
+                        return ValidationResult.Success();
+                    }));
             return priceListFilePath;
         }
         public static TimeSpan AskForFreeTimeSpan()
