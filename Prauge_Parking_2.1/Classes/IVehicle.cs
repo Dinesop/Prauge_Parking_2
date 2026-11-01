@@ -12,7 +12,7 @@ namespace Prauge_Parking_2._1.Classes
     [JsonDerivedType(typeof(Car), "Car")]
     [JsonDerivedType(typeof(Motorcycle), "Motorcycle")]
     [JsonDerivedType(typeof(Bicycle), "Bicycle")]
-    //[JsonDerivedType(typeof(Bus), "Bus")]
+    [JsonDerivedType(typeof(Bus), "Bus")]
     public interface IVehicle
     {
         /* ---------- Properties ---------- */

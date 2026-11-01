@@ -115,3 +115,5 @@ I wrapped up most of the grapic interface as well, except for a out of bounds er
 I realized that the out of bounds error was because the config said 100 parkingspots but the parking garage only had 10 since it never created a new file to match the changes. So are currently handling that. 
 Also talked to a friend that works in IT and he practially begged me to document my code properly so that is something I will try to do. 
 Everything is done, except actually making the code throw if you try to add more than 10 characters. Right now it shows an error and then parks the car anyway.
+That is fixed and I did the interfaces, even if one is a very symbolical one. I just didn't make any sense of having my parking garage class or my parkingspot class as an interface. But I slapped on IParkingSpot anyway. I also made IVehcile which made a lot of sense, and IMenu which made the most sense. 
+I am going to try for buses now and see where it gets me. 

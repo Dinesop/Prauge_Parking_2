@@ -39,7 +39,7 @@ namespace Prauge_Parking_2._1.Classes
                                 break;
 
                             case "Bus":
-
+                                parkingGarage.ParkBus(filePath, configFile);
                                 break;
 
                             case "Bicycle":

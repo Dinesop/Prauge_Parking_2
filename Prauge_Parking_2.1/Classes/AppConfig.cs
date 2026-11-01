@@ -10,8 +10,8 @@ namespace Prauge_Parking_2._1.Classes
 {
     public class AppConfig
     {
-        public int NumberOfParkingSpots { get; set; } = 2;
-        public List<string> AllowedVehicleTypes { get; set; } = new List<string> { "Car", "Motorcycle", "Bicycle" };
+        public int NumberOfParkingSpots { get; set; } = 100;
+        public List<string> AllowedVehicleTypes { get; set; } = new List<string> { "Car", "Motorcycle", "Bicycle", "Bus"};
         public Dictionary<string, decimal> VehiclePrices { get; set; } = new();
         public Dictionary <string, int> VehicleSetup { get; set; } = new();
 
@@ -24,11 +24,15 @@ namespace Prauge_Parking_2._1.Classes
 
         public TimeSpan FreeParkingTime { get; set; } = new TimeSpan(0, 10, 0);
 
+        public int AvailableBusSpots { get; set; }
+
 
         public AppConfig()
         {
             VehiclePrices = CheckExsistingPriceList();
             VehicleSetup = SetupVehicleConfig();
+            AvailableBusSpots = DeterminAvailableBusSpots(NumberOfParkingSpots);
+
         }
 
         public static Dictionary<string, decimal> CheckExsistingPriceList()
@@ -38,7 +42,7 @@ namespace Prauge_Parking_2._1.Classes
             if (!checkForFile)
             {
                 //MyFiles.CreateFile(priceFilePath);
-                Dictionary<string, decimal> vehiclePrices = new Dictionary<string, decimal> { { "Car", 20M }, { "Motorcycle", 10M }, { "Bicycle", 5M } };
+                Dictionary<string, decimal> vehiclePrices = new Dictionary<string, decimal> { { "Car", 20M }, { "Motorcycle", 10M }, { "Bicycle", 5M }, {"Bus", 80M } };
                 MyFiles.WriteDictionaryToTxtFile(priceFilePath, vehiclePrices);
                 return vehiclePrices;
             }
@@ -97,9 +101,20 @@ namespace Prauge_Parking_2._1.Classes
 
         public static Dictionary<string, int> SetupVehicleConfig()
         {
-            Dictionary<string, int> vehiclePrices = new Dictionary<string, int> { { "Car", 4 }, { "Motorcycle", 2 }, { "Bicycle", 1 } };
+            Dictionary<string, int> vehiclePrices = new Dictionary<string, int> { { "Car", 4 }, { "Motorcycle", 2 }, { "Bicycle", 1 }, { "Bus", 16 } };
             return vehiclePrices;
         }
+        public static int DeterminAvailableBusSpots(int NumberOfParkingSpots)
+        {
+            int availableBusSpots;
+
+            if (NumberOfParkingSpots > 50) { availableBusSpots = 47; return availableBusSpots; }
+                
+            else if (NumberOfParkingSpots > 4) {availableBusSpots = NumberOfParkingSpots - 3; return availableBusSpots; }
+
+            else{ availableBusSpots = 0;  PrintOut.NoBusParkingAvailable(); return availableBusSpots; }
+        }
+            
 
 
     }

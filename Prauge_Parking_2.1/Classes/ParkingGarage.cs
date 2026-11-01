@@ -2,6 +2,7 @@
 using Prauge_Parking_2._1.Classes;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Reflection.Metadata;
 using System.Text;
 using System.Text.Json;
@@ -248,9 +249,53 @@ namespace Prauge_Parking_2._1.Classes
             List<IVehicle> bicycleList = parkingGarage.ParkingSpots.SelectMany(spot => spot.ParkedVehicles).Where(v => v.VehicleType == "Bicycle").ToList();
             return bicycleList.Count;
         }
-        
+        public void ParkBus(string filePath, AppConfig appConfig)
+        {
+            ParkingGarage parkingGarage = LoadParkingGarage(filePath);
+            IVehicle bus = new Bus(PrintOut.getLicencePlate(), appConfig);
+            bool validationCheck = Validator.ValidateNewVehicle(bus);
+            if (validationCheck) { List<ParkingSpot> pSpot = parkingGarage.FindFirstEmptyParkingSpotForBus(bus, filePath, appConfig); PrintOut.parkBusAtSpot(pSpot, bus); }
+            else PrintOut.ParkingFailed();
+        }
+        public List<ParkingSpot> FindFirstEmptyParkingSpotForBus(IVehicle vehicle, string filePath, AppConfig appConfig)
+        {
+            for (int index = 0; index < appConfig.AvailableBusSpots; index++)// if spot 47 isn't empty, bus won't fit on the last 4 spots before spot 50.
+            {
+                if (ParkingSpots[index].IsEmpty)
+                {
+                    if (ParkingSpots[index + 1].IsEmpty && ParkingSpots[index + 2].IsEmpty && ParkingSpots[index + 3].IsEmpty)
+                    {
+                        List<ParkingSpot> selectedParkingSpots = new List<ParkingSpot> { ParkingSpots[index], ParkingSpots[index + 1], ParkingSpots[index + 2], ParkingSpots[index + 3] };
+                        
+                        ParkingSpot spot1 = selectedParkingSpots[0];
+                        spot1.ParkVehicleOnSpot(vehicle);
+
+                        ParkingSpot spot2 = selectedParkingSpots[1];
+                        spot2.ParkVehicleOnSpot(vehicle);
+
+                        ParkingSpot spot3 = selectedParkingSpots[2]; ;
+                        spot3.ParkVehicleOnSpot(vehicle);
+
+                        ParkingSpot spot4 = selectedParkingSpots[3];
+                        spot4.ParkVehicleOnSpot(vehicle);
+
+                        foreach (var spot in selectedParkingSpots)
+                        {
+                            this.ParkingSpots.Contains(spot);
+                            SaveParkingGarage(filePath, this);
+                        }
+                        return selectedParkingSpots;
+                    }
+                    else continue;
+                }
+                else continue;
+            }
+            return null;
+        }
+            
+        }
+
 
     }
-}
 
 

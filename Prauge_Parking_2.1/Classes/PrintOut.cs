@@ -86,6 +86,18 @@ namespace Prauge_Parking_2._1.Classes
             if (Validator.ValidateLicencePlate(bicycleColor)) return bicycleColor;
             else return null;
         }
+        public static bool parkBusAtSpot(List<ParkingSpot> parkingSpot, IVehicle vehicle)
+        {
+            AnsiConsole.WriteLine($"The {vehicle.VehicleType} with licence nr {vehicle.LicencePlate} is assigned to parkingspots {parkingSpot[0].ParkingSpotId} - {parkingSpot[3].ParkingSpotId}.");
+            pressAnyKeyToContinue();
+            return true;
+        }
+        public static bool NoBusParkingAvailable()
+        {
+            AnsiConsole.WriteLine($"The amount of parkingspots in the parkinggarage are to few to fit a bus.");
+            pressAnyKeyToContinue();
+            return true;
+        }
 
     }
 }
